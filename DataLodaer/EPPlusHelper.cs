@@ -15,8 +15,8 @@ namespace DataLodaer
         {
             var set = typeof(Helper).GetMethod(nameof(Helper.SetPropertyValue));
             const int FirstDataRow = 2;
-            int columnCount = worksheet.Dimension.Columns;
-            int rowsCount = worksheet.Dimension.Rows;
+            int columnCount = worksheet.Dimension.Columns + 1;
+            int rowsCount = worksheet.Dimension.Rows + 1;
             var titles = new Dictionary<string, int>();
             for (int i = 1; i < columnCount; i++)
                 titles.Add(worksheet.GetValue<string>(1, i), i);
@@ -26,7 +26,7 @@ namespace DataLodaer
                              let number = titles[name]
                              orderby number
                              select (p.Name, Type: p.PropertyType, ColumnNumber: number)).ToArray();
-            //var t = titles.Where(t => !properties.Select(p => p.ColumnNumber).Contains(t.Value)).ToList();
+            var t = titles.Where(t => !properties.Select(p => p.ColumnNumber).Contains(t.Value)).ToList();
             for (int row = FirstDataRow; row < rowsCount; row++)
             {
                 var instance = Helper.ActivateInstance<T>();

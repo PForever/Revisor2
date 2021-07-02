@@ -1,24 +1,35 @@
-using System;
-using System.Collections;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Revisor2.Model
+namespace Revisor2.Model.ViewModels
 {
-    public class RoomPerson
+    public class BypassListVm
     {
-        [Key]
+        public ObservableCollection<BypassVm> Bypasses { get; }
+        public BypassVm Create() => new BypassVm();
+    }
+    public class PeopleVm
+    {
+        public ObservableCollection<PersonVm> Bypasses { get; }
+        public BypassVm Create() => new BypassVm();
+    }
+    public class PersonVm
+    {
         public int Id { get; set; }
         public string Name { get; set; }
         public int? Age { get; set; }
         public string SosialStatus { get; set; }
         public string Inviter { get; set; }
         public string IvitePlace { get; set; }
-        public DateTime? InviteDate  { get; set; }
+        public DateTime? InviteDate { get; set; }
         public int? PaperCount { get; set; }
         public int? LastPaper { get; set; }
         public int? LastСontribution { get; set; }
-        public string OrgState  { get; set; }
+        public string OrgState { get; set; }
         public long? PhoneNumber { get; set; }
         public string Discription { get; set; }
         public bool? IsRoom { get; set; }
@@ -33,6 +44,6 @@ namespace Revisor2.Model
         public int? Room { get; set; }
         public int? Floor { get; set; }
         public string Porch { get; set; }
-        public ICollection<Contribution> Contributions { get; set; }
+        public ICollection<ContributionVm> Contributions { get; set; }
     }
 }

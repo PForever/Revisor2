@@ -9,7 +9,9 @@ namespace Revisor2
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
-            Loader.Upload(@"C:\Users\igor_\OneDrive\Рабочий стол\Оргработа\Обзвон\Обзвон.xlsx");
+            Loader.UploadRoomPerson(@"C:\Users\igor_\OneDrive\Рабочий стол\Оргработа\Обзвон\Обзвон.xlsx");
+            Loader.UploadContributions(@"C:\Users\igor_\OneDrive\Рабочий стол\Оргработа\Обзвон\Обзвон.xlsx");
+            Exporter.ExportToRoomTable();
 
             //using var context = new RevisorContext();
             //context.RoomPeople.Add(new RoomPerson

@@ -14,4 +14,8 @@
     <ProjectReference Include="..\SystemHelpers\SystemHelpers.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Templates\" />
+  </ItemGroup>
+
 </Project>

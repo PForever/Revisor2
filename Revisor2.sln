@@ -7,9 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Revisor2", "Revisor2\Reviso
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Revisor2.Model", "Revisor2.Model\Revisor2.Model.csproj", "{1095D321-ED45-40E2-A31E-CC3451F4D3E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataLodaer", "DataLodaer\DataLodaer.csproj", "{9F71DEEA-6A07-44D9-9792-696DC88F14E9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DataLodaer", "DataLodaer\DataLodaer.csproj", "{9F71DEEA-6A07-44D9-9792-696DC88F14E9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SystemHelpers", "SystemHelpers\SystemHelpers.csproj", "{0C2BFE84-5B39-4359-9BF5-E4798F6D3EC3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SystemHelpers", "SystemHelpers\SystemHelpers.csproj", "{0C2BFE84-5B39-4359-9BF5-E4798F6D3EC3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinFormsView", "WinFormsView\WinFormsView.csproj", "{A752F299-38D7-44BF-95CF-FB6E5CD5F5BB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,6 +35,10 @@ Global
 		{0C2BFE84-5B39-4359-9BF5-E4798F6D3EC3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0C2BFE84-5B39-4359-9BF5-E4798F6D3EC3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0C2BFE84-5B39-4359-9BF5-E4798F6D3EC3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A752F299-38D7-44BF-95CF-FB6E5CD5F5BB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A752F299-38D7-44BF-95CF-FB6E5CD5F5BB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A752F299-38D7-44BF-95CF-FB6E5CD5F5BB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A752F299-38D7-44BF-95CF-FB6E5CD5F5BB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
