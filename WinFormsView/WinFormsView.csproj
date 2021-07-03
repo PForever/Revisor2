@@ -8,7 +8,19 @@
 
   <ItemGroup>
     <Folder Include="Books\" />
-    <Folder Include="Cards\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Revisor2.Model\Revisor2.Model.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Cards\PersonCard.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Update="Cards\Template.cs">
+      <SubType>Form</SubType>
+    </Compile>
   </ItemGroup>
 
 </Project>
