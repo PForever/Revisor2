@@ -62,13 +62,14 @@ namespace WinFormsView
             // smiPeople
             // 
             this.smiPeople.Name = "smiPeople";
-            this.smiPeople.Size = new System.Drawing.Size(147, 26);
+            this.smiPeople.Size = new System.Drawing.Size(224, 26);
             this.smiPeople.Text = "&Люди";
+            this.smiPeople.Click += new System.EventHandler(this.OnPeople);
             // 
             // smiBypasses
             // 
             this.smiBypasses.Name = "smiBypasses";
-            this.smiBypasses.Size = new System.Drawing.Size(147, 26);
+            this.smiBypasses.Size = new System.Drawing.Size(224, 26);
             this.smiBypasses.Text = "&Обходы";
             // 
             // smiBooks

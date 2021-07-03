@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using WinFormsView.Lists;
 
 namespace WinFormsView
 {
@@ -15,6 +16,12 @@ namespace WinFormsView
         public MainForm()
         {
             InitializeComponent();
+        }
+
+        private void OnPeople(object sender, EventArgs e)
+        {
+            var card = new Peoples();
+            card.Show();
         }
     }
 }

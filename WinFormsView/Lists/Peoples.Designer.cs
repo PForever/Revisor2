@@ -62,6 +62,7 @@ namespace WinFormsView.Lists
             this.splitContainer1.Panel2.Controls.Add(this.btRemove);
             this.splitContainer1.Panel2.Controls.Add(this.btChange);
             this.splitContainer1.Panel2.Controls.Add(this.btAdd);
+            this.splitContainer1.Panel2.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.splitContainer1.Panel2.Padding = new System.Windows.Forms.Padding(5);
             this.splitContainer1.Size = new System.Drawing.Size(800, 450);
             this.splitContainer1.SplitterDistance = 401;
@@ -72,6 +73,7 @@ namespace WinFormsView.Lists
             this.dgvPeople.AllowUserToAddRows = false;
             this.dgvPeople.AllowUserToDeleteRows = false;
             this.dgvPeople.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPeople.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.dgvPeople.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvPeople.Location = new System.Drawing.Point(0, 0);
             this.dgvPeople.Name = "dgvPeople";
@@ -99,6 +101,7 @@ namespace WinFormsView.Lists
             this.btChange.TabIndex = 1;
             this.btChange.Text = "Изменить";
             this.btChange.UseVisualStyleBackColor = true;
+            this.btChange.Click += new System.EventHandler(this.OnEdit);
             // 
             // btAdd
             // 
