@@ -16,7 +16,15 @@ namespace WinFormsView.Lists
         private void OnStart()
         {
             InitializeComponent();
+            CustomInitialize();
+            FillDataSources();
         }
+
+        private void CustomInitialize()
+        {
+
+        }
+
         public PersonCard() : this(new PersonVm())
         {
         }
@@ -24,6 +32,10 @@ namespace WinFormsView.Lists
         {
             OnStart();
             Fill(person);
+        }
+
+        private void FillDataSources()
+        {
         }
 
         private void Fill(PersonVm person)
@@ -49,25 +61,21 @@ namespace WinFormsView.Lists
             SetNullubleDateTimeBinding(dtpCallDate, nameof(DateTimePicker.Value), nameof(person.CallDate));
             SetNullubleDateTimeBinding(dtpMeetDate, nameof(DateTimePicker.Value), nameof(person.MeetDate));
 
-            mtbAge.Mask = "00000";
-            mtbLastContribution.Mask = "00000";
-            mtbPhoneNumber.Mask = "00000";
-            mtbDisconnectsCount.Mask = "00000";
-            mtbCallsCount.Mask = "00000";
-            mtbRoom.Mask = "00000";
-            mtbFloor.Mask = "00000";
-            mtbPorch.Mask = "00000";
+            
 
             SetNullubleNumericUpDownBinding(nudPaperCount, chbPaperCount, nameof(person.PaperCount));
-            
-            SetBinding(mtbAge, nameof(MaskedTextBox.Text), nameof(person.Age));
-            SetBinding(mtbLastContribution, nameof(MaskedTextBox.Text), nameof(person.LastСontribution));
+            SetNullubleNumericUpDownBinding(nudAge, chbAge, nameof(person.Age));
+            SetNullubleNumericUpDownBinding(nudLastContribution, chbLastContribution, nameof(person.LastСontribution));
+            SetNullubleNumericUpDownBinding(nudLastPaper, chbLastPaper, nameof(person.LastPaper));
+            SetNullubleNumericUpDownBinding(nudRoom, chbRoom, nameof(person.Room));
+            SetNullubleNumericUpDownBinding(nudFloor, chbFloor, nameof(person.Floor));
+            SetNullubleNumericUpDownBinding(nudPorch, chbPorch, nameof(person.Porch));
+
+
+            SetBinding(nudDisconnectsCount, nameof(NumericUpDown.Value), nameof(person.DisconnectsCount));
+            SetBinding(nudCallsCount, nameof(NumericUpDown.Value), nameof(person.CallsCount));
+
             SetBinding(mtbPhoneNumber, nameof(MaskedTextBox.Text), nameof(person.PhoneNumber));
-            SetBinding(mtbDisconnectsCount, nameof(MaskedTextBox.Text), nameof(person.DisconnectsCount));
-            SetBinding(mtbCallsCount, nameof(MaskedTextBox.Text), nameof(person.CallsCount));
-            SetBinding(mtbRoom, nameof(MaskedTextBox.Text), nameof(person.Room));
-            SetBinding(mtbFloor, nameof(MaskedTextBox.Text), nameof(person.Floor));
-            SetBinding(mtbPorch, nameof(MaskedTextBox.Text), nameof(person.Porch));
         }
         public void SetBinding(Control control, string propertyName, string memeberName)
         {
