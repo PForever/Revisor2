@@ -14,18 +14,18 @@ namespace WinFormsView.Lists
 {
     public partial class Peoples : Form
     {
+        private readonly PeopleRepository _repository;
+
         public Peoples()
         {
+            _repository = new PeopleRepository();
             var poeople = GetPeople();
             OnStart(poeople);
         }
 
         private IList<PersonVm> GetPeople()
         {
-            using (var repository = new PeopleRepository())
-            {
-                return repository.GetPeoples();
-            }
+            return _repository.GetPeoples();
         }
 
         private void OnStart(IList<PersonVm> people)
@@ -49,7 +49,13 @@ namespace WinFormsView.Lists
         {
             if (dgvPeople.SelectedRows.Count == 0) return;
             var person = dgvPeople.SelectedRows[0].DataBoundItem as PersonVm;
-            var card = new PersonCard(person);
+            var card = new PersonCard(person, _repository);
+            card.ShowDialog();
+        }
+
+        private void OnAdd(object sender, EventArgs e)
+        {
+            var card = new PersonCard(_repository);
             card.ShowDialog();
         }
     }

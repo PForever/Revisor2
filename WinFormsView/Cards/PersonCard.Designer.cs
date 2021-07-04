@@ -33,8 +33,7 @@ namespace WinFormsView.Lists
             this.bsPerson = new System.Windows.Forms.BindingSource(this.components);
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
             this.groupBox24 = new System.Windows.Forms.GroupBox();
-            this.nudPorch = new System.Windows.Forms.NumericUpDown();
-            this.chbPorch = new System.Windows.Forms.CheckBox();
+            this.tbPorch = new System.Windows.Forms.TextBox();
             this.groupBox21 = new System.Windows.Forms.GroupBox();
             this.nudFloor = new System.Windows.Forms.NumericUpDown();
             this.chbFloor = new System.Windows.Forms.CheckBox();
@@ -88,13 +87,21 @@ namespace WinFormsView.Lists
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tbName = new System.Windows.Forms.TextBox();
             this.btSave = new System.Windows.Forms.Button();
+            this.bsSosialStatus = new System.Windows.Forms.BindingSource(this.components);
+            this.bsInviter = new System.Windows.Forms.BindingSource(this.components);
+            this.bsInvitePlace = new System.Windows.Forms.BindingSource(this.components);
+            this.bsLastPaper = new System.Windows.Forms.BindingSource(this.components);
+            this.bsOrgState = new System.Windows.Forms.BindingSource(this.components);
+            this.bsWorkType = new System.Windows.Forms.BindingSource(this.components);
+            this.bsCallResult = new System.Windows.Forms.BindingSource(this.components);
+            this.bsMeetPerson = new System.Windows.Forms.BindingSource(this.components);
+            this.bsAddress = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.bsPerson)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.groupBox24.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudPorch)).BeginInit();
             this.groupBox21.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudFloor)).BeginInit();
             this.groupBox22.SuspendLayout();
@@ -126,6 +133,15 @@ namespace WinFormsView.Lists
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudAge)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bsSosialStatus)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsInviter)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsInvitePlace)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsLastPaper)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsOrgState)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsWorkType)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsCallResult)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsMeetPerson)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsAddress)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -170,14 +186,13 @@ namespace WinFormsView.Lists
             this.splitContainer1.Panel2.Controls.Add(this.btSave);
             this.splitContainer1.Panel2.Padding = new System.Windows.Forms.Padding(4);
             this.splitContainer1.Size = new System.Drawing.Size(953, 362);
-            this.splitContainer1.SplitterDistance = 318;
+            this.splitContainer1.SplitterDistance = 322;
             this.splitContainer1.SplitterWidth = 3;
             this.splitContainer1.TabIndex = 2;
             // 
             // groupBox24
             // 
-            this.groupBox24.Controls.Add(this.nudPorch);
-            this.groupBox24.Controls.Add(this.chbPorch);
+            this.groupBox24.Controls.Add(this.tbPorch);
             this.groupBox24.Location = new System.Drawing.Point(567, 236);
             this.groupBox24.Name = "groupBox24";
             this.groupBox24.Size = new System.Drawing.Size(179, 50);
@@ -185,23 +200,13 @@ namespace WinFormsView.Lists
             this.groupBox24.TabStop = false;
             this.groupBox24.Text = "Подъезд";
             // 
-            // nudPorch
+            // tbPorch
             // 
-            this.nudPorch.Location = new System.Drawing.Point(24, 19);
-            this.nudPorch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.nudPorch.Name = "nudPorch";
-            this.nudPorch.Size = new System.Drawing.Size(148, 23);
-            this.nudPorch.TabIndex = 3;
-            // 
-            // chbPorch
-            // 
-            this.chbPorch.AutoSize = true;
-            this.chbPorch.Location = new System.Drawing.Point(3, 23);
-            this.chbPorch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.chbPorch.Name = "chbPorch";
-            this.chbPorch.Size = new System.Drawing.Size(15, 14);
-            this.chbPorch.TabIndex = 2;
-            this.chbPorch.UseVisualStyleBackColor = true;
+            this.tbPorch.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbPorch.Location = new System.Drawing.Point(3, 19);
+            this.tbPorch.Name = "tbPorch";
+            this.tbPorch.Size = new System.Drawing.Size(173, 23);
+            this.tbPorch.TabIndex = 0;
             // 
             // groupBox21
             // 
@@ -702,10 +707,11 @@ namespace WinFormsView.Lists
             this.btSave.Location = new System.Drawing.Point(867, 4);
             this.btSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btSave.Name = "btSave";
-            this.btSave.Size = new System.Drawing.Size(82, 33);
+            this.btSave.Size = new System.Drawing.Size(82, 29);
             this.btSave.TabIndex = 0;
             this.btSave.Text = "Сохранить";
             this.btSave.UseVisualStyleBackColor = true;
+            this.btSave.Click += new System.EventHandler(this.OnSave);
             // 
             // PersonCard
             // 
@@ -723,7 +729,6 @@ namespace WinFormsView.Lists
             this.splitContainer1.ResumeLayout(false);
             this.groupBox24.ResumeLayout(false);
             this.groupBox24.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.nudPorch)).EndInit();
             this.groupBox21.ResumeLayout(false);
             this.groupBox21.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nudFloor)).EndInit();
@@ -765,6 +770,15 @@ namespace WinFormsView.Lists
             ((System.ComponentModel.ISupportInitialize)(this.nudAge)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bsSosialStatus)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsInviter)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsInvitePlace)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsLastPaper)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsOrgState)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsWorkType)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsCallResult)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsMeetPerson)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsAddress)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -815,8 +829,6 @@ namespace WinFormsView.Lists
         private System.Windows.Forms.MaskedTextBox mtbPhoneNumber;
         private System.Windows.Forms.NumericUpDown nudPaperCount;
         private System.Windows.Forms.CheckBox chbPaperCount;
-        private System.Windows.Forms.NumericUpDown nudPorch;
-        private System.Windows.Forms.CheckBox chbPorch;
         private System.Windows.Forms.NumericUpDown nudFloor;
         private System.Windows.Forms.CheckBox chbFloor;
         private System.Windows.Forms.NumericUpDown nudRoom;
@@ -829,5 +841,15 @@ namespace WinFormsView.Lists
         private System.Windows.Forms.CheckBox chbAge;
         private System.Windows.Forms.NumericUpDown nudLastContribution;
         private System.Windows.Forms.CheckBox chbLastContribution;
+        private System.Windows.Forms.BindingSource bsSosialStatus;
+        private System.Windows.Forms.BindingSource bsInviter;
+        private System.Windows.Forms.BindingSource bsInvitePlace;
+        private System.Windows.Forms.BindingSource bsLastPaper;
+        private System.Windows.Forms.BindingSource bsOrgState;
+        private System.Windows.Forms.BindingSource bsWorkType;
+        private System.Windows.Forms.BindingSource bsCallResult;
+        private System.Windows.Forms.BindingSource bsMeetPerson;
+        private System.Windows.Forms.BindingSource bsAddress;
+        private System.Windows.Forms.TextBox tbPorch;
     }
 }

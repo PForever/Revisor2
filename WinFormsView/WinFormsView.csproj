@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Revisor2.Model\Revisor2.Model.csproj" />
+    <ProjectReference Include="..\SystemHelpers\SystemHelpers.csproj" />
   </ItemGroup>
 
   <ItemGroup>

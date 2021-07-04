@@ -11,6 +11,12 @@ namespace SystemHelpers
 {
     public static class Helper
     {
+        public static IEnumerable<T> StartWith<T>(this IEnumerable<T> src, T item)
+        {
+            yield return item;
+            foreach (var i in src) yield return i;
+        }
+
         private static readonly ConcurrentDictionary<(Type Type, string PropertyName), Func<object, object>> Getters = new();
         public static object GetPropertyValue(object instance, string name)
         {

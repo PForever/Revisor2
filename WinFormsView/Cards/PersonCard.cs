@@ -1,5 +1,5 @@
-﻿using Revisor2.Model.ViewModels;
-using System;
+﻿using Revisor2.Model.Repositories;
+using Revisor2.Model.ViewModels;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -8,34 +8,97 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using SystemHelpers;
 
 namespace WinFormsView.Lists
 {
     public partial class PersonCard : Form
     {
+        private readonly PersonVm _person;
+        private readonly PeopleRepository _peopleRepository;
+
         private void OnStart()
         {
             InitializeComponent();
             CustomInitialize();
-            FillDataSources();
+            FillDataSources(_peopleRepository);
         }
 
         private void CustomInitialize()
         {
+            bsSosialStatus.DataSource = typeof(SosialSatusVm);
+            bsInviter.DataSource = typeof(OrgPersonVm);
+            bsInvitePlace.DataSource = typeof(PlaceVm);
+            bsOrgState.DataSource = typeof(OrgStateVm);
+            bsWorkType.DataSource = typeof(WorkTypeVm);
+            bsCallResult.DataSource = typeof(CallResultVm);
+            bsMeetPerson.DataSource = typeof(OrgPersonVm);
+            bsAddress.DataSource = typeof(AddressVm);
 
+            cbSosialStatus.DataSource = bsSosialStatus;
+            cbInviter.DataSource = bsInviter;
+            cbInvitePlace.DataSource = bsInvitePlace;
+            cbOrgState.DataSource = bsOrgState;
+            cbWorkType.DataSource = bsWorkType;
+            cbCallResult.DataSource = bsCallResult;
+            cbMeetPerson.DataSource = bsMeetPerson;
+            cbAddress.DataSource = bsAddress;
+
+            cbSosialStatus.DisplayMember = nameof(SosialSatusVm.Name);
+            cbSosialStatus.ValueMember = nameof(SosialSatusVm.Name);
+
+            cbInviter.DisplayMember = nameof(OrgPersonVm.Name);
+            cbInviter.ValueMember = nameof(OrgPersonVm.Name);
+
+            cbInvitePlace.DisplayMember = nameof(PlaceVm.Name);
+            cbInvitePlace.ValueMember = nameof(PlaceVm.Name);
+
+            cbOrgState.DisplayMember = nameof(OrgStateVm.Name);
+            cbOrgState.ValueMember = nameof(OrgStateVm.Name);
+
+            cbWorkType.DisplayMember = nameof(WorkTypeVm.Name);
+            cbWorkType.ValueMember = nameof(WorkTypeVm.Name);
+
+            cbCallResult.DisplayMember = nameof(CallResultVm.Name);
+            cbCallResult.ValueMember = nameof(CallResultVm.Name);
+
+            cbMeetPerson.DisplayMember = nameof(OrgPersonVm.Name);
+            cbMeetPerson.ValueMember = nameof(OrgPersonVm.Name);
+
+            cbAddress.DisplayMember = nameof(AddressVm.Name);
+            cbAddress.ValueMember = nameof(AddressVm.Name);
         }
 
-        public PersonCard() : this(new PersonVm())
+        public PersonCard(PeopleRepository peopleRepository) : this(new PersonVm(), peopleRepository)
         {
         }
-        public PersonCard(PersonVm person)
+        public PersonCard(PersonVm person, PeopleRepository peopleRepository)
         {
+            _person = person;
+            _peopleRepository = peopleRepository;
             OnStart();
             Fill(person);
         }
 
-        private void FillDataSources()
+        private void FillDataSources(PeopleRepository _peopleRepository)
         {
+            bsSosialStatus.DataSource = _peopleRepository.GetSosialSatus().StartWith(new SosialSatusVm { Name = "Нет"}).ToList();
+            bsInviter.DataSource = _peopleRepository.GetOrgPeople().StartWith(new OrgPersonVm { Name = "Нет" }).ToList();
+            bsInvitePlace.DataSource = _peopleRepository.GetPlaces().StartWith(new PlaceVm { Name = "Нет" }).ToList();
+            bsOrgState.DataSource = _peopleRepository.GetOrgStates().StartWith(new OrgStateVm { Name = "Нет" }).ToList();
+            bsWorkType.DataSource = _peopleRepository.GetWorkTypes().StartWith(new WorkTypeVm { Name = "Нет" }).ToList();
+            bsCallResult.DataSource = _peopleRepository.GetCallResults().StartWith(new CallResultVm { Name = "Нет" }).ToList();
+            bsMeetPerson.DataSource = _peopleRepository.GetOrgPeople().StartWith(new OrgPersonVm { Name = "Нет" }).ToList();
+            bsAddress.DataSource = _peopleRepository.GetAddresses().StartWith(new AddressVm { Name = "Нет" }).ToList();
+
+            cbSosialStatus.SetNullubleBinding(nameof(ComboBox.SelectedValue), bsSosialStatus, nameof(SosialSatusVm.Name), "Нет");
+            cbInviter.SetNullubleBinding(nameof(ComboBox.SelectedValue), bsInviter, nameof(OrgPersonVm.Name), "Нет");
+            cbInvitePlace.SetNullubleBinding(nameof(ComboBox.SelectedValue), bsInvitePlace, nameof(PlaceVm.Name), "Нет");
+            cbOrgState.SetNullubleBinding(nameof(ComboBox.SelectedValue), bsOrgState, nameof(OrgStateVm.Name), "Нет");
+            cbWorkType.SetNullubleBinding(nameof(ComboBox.SelectedValue), bsWorkType, nameof(WorkTypeVm.Name), "Нет");
+            cbCallResult.SetNullubleBinding(nameof(ComboBox.SelectedValue), bsCallResult, nameof(CallResultVm.Name), "Нет");
+            cbMeetPerson.SetNullubleBinding(nameof(ComboBox.SelectedValue), bsMeetPerson, nameof(OrgPersonVm.Name), "Нет");
+            cbAddress.SetNullubleBinding(nameof(ComboBox.SelectedValue), bsAddress, nameof(AddressVm.Name), "Нет");
         }
 
         private void Fill(PersonVm person)
@@ -44,6 +107,7 @@ namespace WinFormsView.Lists
 
             SetBinding(tbName, nameof(TextBox.Text), nameof(person.Name));
             SetBinding(tbDiscription, nameof(TextBox.Text), nameof(person.Discription));
+            SetBinding(tbPorch, nameof(TextBox.Text), nameof(person.Porch));
 
             SetBinding(chbIsRoom, nameof(CheckBox.Checked), nameof(person.IsRoom));
 
@@ -69,7 +133,6 @@ namespace WinFormsView.Lists
             SetNullubleNumericUpDownBinding(nudLastPaper, chbLastPaper, nameof(person.LastPaper));
             SetNullubleNumericUpDownBinding(nudRoom, chbRoom, nameof(person.Room));
             SetNullubleNumericUpDownBinding(nudFloor, chbFloor, nameof(person.Floor));
-            SetNullubleNumericUpDownBinding(nudPorch, chbPorch, nameof(person.Porch));
 
 
             SetBinding(nudDisconnectsCount, nameof(NumericUpDown.Value), nameof(person.DisconnectsCount));
@@ -89,109 +152,10 @@ namespace WinFormsView.Lists
         {
             control.SetNullubleNumericUpDownBinding(checkBox, bsPerson, memeberName);
         }
-    }
-    public static class WinFormsHelper
-    {
-        public static void SetBinding(this Control control, string propertyName, object dataSource, string memeberName)
+
+        private void OnSave(object sender, System.EventArgs e)
         {
-            control.DataBindings.Add(new Binding(propertyName, dataSource, memeberName));
+            _peopleRepository.SavePerson(_person);
         }
-        public static void SetNullubleDateTimeBinding(this DateTimePicker control, string propertyName, object dataSource, string memeberName)
-        {
-            var binding = new Binding(propertyName, dataSource, memeberName, true);
-            var provider = new DateTimeBindingProvider(control);
-            binding.Parse += provider.OnParse;
-            binding.Format += provider.OnFormat;
-            control.DataBindings.Add(binding);
-        }
-        class DateTimeBindingProvider
-        {
-            private readonly DateTimePicker _dateTimePicker;
-            public DateTimeBindingProvider(DateTimePicker dateTimePicker)
-            {
-                _dateTimePicker = dateTimePicker;
-            }
-
-            public void OnFormat(object sender, ConvertEventArgs e)
-            {
-                if (e.Value is null)
-                {
-                    e.Value = _dateTimePicker.Value;
-                    _dateTimePicker.Checked = false;
-                }
-            }
-
-            public void OnParse(object sender, ConvertEventArgs e)
-            {
-                if (_dateTimePicker.Checked) return;
-                e.Value = default(DateTime?);
-            }
-        }
-
-        public static void SetNullubleNumericUpDownBinding(this NumericUpDown control, CheckBox checkBox, object dataSource, string memeberName)
-        {
-            var binding = new Binding(nameof(NumericUpDown.Value), dataSource, memeberName, true);
-            var provider = new NumericUpDownBindingProvider(control, checkBox, binding);
-            binding.Parse += provider.OnParse;
-            binding.Format += provider.OnFormat;
-            checkBox.CheckStateChanged += provider.OnCheckedChanged;
-            control.DataBindings.Add(binding);
-        }
-
-        class NumericUpDownBindingProvider
-        {
-            private readonly NumericUpDown _numericUpDown;
-            private readonly CheckBox _checkBox;
-            private readonly Binding _binding;
-
-            public NumericUpDownBindingProvider(NumericUpDown numericUpDown, CheckBox checkBox, Binding binding)
-            {
-                _numericUpDown = numericUpDown;
-                _checkBox = checkBox;
-                _binding = binding;
-            }
-
-            public void OnFormat(object sender, ConvertEventArgs e)
-            {
-                if (e.Value is null)
-                {
-                    e.Value = _numericUpDown.Value;
-                    if (_checkBox.Checked) _checkBox.Checked = false;
-                    else _numericUpDown.Enabled = false;
-                }
-                else _checkBox.Checked = true;
-            }
-
-            public void OnParse(object sender, ConvertEventArgs e)
-            {
-                if (_checkBox.Checked)
-                {
-                    e.Value = _numericUpDown.Value;
-                }
-                else
-                {
-                    e.Value = null;//default(DateTime?);
-                }
-            }
-
-            public void OnFormatCheckBox(object sender, ConvertEventArgs e)
-            {
-                if (e.Value is null)
-                {
-                    e.Value = false;
-                }
-                else
-                {
-                    e.Value = true;
-                }
-            }
-            internal void OnCheckedChanged(object sender, EventArgs e)
-            {
-                _numericUpDown.Enabled = _checkBox.Checked;
-                //_numericUpDown.Value = _numericUpDown.Value;
-                _binding.WriteValue();
-            }
-        }
-
     }
 }
