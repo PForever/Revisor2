@@ -1,11 +1,35 @@
-﻿using System;
+﻿using FilterLibrary;
+using FilterLibrary.FilterHelp;
+using FilterLibrary.SortableBindingList;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
+using WinFormsView;
 
 namespace WinFormsView
 {
     public static class WinFormsHelper
     {
+        public static void OpenFilterEdit(IDynamicFiltrable list, PropertiesFilter filter)
+        {
+            if (filter == null) return;
+            var filterEditor = new FilterEditor(filter);
+            switch (filterEditor.ShowDialog())
+            {
+                case DialogResult.OK:
+                    list.ApplyFilter(filter);
+                    break;
+                case DialogResult.Cancel:
+                    break;
+                case DialogResult.Abort:
+                    list.RemoveFilter();
+                    break;
+            }
+        }
+        public static SortableBindingList<T> ToSortableBindingList<T>(this IList<T> src) => new SortableBindingList<T>(src);
+        public static SortableBindingList<T> ToSortableBindingList<T>(this IEnumerable<T> src) => new SortableBindingList<T>(src.ToList());
         public static void SetSeleted<T>(this DataGridView dgv, T data, Func<T, T, bool> comparer)
         {
             var row = dgv.Rows.Cast<DataGridViewRow>().First(r => comparer((T)r.DataBoundItem, data));

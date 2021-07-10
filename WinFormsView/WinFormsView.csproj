@@ -11,6 +11,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DynamicFilterControls\DynamicFilterControls.csproj" />
+    <ProjectReference Include="..\FilterLibrary\FilterLibrary.csproj" />
     <ProjectReference Include="..\Revisor2.Model\Revisor2.Model.csproj" />
     <ProjectReference Include="..\SystemHelpers\SystemHelpers.csproj" />
   </ItemGroup>
