@@ -1,4 +1,5 @@
-﻿using DynamicFilter.Abstract;
+﻿using DataLodaer;
+using DynamicFilter.Abstract;
 using DynamicFilterControls;
 using FilterLibrary.FilterHelp;
 using FilterLibrary.SortableBindingList;
@@ -98,6 +99,21 @@ namespace WinFormsView.Lists
                 var people = _repository.GetPeoples(Filter?.Calculate()).ToSortableBindingList();
                 Fill(people);
             }
+        }
+
+        private void OnPrint(object sender, EventArgs e)
+        {
+            if (dgvPeople.SelectedCells.Count == 0) return;
+            var person = dgvPeople.SelectedCells.Cast<DataGridViewCell>()
+                .Where(c => c.RowIndex != -1)
+                .Select(c => c.RowIndex)
+                .Distinct()
+                .Select(i => dgvPeople.Rows[i])
+                .Cast<DataGridViewRow>()
+                .Select(r => r.DataBoundItem as PersonVm)
+                .Select(p => p.Id)
+                .ToList();
+            Exporter.ExportToRoomTable(@"D:\Downloads\", DateTime.Now, person);
         }
     }
 }

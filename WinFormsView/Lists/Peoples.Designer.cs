@@ -40,7 +40,8 @@ namespace WinFormsView.Lists
             this.btChange = new System.Windows.Forms.Button();
             this.btAdd = new System.Windows.Forms.Button();
             this.sbPeople = new System.Windows.Forms.BindingSource(this.components);
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.contextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.smiPrint = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -48,6 +49,7 @@ namespace WinFormsView.Lists
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPeople)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.sbPeople)).BeginInit();
+            this.contextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -116,7 +118,7 @@ namespace WinFormsView.Lists
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvPeople.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.dgvPeople.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvPeople.ContextMenuStrip = this.contextMenuStrip1;
+            this.dgvPeople.ContextMenuStrip = this.contextMenu;
             this.dgvPeople.Cursor = System.Windows.Forms.Cursors.Arrow;
             this.dgvPeople.GridColor = System.Drawing.SystemColors.HotTrack;
             this.dgvPeople.Location = new System.Drawing.Point(0, 0);
@@ -158,11 +160,20 @@ namespace WinFormsView.Lists
             this.btAdd.UseVisualStyleBackColor = true;
             this.btAdd.Click += new System.EventHandler(this.OnAdd);
             // 
-            // contextMenuStrip1
+            // contextMenu
             // 
-            this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            this.contextMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.smiPrint});
+            this.contextMenu.Name = "contextMenu";
+            this.contextMenu.Size = new System.Drawing.Size(211, 56);
+            // 
+            // smiPrint
+            // 
+            this.smiPrint.Name = "smiPrint";
+            this.smiPrint.Size = new System.Drawing.Size(210, 24);
+            this.smiPrint.Text = "Печать";
+            this.smiPrint.Click += new System.EventHandler(this.OnPrint);
             // 
             // Peoples
             // 
@@ -181,6 +192,7 @@ namespace WinFormsView.Lists
             this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPeople)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.sbPeople)).EndInit();
+            this.contextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -196,6 +208,7 @@ namespace WinFormsView.Lists
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripSplitButton btFilter;
         private System.Windows.Forms.ToolStripMenuItem btFilterClear;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.ContextMenuStrip contextMenu;
+        private System.Windows.Forms.ToolStripMenuItem smiPrint;
     }
 }
