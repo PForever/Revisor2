@@ -24,7 +24,8 @@ namespace DynamicFilter.Operands.CollectionOperands
 
         public IFilterData Data { get; set; }
 
-        public LambdaExpression Calculate() => InnerOperand != null ? FilterBuilder.AnyPredicate(Data, InnerOperand.Calculate()) : FilterBuilder.AnyPredicate(Data);
+        public LambdaExpression CalculateSql() => InnerOperand != null ? FilterBuilder.AnyPredicate(Data, InnerOperand.CalculateSql()) : FilterBuilder.AnyPredicate(Data);
+        public LambdaExpression Calculate() => InnerOperand != null ? FilterBuilder.SafeAnyPredicate(Data, InnerOperand.Calculate()) : FilterBuilder.SafeAnyPredicate(Data);
 
         public IOperand Copy() => new AnyOperand(Data, InnerOperand.Copy());
 

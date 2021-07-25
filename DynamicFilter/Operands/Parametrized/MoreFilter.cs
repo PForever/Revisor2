@@ -19,9 +19,14 @@ namespace DynamicFilter.Operands.Parametrized
             Data = data;
         }
 
-        public LambdaExpression Calculate()
+        public LambdaExpression CalculateSql()
         {
             return FilterBuilder.MorePredicate(Data, Value);
+        }
+
+        public LambdaExpression Calculate()
+        {
+            return FilterBuilder.SafeMorePredicate(Data, Value);
         }
         public string Print() => $"({Name})";
         public IOperand Copy() => new MoreFilter(Data) { Value = Value, DisplayValue = DisplayValue };

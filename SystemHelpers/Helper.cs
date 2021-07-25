@@ -145,6 +145,14 @@ namespace SystemHelpers
             if (value is not null && type == typeof(string) && value is not string) return value.ToString();
             return value;
         }
+        private static bool IsSimleTypeInternal(this Type t)
+        {
+            return t.IsPrimitive || t == typeof(string) || t == typeof(DateTime);
+        }
+        public static bool IsSimleType(this Type t)
+        {
+            return IsSimleTypeInternal(t) || t == typeof(Nullable<>) && IsSimleTypeInternal(t.GenericTypeArguments[0]);
+        }
     }
     class CommandBuilder
     {
@@ -170,6 +178,7 @@ namespace SystemHelpers
             return _command;
             _command = null;
         }
+        
     }
     
 }

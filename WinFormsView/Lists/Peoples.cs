@@ -16,7 +16,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using SystemHelpers;
-using WinFormsView;
+using WinFormsView.Help;
 
 namespace WinFormsView.Lists
 {
@@ -50,19 +50,30 @@ namespace WinFormsView.Lists
         private void InitializeComponentCustom()
         {
             InitColumns();
+            dgvPeople.DataError += OnDataErrors;
             //btFilter.Container.Components.OfType<Control>().ForEach(c => c.Cursor = System.Windows.Forms.Cursors.Arrow);
             //btFilterClear.Container.Components.OfType<Control>().ForEach(c => c.Cursor = System.Windows.Forms.Cursors.Arrow);
         }
 
+        private void OnDataErrors(object sender, DataGridViewDataErrorEventArgs e)
+        {
+            e.Cancel = true;
+        }
+
         private void Fill(IList<PersonVm> people)
         {
-            sbPeople.DataSource = people.ToSortableBindingList();
+            bsPeople.DataSource = people.ToSortableBindingList();
+            bsAddresses.DataSource = _repository.GetAddresses()/*.StartWith(NoValue)*/.ToList();
             _docFilters = new PropertiesFilter(dgvPeople.Columns.Cast<DataGridViewColumn>());
         }
 
         private void InitColumns()
         {
-            dgvPeople.DataSource = sbPeople;
+            dgvPeople.AutoGenerateColumns = false;
+            bsAddresses.DataSource = _repository.GetAddresses();
+            var columns = WinFormsHelper.CreateColumns<PersonVm>(bsAddresses);
+            dgvPeople.Columns.AddRange(columns);
+            dgvPeople.DataSource = bsPeople;
         }
 
         private void OnEdit(object sender, EventArgs e)
@@ -90,13 +101,15 @@ namespace WinFormsView.Lists
 
         private async void OnFilter(object sender, EventArgs e)
         {
-            var filterForm = Filter == null ? new DynamicFilterForm(_repository.DtoType, dgvPeople.Columns) : new DynamicFilterForm(_repository.DtoType, dgvPeople.Columns, Filter);
+            var filterForm = Filter == null ? new DynamicFilterForm(typeof(PersonVm), dgvPeople.Columns) : new DynamicFilterForm(typeof(PersonVm), dgvPeople.Columns, Filter);
             if (filterForm.ShowDialog() == DialogResult.OK)
             {
                 Filter = filterForm.Result;
                 //Predicate = Filter?.Calculate() as Expression<Func<PersonVm, bool>>;
                 //var filter = Predicate.Compile();
-                var people = _repository.GetPeoples(Filter?.Calculate()).ToSortableBindingList();
+                Predicate = Filter?.Calculate().Reduce() as Expression<Func<PersonVm, bool>>;
+                var filter = Predicate.Compile();
+                var people = _repository.GetPeoples().Where(filter).ToSortableBindingList();
                 Fill(people);
             }
         }

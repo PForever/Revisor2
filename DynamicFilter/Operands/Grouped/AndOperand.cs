@@ -22,6 +22,12 @@ namespace DynamicFilter.Operands.Grouped
 
         public string Name => "и";
 
+        public LambdaExpression CalculateSql()
+        {
+            var l = Left.CalculateSql();
+            var r = Right.CalculateSql();
+            return AndAlso(l, r);
+        }
         public LambdaExpression Calculate()
         {
             var l = Left.Calculate();

@@ -6,12 +6,73 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
-using WinFormsView;
+using SystemHelpers;
 
-namespace WinFormsView
+namespace WinFormsView.Help
 {
     public static class WinFormsHelper
     {
+        public static DataGridViewColumn[] CreateColumns<T>(params BindingSource[] sourses)
+        {
+            var s = sourses.ToDictionary(s => s.DataSource.GetType().GetGenericArguments()[0]);
+            return (from p in typeof(T).GetProperties(System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public)
+            where p.GetCustomAttributes(typeof(NonDisplayAttribute), false).Length == 0
+            let displayName = (p.GetCustomAttributes(typeof(DisplayNameAttribute), false).FirstOrDefault() as DisplayNameAttribute)?.Name ?? p.Name
+            select p.PropertyType switch
+            {
+                var t when t == typeof(bool) || t == typeof(bool?) =>  (DataGridViewColumn)CreateCheckBoxColumn(p.Name, displayName),
+                var t when t.IsSimleType() || !s.ContainsKey(p.PropertyType) => CreateTextColumn(p.Name, displayName),
+                _ => CreateComboBoxColumn(p.Name, displayName, s[p.PropertyType])
+            }).ToArray();
+        }
+        public static DataGridViewTextBoxColumn CreateTextColumn(string propertyName, string displayName, bool readOnly = true, DataGridViewAutoSizeColumnMode autoSizeMode = DataGridViewAutoSizeColumnMode.AllCells)
+        {
+            return new DataGridViewTextBoxColumn()
+            {
+                Name = propertyName,
+                HeaderText = displayName,
+                DataPropertyName = propertyName,
+                AutoSizeMode = autoSizeMode,
+                ReadOnly = readOnly,
+            };
+        }
+        public static DataGridViewCheckBoxColumn CreateCheckBoxColumn(string propertyName, string displayName, bool readOnly = true, DataGridViewAutoSizeColumnMode autoSizeMode = DataGridViewAutoSizeColumnMode.AllCells)
+        {
+            return new DataGridViewCheckBoxColumn()
+            {
+                Name = propertyName,
+                HeaderText = displayName,
+                DataPropertyName = propertyName,
+                AutoSizeMode = autoSizeMode,
+                ReadOnly = readOnly,
+            };
+        }
+        public static DataGridViewComboBoxColumn CreateComboBoxColumn(string propertyName, string displayName, object dataSource, bool readOnly = true, DataGridViewAutoSizeColumnMode autoSizeMode = DataGridViewAutoSizeColumnMode.AllCells)
+        {
+            return new DataGridViewComboBoxColumn()
+            {
+                Name = propertyName,
+                HeaderText = displayName,
+                DataPropertyName = propertyName,
+                AutoSizeMode = autoSizeMode,
+                ReadOnly = readOnly,
+                DataSource = dataSource,
+            };
+        }
+        //public static DataGridViewComboBoxColumn CreateCheckBoxColumn(string propertyName, string displayName, object dataSource, string displayMember = "Name", string valueMember = "Id", bool readOnly = true, DataGridViewAutoSizeColumnMode autoSizeMode = DataGridViewAutoSizeColumnMode.AllCells)
+        //{
+        //    return new DataGridViewComboBoxColumn()
+        //    {
+        //        Name = propertyName,
+        //        HeaderText = displayName,
+        //        DataPropertyName = propertyName,
+        //        DisplayMember = displayMember,
+        //        ValueMember = valueMember,
+        //        AutoSizeMode = autoSizeMode,
+        //        ReadOnly = readOnly,
+        //        DataSource = dataSource,
+        //    };
+        //}
         public static void OpenFilterEdit(IDynamicFiltrable list, PropertiesFilter filter)
         {
             if (filter == null) return;
@@ -57,6 +118,16 @@ namespace WinFormsView
             binding.Format += provider.OnFormat;
             binding.Parse += provider.OnParse;
         }
+
+        public static void SetNullubleBinding(this Control control, string propertyName, object dataSource, object defaultMember)
+        {
+            var binding = new Binding(propertyName, dataSource, "");
+            control.DataBindings.Add(binding);
+            var provider = new BindingProvider(defaultMember);
+            binding.Format += provider.OnFormat;
+            binding.Parse += provider.OnParse;
+        }
+
         class BindingProvider
         {
             private object _defatultMember;

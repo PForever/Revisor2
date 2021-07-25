@@ -23,5 +23,10 @@ namespace WinFormsView
             var card = new Peoples();
             card.Show();
         }
+
+        private void OnAddresses(object sender, EventArgs e)
+        {
+
+        }
     }
 }

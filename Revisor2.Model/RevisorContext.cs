@@ -10,6 +10,7 @@ namespace Revisor2.Model
 {
     public class RevisorContext : DbContext
     {
+        public DbSet<Address> Addresses { get; set; }
         public DbSet<RoomPerson> RoomPeople { get; set; }
         public DbSet<Contribution> Contributions { get; set; }
         public RevisorContext() : base()

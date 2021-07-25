@@ -62,9 +62,11 @@ namespace FilterLibrary.FilterHelp
                 var type = list[0].GetType();
                 var display = type.GetProperty(cb.DisplayMember);
                 var value = type.GetProperty(cb.ValueMember);
+                Func<object, string> getDisplay = display != null ? i => (string)display.GetValue(i) : i => i.ToString();
+                Func<object, object> getValue = value != null ? i => value.GetValue(i) : i => i;
                 foreach (var item in list)
                 {
-                    result.Add(((string)display.GetValue(item), value.GetValue(item)));
+                    result.Add((getDisplay(item), getValue(item)));
                 }
                 return result.ToLookup(kvp => kvp.Key, kvp => kvp.Value);
             }

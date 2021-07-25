@@ -25,6 +25,12 @@ namespace DynamicFilter.Operands.Parametrized
 
         public string DisplayValue { get => Operand.DisplayValue; set => Operand.DisplayValue = value; }
 
+        public LambdaExpression CalculateSql()
+        {
+            var l = Check.CalculateSql();
+            var r = Operand.CalculateSql();
+            return ExpressionLogicOperations.AndAlso(l, r);
+        }
         public LambdaExpression Calculate()
         {
             var l = Check.Calculate();

@@ -21,9 +21,14 @@ namespace DynamicFilter.Operands.Parametrized
             Data = data;
         }
 
-        public LambdaExpression Calculate()
+        public LambdaExpression CalculateSql()
         {
             return FilterBuilder.EqualPredicate(InnerProperty, Value);
+        }
+
+        public LambdaExpression Calculate()
+        {
+            return FilterBuilder.SafeEqualPredicate(InnerProperty, Value);
         }
         public string Print() => $"({Name})";
 

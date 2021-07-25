@@ -187,7 +187,7 @@ namespace DynamicFilterControls
             if (filterDialog.ShowDialog() == DialogResult.OK)
             {
                 _filter = filterDialog.Result;
-                var exp = (_simpleFilter?.AndAlso(_filter) ?? _filter).Calculate();
+                var exp = (_simpleFilter?.AndAlso(_filter) ?? _filter).CalculateSql();
                 if (exp.CanReduce) exp = (LambdaExpression)exp.Reduce();
 
                 _predicate = exp;
@@ -253,7 +253,7 @@ namespace DynamicFilterControls
         private async void OnClearFilter(object sender, EventArgs e)
         {
             _filter = null;
-            _predicate = _simpleFilter?.Calculate() ?? null;
+            _predicate = _simpleFilter?.CalculateSql() ?? null;
             await UpdateData();
         }
         public IEnumerable<(Type SrcType, string propertyName, string displayName)> InnerDisplayDictionary { get; set; }
@@ -350,7 +350,7 @@ namespace DynamicFilterControls
             if (string.IsNullOrEmpty(text))
             {
                 _simpleFilter = null;
-                _predicate = _filter?.Calculate();
+                _predicate = _filter?.CalculateSql();
             }
             else
             {
@@ -358,7 +358,7 @@ namespace DynamicFilterControls
                 if (bsSimpleFilters.Current is Alias alias)
                 {
                     _simpleFilter = alias.FilterData is IFilterData data ? OperandFactory.LikeStringFilter(data, text) : OperandFactory.CreateFullFilter(FastFilterData, text);
-                    _predicate = (_filter?.AndAlso(_simpleFilter) ?? _simpleFilter).Calculate();
+                    _predicate = (_filter?.AndAlso(_simpleFilter) ?? _simpleFilter).CalculateSql();
                 }
                 else return;
             }

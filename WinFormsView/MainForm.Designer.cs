@@ -85,6 +85,7 @@ namespace WinFormsView
             this.smiAddresses.Name = "smiAddresses";
             this.smiAddresses.Size = new System.Drawing.Size(224, 26);
             this.smiAddresses.Text = "&Адреса";
+            this.smiAddresses.Click += new System.EventHandler(this.OnAddresses);
             // 
             // MainForm
             // 

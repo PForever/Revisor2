@@ -18,6 +18,12 @@ namespace DynamicFilter.Operands.Grouped
 
         public string Name => "или";
 
+        public LambdaExpression CalculateSql()
+        {
+            var l = Left.CalculateSql();
+            var r = Right.CalculateSql();
+            return OrElse(l, r);
+        }
         public LambdaExpression Calculate()
         {
             var l = Left.Calculate();

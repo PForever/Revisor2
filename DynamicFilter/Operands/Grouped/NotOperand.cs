@@ -19,6 +19,14 @@ namespace DynamicFilter.Operands.Grouped
 
         public string Name => "не";
 
+        public LambdaExpression CalculateSql()
+        {
+            var op = Operand.CalculateSql();
+            var param = op.Parameters;
+            var body = op.Body;
+            body = Expression.Not(op.Body);
+            return Expression.Lambda(body, param);
+        }
         public LambdaExpression Calculate()
         {
             var op = Operand.Calculate();

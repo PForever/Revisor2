@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace Revisor2.Model.ViewModels
 {
-    public class PersonVm
+    public class PersonVm : ViewModelBase<PersonVm, int>
     {
-        public int Id { get; set; }
+        public PersonVm(int id) : base(id) { }
         public string Name { get; set; }
         public int? Age { get; set; }
         public string SosialStatus { get; set; }
@@ -26,10 +26,12 @@ namespace Revisor2.Model.ViewModels
         public int? CallsCount { get; set; }
         public string CallResult { get; set; }
         public string MeetPerson { get; set; }
-        public string Address { get; set; }
+        public AddressVm Address { get; set; }
         public int? Room { get; set; }
         public int? Floor { get; set; }
         public string Porch { get; set; }
         public ICollection<ContributionVm> Contributions { get; set; }
+
+        public override string DisplayMember => Name;
     }
 }

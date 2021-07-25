@@ -8,8 +8,10 @@ using System.Windows.Input;
 
 namespace Revisor2.Model.ViewModels
 {
-    public class BypassVm : ViewModelBase
+    public class BypassVm : ViewModelBase<BypassVm, Guid>
     {
+        public BypassVm(Guid id) : base(id) { }
+
         private DateTime bypassDate;
         private string addressName;
         private Guid addressId;
@@ -18,6 +20,9 @@ namespace Revisor2.Model.ViewModels
         public string AddressName { get => addressName; set => Set(ref addressName, value); }
         public Guid AddressId { get => addressId; set => Set(ref addressId, value); }
         public ICommand SaveCommand { get; }
+
+        public override string DisplayMember => $"{AddressName} ({BypassDate})";
+
         ObservableCollection<ContributionVm> Contributions { get; } = new();
     }
 }

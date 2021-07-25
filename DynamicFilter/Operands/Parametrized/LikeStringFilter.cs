@@ -19,11 +19,16 @@ namespace DynamicFilter.Operands.Parametrized
             Data = data;
         }
 
+        public LambdaExpression CalculateSql()
+        {
+            return FilterBuilder.LikeStringPredicateSql(Data, StringValue);
+        }
+        public string Print() => $"({Name})";
+        public IOperand Copy() => new LikeStringFilter(Data) { StringValue = StringValue, DisplayValue = DisplayValue };
+
         public LambdaExpression Calculate()
         {
             return FilterBuilder.LikeStringPredicate(Data, StringValue);
         }
-        public string Print() => $"({Name})";
-        public IOperand Copy() => new LikeStringFilter(Data) { StringValue = StringValue, DisplayValue = DisplayValue };
     }
 }

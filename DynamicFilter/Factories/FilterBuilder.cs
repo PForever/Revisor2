@@ -21,7 +21,14 @@ namespace DynamicFilter.Factories
             var equalExp = Expression.Equal(propertyConvertedExp, constExp);
             return Expression.Lambda(equalExp, parameterExp);
         }
-        internal static LambdaExpression LikePredicate(IFilterData data, object value)
+        internal static LambdaExpression SafeEqualPredicate(IFilterData data, object value)
+        {
+            SafeCreateConvertedParameters(data, value, out var parameterExp, out var constExp, out var propertyConvertedExp);
+
+            var equalExp = propertyConvertedExp.Equal(constExp);
+            return Expression.Lambda(equalExp, parameterExp);
+        }
+        internal static LambdaExpression LikePredicateSql(IFilterData data, object value)
         {
             CreateConvertedParameters(data, value, out var parameterExp, out var constExp, out var propertyConvertedExp);
             //var containsInfo = typeof(String).GetMethod(nameof(String.Contains));
@@ -32,13 +39,21 @@ namespace DynamicFilter.Factories
 
             return Expression.Lambda(equalExp, parameterExp);
         }
-        internal static LambdaExpression LikeStringPredicate(IFilterData data, string value)
+        internal static LambdaExpression LikePredicate(IFilterData data, object value)
+        {
+            SafeCreateConvertedParameters(data, value, out var parameterExp, out var constExp, out var propertyConvertedExp);
+            var containsInfo = typeof(String).GetMethod(nameof(String.Contains));
+            var equalExp = Expression.Call(propertyConvertedExp, containsInfo, constExp);
+
+            return Expression.Lambda(equalExp, parameterExp);
+        }
+        internal static LambdaExpression LikeStringPredicateSql(IFilterData data, string value)
         {
             CreateParameters(data, value, out var parameterExp, out var constExp, out var propertyExp);
 
             var propertyType = propertyExp.Type;
 
-            Expression ConvertOrFalse<T>(bool isConvarted, T convarted) => 
+            Expression EqualsIfConverted<T>(bool isConvarted, T convarted) => 
                 !isConvarted ? Expression.Constant(false) : (Expression)Expression.Equal(propertyExp, Expression.Constant(convarted, propertyExp.Type));
 
             Expression body;
@@ -47,19 +62,52 @@ namespace DynamicFilter.Factories
                 var containsInfo = typeof(DbFunctions).GetMethod(nameof(DbFunctionsExtensions.Like), new[] { typeof(string), typeof(string), typeof(string) });
                 body = Expression.Call(null, containsInfo, propertyExp, ToLikeExp(value?.ToString() ?? ""), Expression.Constant(FilterDataHelper.LikeScreening.ToString()));
             }
-            else if (propertyType == typeof(int) || propertyType == typeof(int?)) body = ConvertOrFalse(int.TryParse(value, out int res), res);
-            else if (propertyType == typeof(DateTime) || propertyType == typeof(DateTime?)) body = ConvertOrFalse(DateTime.TryParse(value, out var res), res);
-            else if (propertyType == typeof(double) || propertyType == typeof(double?)) body = ConvertOrFalse(double.TryParse(value, out var res), res);
-            else if (propertyType == typeof(decimal) || propertyType == typeof(decimal?)) body = ConvertOrFalse(decimal.TryParse(value, out var res), res);
-            else if (propertyType == typeof(float) || propertyType == typeof(float?)) body = ConvertOrFalse(float.TryParse(value, out var res), res);
-            else if (propertyType == typeof(byte) || propertyType == typeof(byte?)) body = ConvertOrFalse(byte.TryParse(value, out var res), res);
-            else if (propertyType == typeof(long) || propertyType == typeof(long?)) body = ConvertOrFalse(long.TryParse(value, out var res), res);
-            else if (propertyType == typeof(short) || propertyType == typeof(short?)) body = ConvertOrFalse(short.TryParse(value, out var res), res);
+            else if (propertyType == typeof(int) || propertyType == typeof(int?)) body = EqualsIfConverted(int.TryParse(value, out int res), res);
+            else if (propertyType == typeof(DateTime) || propertyType == typeof(DateTime?)) body = EqualsIfConverted(DateTime.TryParse(value, out var res), res);
+            else if (propertyType == typeof(double) || propertyType == typeof(double?)) body = EqualsIfConverted(double.TryParse(value, out var res), res);
+            else if (propertyType == typeof(decimal) || propertyType == typeof(decimal?)) body = EqualsIfConverted(decimal.TryParse(value, out var res), res);
+            else if (propertyType == typeof(float) || propertyType == typeof(float?)) body = EqualsIfConverted(float.TryParse(value, out var res), res);
+            else if (propertyType == typeof(byte) || propertyType == typeof(byte?)) body = EqualsIfConverted(byte.TryParse(value, out var res), res);
+            else if (propertyType == typeof(long) || propertyType == typeof(long?)) body = EqualsIfConverted(long.TryParse(value, out var res), res);
+            else if (propertyType == typeof(short) || propertyType == typeof(short?)) body = EqualsIfConverted(short.TryParse(value, out var res), res);
             else if (propertyType == typeof(bool) || propertyType == typeof(bool?))
             {
                 if (FilterDataHelper.IsTrue(value)) body = Expression.Equal(propertyExp, Expression.Constant(true, propertyExp.Type));
                 else if (FilterDataHelper.IsFalse(value)) body = Expression.Equal(propertyExp, Expression.Constant(false, propertyExp.Type));
-                else body = ConvertOrFalse(bool.TryParse(value, out var res), res);
+                else body = EqualsIfConverted(bool.TryParse(value, out var res), res);
+            }
+            else body = Expression.Constant(false);
+
+            return Expression.Lambda(body, parameterExp);
+        }
+        internal static LambdaExpression LikeStringPredicate(IFilterData data, string value)
+        {
+            SafeCreateParameters(data, value, out var parameterExp, out var constExp, out var propertyExp);
+
+            var propertyType = propertyExp.Type;
+
+            Expression EqualsIfConverted<T>(bool isConvarted, T convarted) => 
+                !isConvarted ? Expression.Constant(false) : (Expression)propertyExp.Equal(Expression.Constant(convarted, propertyExp.Type));
+
+            Expression body;
+            if (propertyType.IsString())
+            {
+                var containsInfo = typeof(String).GetMethod(nameof(String.Contains));
+                body = Expression.Call(propertyExp, containsInfo, constExp);
+            }
+            else if (propertyType == typeof(int) || propertyType == typeof(int?)) body = EqualsIfConverted(int.TryParse(value, out int res), res);
+            else if (propertyType == typeof(DateTime) || propertyType == typeof(DateTime?)) body = EqualsIfConverted(DateTime.TryParse(value, out var res), res);
+            else if (propertyType == typeof(double) || propertyType == typeof(double?)) body = EqualsIfConverted(double.TryParse(value, out var res), res);
+            else if (propertyType == typeof(decimal) || propertyType == typeof(decimal?)) body = EqualsIfConverted(decimal.TryParse(value, out var res), res);
+            else if (propertyType == typeof(float) || propertyType == typeof(float?)) body = EqualsIfConverted(float.TryParse(value, out var res), res);
+            else if (propertyType == typeof(byte) || propertyType == typeof(byte?)) body = EqualsIfConverted(byte.TryParse(value, out var res), res);
+            else if (propertyType == typeof(long) || propertyType == typeof(long?)) body = EqualsIfConverted(long.TryParse(value, out var res), res);
+            else if (propertyType == typeof(short) || propertyType == typeof(short?)) body = EqualsIfConverted(short.TryParse(value, out var res), res);
+            else if (propertyType == typeof(bool) || propertyType == typeof(bool?))
+            {
+                if (FilterDataHelper.IsTrue(value)) body = propertyExp.Equal(Expression.Constant(true, propertyExp.Type));
+                else if (FilterDataHelper.IsFalse(value)) body = propertyExp.Equal(Expression.Constant(false, propertyExp.Type));
+                else body = EqualsIfConverted(bool.TryParse(value, out var res), res);
             }
             else body = Expression.Constant(false);
 
@@ -81,10 +129,24 @@ namespace DynamicFilter.Factories
             var any = CreateAny(propertyConvertedExp);
             return Expression.Lambda(any, parameterExp);
         }
+        internal static LambdaExpression SafeAnyPredicate(IFilterData data)
+        {
+            SafeCreateConvertedParameters(data, null, out var parameterExp, out var _, out var propertyConvertedExp);
+
+            var any = CreateAny(propertyConvertedExp);
+            return Expression.Lambda(any, parameterExp);
+        }
 
         internal static LambdaExpression AnyPredicate(IFilterData data, LambdaExpression lambdaExpression)
         {
             CreateConvertedParameters(data, null, out var parameterExp, out var _, out var propertyConvertedExp);
+
+            var any = CreateAny(propertyConvertedExp, lambdaExpression);
+            return Expression.Lambda(any, parameterExp);
+        }
+        internal static LambdaExpression SafeAnyPredicate(IFilterData data, LambdaExpression lambdaExpression)
+        {
+            SafeCreateConvertedParameters(data, null, out var parameterExp, out var _, out var propertyConvertedExp);
 
             var any = CreateAny(propertyConvertedExp, lambdaExpression);
             return Expression.Lambda(any, parameterExp);
@@ -97,6 +159,13 @@ namespace DynamicFilter.Factories
             var all = CreateAll(propertyConvertedExp, lambdaExpression);
             return Expression.Lambda(all, parameterExp);
         }
+        internal static LambdaExpression SafeAllPredicate(IFilterData data, LambdaExpression lambdaExpression)
+        {
+            SafeCreateConvertedParameters(data, null, out var parameterExp, out var _, out var propertyConvertedExp);
+
+            var all = CreateAll(propertyConvertedExp, lambdaExpression);
+            return Expression.Lambda(all, parameterExp);
+        }
 
         internal static LambdaExpression MorePredicate(IFilterData data, object value)
         {
@@ -105,11 +174,29 @@ namespace DynamicFilter.Factories
             var equalExp = Expression.GreaterThan(propertyConvertedExp, constExp);
             return Expression.Lambda(equalExp, parameterExp);
         }
+
+        internal static LambdaExpression SafeMorePredicate(IFilterData data, object value)
+        {
+            SafeCreateConvertedParameters(data, value, out var parameterExp, out var constExp, out var propertyConvertedExp);
+            //var notNullProps = 
+            var equalExp = Expression.GreaterThan(propertyConvertedExp, constExp).CheckNull(propertyConvertedExp);
+            return Expression.Lambda(equalExp, parameterExp);
+        }
+        
+
+
         internal static LambdaExpression LessPredicate(IFilterData data, object value)
         {
             CreateConvertedParameters(data, value, out var parameterExp, out var constExp, out var propertyConvertedExp);
 
             var equalExp = Expression.LessThan(propertyConvertedExp, constExp);
+            return Expression.Lambda(equalExp, parameterExp);
+        }
+        internal static LambdaExpression SafeLessPredicate(IFilterData data, object value)
+        {
+            SafeCreateConvertedParameters(data, value, out var parameterExp, out var constExp, out var propertyConvertedExp);
+
+            var equalExp = Expression.LessThan(propertyConvertedExp, constExp).CheckNull(propertyConvertedExp);
             return Expression.Lambda(equalExp, parameterExp);
         }
         public static LambdaExpression PropertySelector(IFilterData data)
@@ -132,6 +219,11 @@ namespace DynamicFilter.Factories
             CreateParameters(data, value, out parameterExp, out constExp, out var propertyExp);
             propertyConvertedExp = value != null ? Expression.Convert(propertyExp, value.GetType()) : propertyExp;
         }
+        private static void SafeCreateConvertedParameters(IFilterData data, object value, out ParameterExpression parameterExp, out ConstantExpression constExp, out Expression propertyConvertedExp)
+        {
+            SafeCreateParameters(data, value, out parameterExp, out constExp, out var propertyExp);
+            propertyConvertedExp = value != null ? Expression.Convert(propertyExp, value.GetNullubleType()) : propertyExp;
+        }
 
         private static void CreateParameters(IFilterData data, object value, out ParameterExpression parameterExp, out ConstantExpression constExp, out Expression propertyExp)
         {
@@ -142,6 +234,15 @@ namespace DynamicFilter.Factories
             propertyExp = CreatePropertyExp(childTree, parameterExp);
         }
 
+        private static void SafeCreateParameters(IFilterData data, object value, out ParameterExpression parameterExp, out ConstantExpression constExp, out Expression propertyExp)
+        {
+            var childTree = FilterDataHelper.CreateChildTree(data);
+            var parentData = GetParent(childTree);
+            parameterExp = Expression.Variable(parentData.PropertyType);
+            constExp = Expression.Constant(value, value.GetNullubleType());
+            propertyExp = SafeCreatePropertyExp(childTree, parameterExp);
+        }
+
         private static IFilterData GetParent(List<IFilterData> childTree) => childTree[childTree.Count - 1];
 
         private static Expression CreatePropertyExp(List<IFilterData> childTree, ParameterExpression parentExp)
@@ -149,6 +250,21 @@ namespace DynamicFilter.Factories
             Expression propertyExp = parentExp;
             for (int i = childTree.Count - 2; i >= 0; i--) propertyExp = Expression.Property(propertyExp, childTree[i].PropertyName);
 
+            return propertyExp;
+        }
+        private static Expression SafeCreatePropertyExp(List<IFilterData> childTree, ParameterExpression parentExp)
+        {
+            Expression propertyExp = parentExp;
+            for (int i = childTree.Count - 2; i >= 0; i--)
+            {
+                if(childTree[i].PropertyType.CanBeNull())
+                propertyExp = Expression.Condition(propertyExp.IsNotNull(), Expression.Property(propertyExp, childTree[i].PropertyName), Expression.Constant(null, childTree[i].PropertyType));
+                else
+                {
+                    var nullubleType = typeof(Nullable<>).MakeGenericType(childTree[i].PropertyType);
+                    propertyExp = Expression.Condition(propertyExp.IsNotNull(), Expression.Property(propertyExp, childTree[i].PropertyName).ConvertTo(nullubleType), Expression.Constant(null, nullubleType));
+                }
+            }
             return propertyExp;
         }
         private static Expression CreatePropertyOrSelect(List<IFilterData> childTree, ParameterExpression parentExp, IFilterData data)

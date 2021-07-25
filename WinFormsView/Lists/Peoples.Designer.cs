@@ -36,20 +36,22 @@ namespace WinFormsView.Lists
             this.btFilter = new System.Windows.Forms.ToolStripSplitButton();
             this.btFilterClear = new System.Windows.Forms.ToolStripMenuItem();
             this.dgvPeople = new System.Windows.Forms.DataGridView();
+            this.contextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.smiPrint = new System.Windows.Forms.ToolStripMenuItem();
             this.btRemove = new System.Windows.Forms.Button();
             this.btChange = new System.Windows.Forms.Button();
             this.btAdd = new System.Windows.Forms.Button();
-            this.sbPeople = new System.Windows.Forms.BindingSource(this.components);
-            this.contextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.smiPrint = new System.Windows.Forms.ToolStripMenuItem();
+            this.bsPeople = new System.Windows.Forms.BindingSource(this.components);
+            this.bsAddresses = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.toolStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPeople)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sbPeople)).BeginInit();
             this.contextMenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bsPeople)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsAddresses)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -128,6 +130,21 @@ namespace WinFormsView.Lists
             this.dgvPeople.Size = new System.Drawing.Size(800, 378);
             this.dgvPeople.TabIndex = 0;
             // 
+            // contextMenu
+            // 
+            this.contextMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.smiPrint});
+            this.contextMenu.Name = "contextMenu";
+            this.contextMenu.Size = new System.Drawing.Size(128, 28);
+            // 
+            // smiPrint
+            // 
+            this.smiPrint.Name = "smiPrint";
+            this.smiPrint.Size = new System.Drawing.Size(127, 24);
+            this.smiPrint.Text = "Печать";
+            this.smiPrint.Click += new System.EventHandler(this.OnPrint);
+            // 
             // btRemove
             // 
             this.btRemove.Dock = System.Windows.Forms.DockStyle.Left;
@@ -160,21 +177,6 @@ namespace WinFormsView.Lists
             this.btAdd.UseVisualStyleBackColor = true;
             this.btAdd.Click += new System.EventHandler(this.OnAdd);
             // 
-            // contextMenu
-            // 
-            this.contextMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.contextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.smiPrint});
-            this.contextMenu.Name = "contextMenu";
-            this.contextMenu.Size = new System.Drawing.Size(211, 56);
-            // 
-            // smiPrint
-            // 
-            this.smiPrint.Name = "smiPrint";
-            this.smiPrint.Size = new System.Drawing.Size(210, 24);
-            this.smiPrint.Text = "Печать";
-            this.smiPrint.Click += new System.EventHandler(this.OnPrint);
-            // 
             // Peoples
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -191,8 +193,9 @@ namespace WinFormsView.Lists
             this.toolStrip1.ResumeLayout(false);
             this.toolStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPeople)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.sbPeople)).EndInit();
             this.contextMenu.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.bsPeople)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsAddresses)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -204,11 +207,12 @@ namespace WinFormsView.Lists
         private System.Windows.Forms.Button btRemove;
         private System.Windows.Forms.Button btChange;
         private System.Windows.Forms.Button btAdd;
-        private System.Windows.Forms.BindingSource sbPeople;
+        private System.Windows.Forms.BindingSource bsPeople;
         private System.Windows.Forms.ToolStrip toolStrip1;
         private System.Windows.Forms.ToolStripSplitButton btFilter;
         private System.Windows.Forms.ToolStripMenuItem btFilterClear;
         private System.Windows.Forms.ContextMenuStrip contextMenu;
         private System.Windows.Forms.ToolStripMenuItem smiPrint;
+        private System.Windows.Forms.BindingSource bsAddresses;
     }
 }
