@@ -11,4 +11,9 @@ namespace Revisor2.Model.ViewModels
         public string Type { get; set; }
         public string Description { get; set; }
     }
+    public class ResultTypeVm
+    {
+        public int Id { get; set; }
+        public string Name { get; set; }
+    }
 }

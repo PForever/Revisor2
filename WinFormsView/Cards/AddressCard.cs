@@ -10,11 +10,12 @@ using System.Windows.Forms;
 
 namespace WinFormsView.Cards
 {
-    public partial class Template : Form
+    public partial class AddressCard : Form
     {
-        public Template()
+        public AddressCard()
         {
             InitializeComponent();
         }
+
     }
 }

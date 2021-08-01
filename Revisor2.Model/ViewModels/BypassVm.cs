@@ -12,17 +12,22 @@ namespace Revisor2.Model.ViewModels
     {
         public BypassVm(Guid id) : base(id) { }
 
-        private DateTime bypassDate;
-        private string addressName;
-        private Guid addressId;
+        private DateOnly _bypassDate;
+        private AddressVm _address;
+        private MonthVm _month;
 
-        public DateTime BypassDate { get => bypassDate; set => Set(ref bypassDate, value); }
-        public string AddressName { get => addressName; set => Set(ref addressName, value); }
-        public Guid AddressId { get => addressId; set => Set(ref addressId, value); }
+        public MonthVm Month { get => _month; set => Set(ref _month, value); }
+
+        public DateOnly BypassDate { get => _bypassDate; set => Set(ref _bypassDate, value); }
+        public AddressVm Address { get => _address; set => Set(ref _address, value); }
+        public string AddressName { get => _address.Name; }
         public ICommand SaveCommand { get; }
 
         public override string DisplayMember => $"{AddressName} ({BypassDate})";
 
         ObservableCollection<ContributionVm> Contributions { get; } = new();
+        ObservableCollection<PersonTimeVm> PersonTimes { get; } = new();
+        public bool IsComplited { get; set; }
+        public string Description { get; }
     }
 }

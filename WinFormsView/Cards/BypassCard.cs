@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace WinFormsView.Cards
 {
-    public partial class Template : Form
+    public partial class BypassCard : Form
     {
-        public Template()
+        public BypassCard()
         {
             InitializeComponent();
         }

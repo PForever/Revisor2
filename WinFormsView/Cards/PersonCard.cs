@@ -11,7 +11,7 @@ using System.Windows.Forms;
 using SystemHelpers;
 using WinFormsView.Help;
 
-namespace WinFormsView.Lists
+namespace WinFormsView.Cards
 {
     public partial class PersonCard : Form
     {

@@ -1,5 +1,5 @@
 ﻿
-namespace WinFormsView.Lists
+namespace WinFormsView.Cards
 {
     partial class PersonCard
     {
