@@ -7,12 +7,12 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Revisor2.Model.ViewModels
+namespace Revisor2.Model.Models
 {
-    public abstract class ViewModelBase<T, TKey> : INotifyPropertyChanged, IHasId<TKey>, IEquatable<T>
-        where T : ViewModelBase<T, TKey> 
+    public abstract class DomainModelBase<T, TKey> : INotifyPropertyChanged, IHasId<TKey>, IEquatable<T>
+        where T : DomainModelBase<T, TKey> 
     {
-        public ViewModelBase(TKey id)
+        public DomainModelBase(TKey id)
         {
             Id = id;
         }
@@ -30,8 +30,8 @@ namespace Revisor2.Model.ViewModels
         public override bool Equals(object obj) => Equals(obj as T);
         public bool Equals(T other) => other is not null && EqualityComparer<TKey>.Default.Equals(Id, other.Id);
         public override int GetHashCode() => HashCode.Combine(Id);
-        public static bool operator ==(ViewModelBase<T, TKey> left, ViewModelBase<T, TKey> right) => left is T && right is T && EqualityComparer<ViewModelBase<T, TKey>>.Default.Equals(left, right);
-        public static bool operator !=(ViewModelBase<T, TKey> left, ViewModelBase<T, TKey> right) => !(left == right);
+        public static bool operator ==(DomainModelBase<T, TKey> left, DomainModelBase<T, TKey> right) => left is T && right is T && EqualityComparer<DomainModelBase<T, TKey>>.Default.Equals(left, right);
+        public static bool operator !=(DomainModelBase<T, TKey> left, DomainModelBase<T, TKey> right) => !(left == right);
     }
     public interface IHasId<TKey>
     {

@@ -1,10 +1,10 @@
 ﻿using System;
 
-namespace Revisor2.Model.ViewModels
+namespace Revisor2.Model.Models
 {
-    public class MonthVm : ViewModelBase<MonthVm, Guid>
+    public class MonthM : DomainModelBase<MonthM, Guid>
     {
-        public MonthVm(Guid id) : base(id) {}
+        public MonthM(Guid id) : base(id) {}
         public string Name {  get; init; }
         public DateOnly DateStart { get; init; }
         public DateOnly DateFinish { get; init; }

@@ -12,9 +12,9 @@ using System.Windows.Forms;
 
 namespace WinFormsView.Cards
 {
-    public partial class BypassCard : Form
+    public partial class PorchCard : Form
     {
-        public BypassCard(BypassM model, AddressM address, AddressesRepository repository)
+        public PorchCard(PorchM model, AddressM address, AddressesRepository repository)
         {
             InitializeComponent();
         }

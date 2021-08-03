@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace Revisor2.Model.ViewModels
+namespace Revisor2.Model.Models
 {
-    public class ContributionVm
+    public class ContributionM
     {
         public int Id { get; set; }
         public int RoomPersonId { get; set; }

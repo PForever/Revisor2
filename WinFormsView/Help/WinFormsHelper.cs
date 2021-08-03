@@ -14,7 +14,7 @@ namespace WinFormsView.Help
     {
         public static DataGridViewColumn[] CreateColumns<T>(params BindingSource[] sourses)
         {
-            var s = sourses.ToDictionary(s => s.DataSource.GetType().GetGenericArguments()[0]);
+            var s = sourses.ToDictionary(s => s.DataSource is Type t ? t : s.DataSource.GetType().GetGenericArguments()[0]);
             return (from p in typeof(T).GetProperties(System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.Public)
             where p.GetCustomAttributes(typeof(NonDisplayAttribute), false).Length == 0
             let displayName = (p.GetCustomAttributes(typeof(DisplayNameAttribute), false).FirstOrDefault() as DisplayNameAttribute)?.Name ?? p.Name
@@ -146,6 +146,11 @@ namespace WinFormsView.Help
                 //if (e.Value != null && e.Value.Equals(_defatultMember)) e.Value = null;
                 if (e.Value == null) e.Value = _defatultMember;
             }
+        }
+        public static T GetCurrent<T>(this DataGridView dgv) where T : class => dgv.SelectedCells is var cells && cells.Count == 1 && cells[0].RowIndex != -1 ? dgv.Rows[cells[0].RowIndex].DataBoundItem as T : default;
+        public static void SetTextBoxBinding(this TextBox control, object dataSource, string memeberName)
+        {
+            control.DataBindings.Add(new Binding(nameof(TextBox.Text), dataSource, memeberName));
         }
         public static void SetBinding(this Control control, string propertyName, object dataSource, string memeberName)
         {

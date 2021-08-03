@@ -100,7 +100,7 @@ namespace WinFormsView.Lists
             this.btCard.TabIndex = 1;
             this.btCard.Text = "Карточка";
             this.btCard.UseVisualStyleBackColor = true;
-            this.btCard.Click += new System.EventHandler(this.OnCard);
+            this.btCard.Click += new System.EventHandler(this.OnChange);
             // 
             // btDelete
             // 

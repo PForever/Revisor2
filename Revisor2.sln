@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.30621.155
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31521.260
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Revisor2", "Revisor2\Revisor2.csproj", "{2E55D034-4E53-444D-B126-AC06208B2B59}"
 EndProject
@@ -15,11 +15,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinFormsView", "WinFormsVie
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FilterLibrary", "FilterLibrary\FilterLibrary.csproj", "{96B6B81B-FD30-44CD-A17A-69321F0E331F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicFilterControls", "DynamicFilterControls\DynamicFilterControls.csproj", "{FCBF3F55-C6F0-4FEC-8EFD-1A02022CECB1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DynamicFilterControls", "DynamicFilterControls\DynamicFilterControls.csproj", "{FCBF3F55-C6F0-4FEC-8EFD-1A02022CECB1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DynamicFilter", "DynamicFilter\DynamicFilter.csproj", "{4B0AC030-B616-4049-BCA3-8E91F6D4ED55}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DynamicFilter", "DynamicFilter\DynamicFilter.csproj", "{4B0AC030-B616-4049-BCA3-8E91F6D4ED55}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LazyCollection", "LazyCollection\LazyCollection.csproj", "{F73A917F-F5B1-4917-A185-FAF73B92AB2E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LazyCollection", "LazyCollection\LazyCollection.csproj", "{F73A917F-F5B1-4917-A185-FAF73B92AB2E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Revisor2.ViewModel", "Revisor2.ViewModel\Revisor2.ViewModel.csproj", "{F937AA95-8A22-4453-A2F3-EFECA6B1F4EF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +65,10 @@ Global
 		{F73A917F-F5B1-4917-A185-FAF73B92AB2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F73A917F-F5B1-4917-A185-FAF73B92AB2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F73A917F-F5B1-4917-A185-FAF73B92AB2E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F937AA95-8A22-4453-A2F3-EFECA6B1F4EF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F937AA95-8A22-4453-A2F3-EFECA6B1F4EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F937AA95-8A22-4453-A2F3-EFECA6B1F4EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F937AA95-8A22-4453-A2F3-EFECA6B1F4EF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

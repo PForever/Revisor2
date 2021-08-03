@@ -26,7 +26,8 @@ namespace WinFormsView
 
         private void OnAddresses(object sender, EventArgs e)
         {
-
+            var card = new AddressesList();
+            card.Show();
         }
     }
 }

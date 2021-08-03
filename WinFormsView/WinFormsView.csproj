@@ -39,6 +39,9 @@
     <Compile Update="Cards\AddressCard.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Update="Cards\PorchCard.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <Compile Update="Cards\Template.cs">
       <SubType>Form</SubType>
     </Compile>

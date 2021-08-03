@@ -30,60 +30,66 @@ namespace WinFormsView.Cards
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.sbBypassed = new System.Windows.Forms.BindingSource(this.components);
+            this.bsBypass = new System.Windows.Forms.BindingSource(this.components);
             this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-            this.dgvByPassed = new System.Windows.Forms.DataGridView();
-            this.btRemove = new System.Windows.Forms.Button();
-            this.btChange = new System.Windows.Forms.Button();
-            this.btAdd = new System.Windows.Forms.Button();
+            this.dgvPeople = new System.Windows.Forms.DataGridView();
+            this.btRemovePerson = new System.Windows.Forms.Button();
+            this.btChangePerson = new System.Windows.Forms.Button();
+            this.btAddPerson = new System.Windows.Forms.Button();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
-            this.btSave = new System.Windows.Forms.Button();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.splitContainer3 = new System.Windows.Forms.SplitContainer();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.tbDescription = new System.Windows.Forms.TextBox();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.button4 = new System.Windows.Forms.Button();
-            this.button5 = new System.Windows.Forms.Button();
-            this.button6 = new System.Windows.Forms.Button();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.sbBypassed)).BeginInit();
+            this.dgvPorch = new System.Windows.Forms.DataGridView();
+            this.btRemovePorch = new System.Windows.Forms.Button();
+            this.btChangePorch = new System.Windows.Forms.Button();
+            this.btAddPorch = new System.Windows.Forms.Button();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.splitContainer3 = new System.Windows.Forms.SplitContainer();
+            this.dgvBypass = new System.Windows.Forms.DataGridView();
+            this.btRemoveBypass = new System.Windows.Forms.Button();
+            this.btChangeBypass = new System.Windows.Forms.Button();
+            this.btAddBypass = new System.Windows.Forms.Button();
+            this.splitContainer2 = new System.Windows.Forms.SplitContainer();
+            this.btSave = new System.Windows.Forms.Button();
+            this.tbName = new System.Windows.Forms.TextBox();
+            this.bsPeople = new System.Windows.Forms.BindingSource(this.components);
+            this.bsAddress = new System.Windows.Forms.BindingSource(this.components);
+            this.bsPorch = new System.Windows.Forms.BindingSource(this.components);
+            ((System.ComponentModel.ISupportInitialize)(this.bsBypass)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvByPassed)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPeople)).BeginInit();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
-            this.splitContainer2.Panel1.SuspendLayout();
-            this.splitContainer2.Panel2.SuspendLayout();
-            this.splitContainer2.SuspendLayout();
-            this.tabPage3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
-            this.splitContainer3.Panel1.SuspendLayout();
-            this.splitContainer3.Panel2.SuspendLayout();
-            this.splitContainer3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.groupBox2.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).BeginInit();
             this.splitContainer4.Panel1.SuspendLayout();
             this.splitContainer4.Panel2.SuspendLayout();
             this.splitContainer4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
-            this.groupBox1.SuspendLayout();
-            this.groupBox2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPorch)).BeginInit();
+            this.tabPage2.SuspendLayout();
+            this.tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).BeginInit();
+            this.splitContainer3.Panel1.SuspendLayout();
+            this.splitContainer3.Panel2.SuspendLayout();
+            this.splitContainer3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvBypass)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
+            this.splitContainer2.Panel1.SuspendLayout();
+            this.splitContainer2.Panel2.SuspendLayout();
+            this.splitContainer2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bsPeople)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsAddress)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsPorch)).BeginInit();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -98,66 +104,69 @@ namespace WinFormsView.Cards
             // 
             // splitContainer1.Panel1
             // 
-            this.splitContainer1.Panel1.Controls.Add(this.dgvByPassed);
+            this.splitContainer1.Panel1.Controls.Add(this.dgvPeople);
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.btRemove);
-            this.splitContainer1.Panel2.Controls.Add(this.btChange);
-            this.splitContainer1.Panel2.Controls.Add(this.btAdd);
-            this.splitContainer1.Panel2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.splitContainer1.Panel2.Controls.Add(this.btRemovePerson);
+            this.splitContainer1.Panel2.Controls.Add(this.btChangePerson);
+            this.splitContainer1.Panel2.Controls.Add(this.btAddPerson);
+            this.splitContainer1.Panel2.Padding = new System.Windows.Forms.Padding(4);
             this.splitContainer1.Size = new System.Drawing.Size(686, 265);
-            this.splitContainer1.SplitterDistance = 217;
+            this.splitContainer1.SplitterDistance = 218;
             this.splitContainer1.SplitterWidth = 3;
             this.splitContainer1.TabIndex = 2;
             // 
-            // dgvByPassed
+            // dgvPeople
             // 
-            this.dgvByPassed.AllowUserToAddRows = false;
-            this.dgvByPassed.AllowUserToDeleteRows = false;
-            this.dgvByPassed.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
-            this.dgvByPassed.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvByPassed.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dgvByPassed.Location = new System.Drawing.Point(0, 0);
-            this.dgvByPassed.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dgvByPassed.Name = "dgvByPassed";
-            this.dgvByPassed.ReadOnly = true;
-            this.dgvByPassed.RowHeadersWidth = 51;
-            this.dgvByPassed.Size = new System.Drawing.Size(686, 217);
-            this.dgvByPassed.TabIndex = 0;
+            this.dgvPeople.AllowUserToAddRows = false;
+            this.dgvPeople.AllowUserToDeleteRows = false;
+            this.dgvPeople.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
+            this.dgvPeople.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPeople.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvPeople.Location = new System.Drawing.Point(0, 0);
+            this.dgvPeople.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dgvPeople.Name = "dgvPeople";
+            this.dgvPeople.ReadOnly = true;
+            this.dgvPeople.RowHeadersWidth = 51;
+            this.dgvPeople.Size = new System.Drawing.Size(686, 218);
+            this.dgvPeople.TabIndex = 0;
             // 
-            // btRemove
+            // btRemovePerson
             // 
-            this.btRemove.Dock = System.Windows.Forms.DockStyle.Left;
-            this.btRemove.Location = new System.Drawing.Point(4, 4);
-            this.btRemove.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btRemove.Name = "btRemove";
-            this.btRemove.Size = new System.Drawing.Size(82, 37);
-            this.btRemove.TabIndex = 2;
-            this.btRemove.Text = "Удалить";
-            this.btRemove.UseVisualStyleBackColor = true;
+            this.btRemovePerson.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btRemovePerson.Location = new System.Drawing.Point(4, 4);
+            this.btRemovePerson.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btRemovePerson.Name = "btRemovePerson";
+            this.btRemovePerson.Size = new System.Drawing.Size(82, 36);
+            this.btRemovePerson.TabIndex = 2;
+            this.btRemovePerson.Text = "Удалить";
+            this.btRemovePerson.UseVisualStyleBackColor = true;
+            this.btRemovePerson.Click += new System.EventHandler(this.OnRemovePerson);
             // 
-            // btChange
+            // btChangePerson
             // 
-            this.btChange.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btChange.Location = new System.Drawing.Point(518, 4);
-            this.btChange.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btChange.Name = "btChange";
-            this.btChange.Size = new System.Drawing.Size(82, 37);
-            this.btChange.TabIndex = 1;
-            this.btChange.Text = "Изменить";
-            this.btChange.UseVisualStyleBackColor = true;
+            this.btChangePerson.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btChangePerson.Location = new System.Drawing.Point(518, 4);
+            this.btChangePerson.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btChangePerson.Name = "btChangePerson";
+            this.btChangePerson.Size = new System.Drawing.Size(82, 36);
+            this.btChangePerson.TabIndex = 1;
+            this.btChangePerson.Text = "Изменить";
+            this.btChangePerson.UseVisualStyleBackColor = true;
+            this.btChangePerson.Click += new System.EventHandler(this.OnChangePerson);
             // 
-            // btAdd
+            // btAddPerson
             // 
-            this.btAdd.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btAdd.Location = new System.Drawing.Point(600, 4);
-            this.btAdd.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btAdd.Name = "btAdd";
-            this.btAdd.Size = new System.Drawing.Size(82, 37);
-            this.btAdd.TabIndex = 0;
-            this.btAdd.Text = "Добавить";
-            this.btAdd.UseVisualStyleBackColor = true;
+            this.btAddPerson.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btAddPerson.Location = new System.Drawing.Point(600, 4);
+            this.btAddPerson.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btAddPerson.Name = "btAddPerson";
+            this.btAddPerson.Size = new System.Drawing.Size(82, 36);
+            this.btAddPerson.TabIndex = 0;
+            this.btAddPerson.Text = "Добавить";
+            this.btAddPerson.UseVisualStyleBackColor = true;
+            this.btAddPerson.Click += new System.EventHandler(this.OnAddPerson);
             // 
             // tabControl1
             // 
@@ -184,131 +193,34 @@ namespace WinFormsView.Cards
             this.tabPage1.Text = "Основное";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // tabPage2
+            // groupBox2
             // 
-            this.tabPage2.Controls.Add(this.splitContainer1);
-            this.tabPage2.Location = new System.Drawing.Point(4, 24);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(692, 271);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Люди";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.groupBox2.Controls.Add(this.tbDescription);
+            this.groupBox2.Location = new System.Drawing.Point(8, 61);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(676, 114);
+            this.groupBox2.TabIndex = 1;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Комментарий";
             // 
-            // splitContainer2
+            // tbDescription
             // 
-            this.splitContainer2.Cursor = System.Windows.Forms.Cursors.HSplit;
-            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer2.Location = new System.Drawing.Point(0, 0);
-            this.splitContainer2.Name = "splitContainer2";
-            this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            this.tbDescription.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbDescription.Location = new System.Drawing.Point(3, 19);
+            this.tbDescription.Multiline = true;
+            this.tbDescription.Name = "tbDescription";
+            this.tbDescription.Size = new System.Drawing.Size(670, 92);
+            this.tbDescription.TabIndex = 0;
             // 
-            // splitContainer2.Panel1
+            // groupBox1
             // 
-            this.splitContainer2.Panel1.Controls.Add(this.tabControl1);
-            // 
-            // splitContainer2.Panel2
-            // 
-            this.splitContainer2.Panel2.Controls.Add(this.btSave);
-            this.splitContainer2.Size = new System.Drawing.Size(700, 338);
-            this.splitContainer2.SplitterDistance = 299;
-            this.splitContainer2.TabIndex = 4;
-            this.splitContainer2.SplitterMoved += new System.Windows.Forms.SplitterEventHandler(this.splitContainer2_SplitterMoved);
-            // 
-            // btSave
-            // 
-            this.btSave.Dock = System.Windows.Forms.DockStyle.Right;
-            this.btSave.Location = new System.Drawing.Point(618, 0);
-            this.btSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btSave.Name = "btSave";
-            this.btSave.Size = new System.Drawing.Size(82, 35);
-            this.btSave.TabIndex = 1;
-            this.btSave.Text = "Сохранить";
-            this.btSave.UseVisualStyleBackColor = true;
-            // 
-            // tabPage3
-            // 
-            this.tabPage3.Controls.Add(this.splitContainer3);
-            this.tabPage3.Location = new System.Drawing.Point(4, 24);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(692, 271);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "Обходы";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // splitContainer3
-            // 
-            this.splitContainer3.Cursor = System.Windows.Forms.Cursors.HSplit;
-            this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.splitContainer3.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
-            this.splitContainer3.Location = new System.Drawing.Point(3, 3);
-            this.splitContainer3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.splitContainer3.Name = "splitContainer3";
-            this.splitContainer3.Orientation = System.Windows.Forms.Orientation.Horizontal;
-            // 
-            // splitContainer3.Panel1
-            // 
-            this.splitContainer3.Panel1.Controls.Add(this.dataGridView1);
-            // 
-            // splitContainer3.Panel2
-            // 
-            this.splitContainer3.Panel2.Controls.Add(this.button1);
-            this.splitContainer3.Panel2.Controls.Add(this.button2);
-            this.splitContainer3.Panel2.Controls.Add(this.button3);
-            this.splitContainer3.Panel2.Padding = new System.Windows.Forms.Padding(4);
-            this.splitContainer3.Size = new System.Drawing.Size(686, 265);
-            this.splitContainer3.SplitterDistance = 218;
-            this.splitContainer3.SplitterWidth = 3;
-            this.splitContainer3.TabIndex = 3;
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.AllowUserToAddRows = false;
-            this.dataGridView1.AllowUserToDeleteRows = false;
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.ReadOnly = true;
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.Size = new System.Drawing.Size(686, 218);
-            this.dataGridView1.TabIndex = 0;
-            // 
-            // button1
-            // 
-            this.button1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.button1.Location = new System.Drawing.Point(4, 4);
-            this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(82, 36);
-            this.button1.TabIndex = 2;
-            this.button1.Text = "Удалить";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            this.button2.Dock = System.Windows.Forms.DockStyle.Right;
-            this.button2.Location = new System.Drawing.Point(518, 4);
-            this.button2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(82, 36);
-            this.button2.TabIndex = 1;
-            this.button2.Text = "Изменить";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // button3
-            // 
-            this.button3.Dock = System.Windows.Forms.DockStyle.Right;
-            this.button3.Location = new System.Drawing.Point(600, 4);
-            this.button3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(82, 36);
-            this.button3.TabIndex = 0;
-            this.button3.Text = "Добавить";
-            this.button3.UseVisualStyleBackColor = true;
+            this.groupBox1.Controls.Add(this.tbName);
+            this.groupBox1.Location = new System.Drawing.Point(8, 6);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(676, 49);
+            this.groupBox1.TabIndex = 0;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Улица Дом";
             // 
             // tabPage4
             // 
@@ -333,104 +245,205 @@ namespace WinFormsView.Cards
             // 
             // splitContainer4.Panel1
             // 
-            this.splitContainer4.Panel1.Controls.Add(this.dataGridView2);
+            this.splitContainer4.Panel1.Controls.Add(this.dgvPorch);
             // 
             // splitContainer4.Panel2
             // 
-            this.splitContainer4.Panel2.Controls.Add(this.button4);
-            this.splitContainer4.Panel2.Controls.Add(this.button5);
-            this.splitContainer4.Panel2.Controls.Add(this.button6);
+            this.splitContainer4.Panel2.Controls.Add(this.btRemovePorch);
+            this.splitContainer4.Panel2.Controls.Add(this.btChangePorch);
+            this.splitContainer4.Panel2.Controls.Add(this.btAddPorch);
             this.splitContainer4.Panel2.Padding = new System.Windows.Forms.Padding(4);
             this.splitContainer4.Size = new System.Drawing.Size(686, 265);
-            this.splitContainer4.SplitterDistance = 218;
+            this.splitContainer4.SplitterDistance = 219;
             this.splitContainer4.SplitterWidth = 3;
             this.splitContainer4.TabIndex = 3;
             // 
-            // dataGridView2
+            // dgvPorch
             // 
-            this.dataGridView2.AllowUserToAddRows = false;
-            this.dataGridView2.AllowUserToDeleteRows = false;
-            this.dataGridView2.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView2.Location = new System.Drawing.Point(0, 0);
-            this.dataGridView2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.ReadOnly = true;
-            this.dataGridView2.RowHeadersWidth = 51;
-            this.dataGridView2.Size = new System.Drawing.Size(686, 218);
-            this.dataGridView2.TabIndex = 0;
+            this.dgvPorch.AllowUserToAddRows = false;
+            this.dgvPorch.AllowUserToDeleteRows = false;
+            this.dgvPorch.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
+            this.dgvPorch.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPorch.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvPorch.Location = new System.Drawing.Point(0, 0);
+            this.dgvPorch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dgvPorch.Name = "dgvPorch";
+            this.dgvPorch.ReadOnly = true;
+            this.dgvPorch.RowHeadersWidth = 51;
+            this.dgvPorch.Size = new System.Drawing.Size(686, 219);
+            this.dgvPorch.TabIndex = 0;
             // 
-            // button4
+            // btRemovePorch
             // 
-            this.button4.Dock = System.Windows.Forms.DockStyle.Left;
-            this.button4.Location = new System.Drawing.Point(4, 4);
-            this.button4.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(82, 36);
-            this.button4.TabIndex = 2;
-            this.button4.Text = "Удалить";
-            this.button4.UseVisualStyleBackColor = true;
+            this.btRemovePorch.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btRemovePorch.Location = new System.Drawing.Point(4, 4);
+            this.btRemovePorch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btRemovePorch.Name = "btRemovePorch";
+            this.btRemovePorch.Size = new System.Drawing.Size(82, 35);
+            this.btRemovePorch.TabIndex = 2;
+            this.btRemovePorch.Text = "Удалить";
+            this.btRemovePorch.UseVisualStyleBackColor = true;
+            this.btRemovePorch.Click += new System.EventHandler(this.OnRemovePorch);
             // 
-            // button5
+            // btChangePorch
             // 
-            this.button5.Dock = System.Windows.Forms.DockStyle.Right;
-            this.button5.Location = new System.Drawing.Point(518, 4);
-            this.button5.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(82, 36);
-            this.button5.TabIndex = 1;
-            this.button5.Text = "Изменить";
-            this.button5.UseVisualStyleBackColor = true;
+            this.btChangePorch.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btChangePorch.Location = new System.Drawing.Point(518, 4);
+            this.btChangePorch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btChangePorch.Name = "btChangePorch";
+            this.btChangePorch.Size = new System.Drawing.Size(82, 35);
+            this.btChangePorch.TabIndex = 1;
+            this.btChangePorch.Text = "Изменить";
+            this.btChangePorch.UseVisualStyleBackColor = true;
+            this.btChangePorch.Click += new System.EventHandler(this.OnChangePorch);
             // 
-            // button6
+            // btAddPorch
             // 
-            this.button6.Dock = System.Windows.Forms.DockStyle.Right;
-            this.button6.Location = new System.Drawing.Point(600, 4);
-            this.button6.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button6.Name = "button6";
-            this.button6.Size = new System.Drawing.Size(82, 36);
-            this.button6.TabIndex = 0;
-            this.button6.Text = "Добавить";
-            this.button6.UseVisualStyleBackColor = true;
+            this.btAddPorch.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btAddPorch.Location = new System.Drawing.Point(600, 4);
+            this.btAddPorch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btAddPorch.Name = "btAddPorch";
+            this.btAddPorch.Size = new System.Drawing.Size(82, 35);
+            this.btAddPorch.TabIndex = 0;
+            this.btAddPorch.Text = "Добавить";
+            this.btAddPorch.UseVisualStyleBackColor = true;
+            this.btAddPorch.Click += new System.EventHandler(this.OnAddPorch);
             // 
-            // groupBox1
+            // tabPage2
             // 
-            this.groupBox1.Controls.Add(this.comboBox1);
-            this.groupBox1.Location = new System.Drawing.Point(8, 6);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(676, 49);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Улица Дом";
+            this.tabPage2.Controls.Add(this.splitContainer1);
+            this.tabPage2.Location = new System.Drawing.Point(4, 24);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(692, 271);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Люди";
+            this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // groupBox2
+            // tabPage3
             // 
-            this.groupBox2.Controls.Add(this.textBox1);
-            this.groupBox2.Location = new System.Drawing.Point(8, 61);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(676, 114);
-            this.groupBox2.TabIndex = 1;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Комментарий";
+            this.tabPage3.Controls.Add(this.splitContainer3);
+            this.tabPage3.Location = new System.Drawing.Point(4, 24);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage3.Size = new System.Drawing.Size(692, 271);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "Обходы";
+            this.tabPage3.UseVisualStyleBackColor = true;
             // 
-            // comboBox1
+            // splitContainer3
             // 
-            this.comboBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(3, 19);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(670, 23);
-            this.comboBox1.TabIndex = 0;
+            this.splitContainer3.Cursor = System.Windows.Forms.Cursors.HSplit;
+            this.splitContainer3.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer3.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
+            this.splitContainer3.Location = new System.Drawing.Point(3, 3);
+            this.splitContainer3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.splitContainer3.Name = "splitContainer3";
+            this.splitContainer3.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
-            // textBox1
+            // splitContainer3.Panel1
             // 
-            this.textBox1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.textBox1.Location = new System.Drawing.Point(3, 19);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(670, 92);
-            this.textBox1.TabIndex = 0;
+            this.splitContainer3.Panel1.Controls.Add(this.dgvBypass);
+            // 
+            // splitContainer3.Panel2
+            // 
+            this.splitContainer3.Panel2.Controls.Add(this.btRemoveBypass);
+            this.splitContainer3.Panel2.Controls.Add(this.btChangeBypass);
+            this.splitContainer3.Panel2.Controls.Add(this.btAddBypass);
+            this.splitContainer3.Panel2.Padding = new System.Windows.Forms.Padding(4);
+            this.splitContainer3.Size = new System.Drawing.Size(686, 265);
+            this.splitContainer3.SplitterDistance = 219;
+            this.splitContainer3.SplitterWidth = 3;
+            this.splitContainer3.TabIndex = 3;
+            // 
+            // dgvBypass
+            // 
+            this.dgvBypass.AllowUserToAddRows = false;
+            this.dgvBypass.AllowUserToDeleteRows = false;
+            this.dgvBypass.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
+            this.dgvBypass.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvBypass.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgvBypass.Location = new System.Drawing.Point(0, 0);
+            this.dgvBypass.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dgvBypass.Name = "dgvBypass";
+            this.dgvBypass.ReadOnly = true;
+            this.dgvBypass.RowHeadersWidth = 51;
+            this.dgvBypass.Size = new System.Drawing.Size(686, 219);
+            this.dgvBypass.TabIndex = 0;
+            // 
+            // btRemoveBypass
+            // 
+            this.btRemoveBypass.Dock = System.Windows.Forms.DockStyle.Left;
+            this.btRemoveBypass.Location = new System.Drawing.Point(4, 4);
+            this.btRemoveBypass.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btRemoveBypass.Name = "btRemoveBypass";
+            this.btRemoveBypass.Size = new System.Drawing.Size(82, 35);
+            this.btRemoveBypass.TabIndex = 2;
+            this.btRemoveBypass.Text = "Удалить";
+            this.btRemoveBypass.UseVisualStyleBackColor = true;
+            this.btRemoveBypass.Click += new System.EventHandler(this.OnRemoveBypass);
+            // 
+            // btChangeBypass
+            // 
+            this.btChangeBypass.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btChangeBypass.Location = new System.Drawing.Point(518, 4);
+            this.btChangeBypass.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btChangeBypass.Name = "btChangeBypass";
+            this.btChangeBypass.Size = new System.Drawing.Size(82, 35);
+            this.btChangeBypass.TabIndex = 1;
+            this.btChangeBypass.Text = "Изменить";
+            this.btChangeBypass.UseVisualStyleBackColor = true;
+            this.btChangeBypass.Click += new System.EventHandler(this.OnChangeBypass);
+            // 
+            // btAddBypass
+            // 
+            this.btAddBypass.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btAddBypass.Location = new System.Drawing.Point(600, 4);
+            this.btAddBypass.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btAddBypass.Name = "btAddBypass";
+            this.btAddBypass.Size = new System.Drawing.Size(82, 35);
+            this.btAddBypass.TabIndex = 0;
+            this.btAddBypass.Text = "Добавить";
+            this.btAddBypass.UseVisualStyleBackColor = true;
+            this.btAddBypass.Click += new System.EventHandler(this.OnAddBypass);
+            // 
+            // splitContainer2
+            // 
+            this.splitContainer2.Cursor = System.Windows.Forms.Cursors.HSplit;
+            this.splitContainer2.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.splitContainer2.Location = new System.Drawing.Point(0, 0);
+            this.splitContainer2.Name = "splitContainer2";
+            this.splitContainer2.Orientation = System.Windows.Forms.Orientation.Horizontal;
+            // 
+            // splitContainer2.Panel1
+            // 
+            this.splitContainer2.Panel1.Controls.Add(this.tabControl1);
+            // 
+            // splitContainer2.Panel2
+            // 
+            this.splitContainer2.Panel2.Controls.Add(this.btSave);
+            this.splitContainer2.Size = new System.Drawing.Size(700, 338);
+            this.splitContainer2.SplitterDistance = 299;
+            this.splitContainer2.TabIndex = 4;
+            // 
+            // btSave
+            // 
+            this.btSave.Dock = System.Windows.Forms.DockStyle.Right;
+            this.btSave.Location = new System.Drawing.Point(618, 0);
+            this.btSave.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btSave.Name = "btSave";
+            this.btSave.Size = new System.Drawing.Size(82, 35);
+            this.btSave.TabIndex = 1;
+            this.btSave.Text = "Сохранить";
+            this.btSave.UseVisualStyleBackColor = true;
+            // 
+            // tbName
+            // 
+            this.tbName.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbName.Location = new System.Drawing.Point(3, 19);
+            this.tbName.Name = "tbName";
+            this.tbName.Size = new System.Drawing.Size(670, 23);
+            this.tbName.TabIndex = 0;
             // 
             // AddressCard
             // 
@@ -441,46 +454,50 @@ namespace WinFormsView.Cards
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "AddressCard";
             this.Text = "AddressCard";
-            ((System.ComponentModel.ISupportInitialize)(this.sbBypassed)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsBypass)).EndInit();
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvByPassed)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPeople)).EndInit();
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
-            this.splitContainer2.Panel1.ResumeLayout(false);
-            this.splitContainer2.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
-            this.splitContainer2.ResumeLayout(false);
-            this.tabPage3.ResumeLayout(false);
-            this.splitContainer3.Panel1.ResumeLayout(false);
-            this.splitContainer3.Panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
-            this.splitContainer3.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.tabPage4.ResumeLayout(false);
             this.splitContainer4.Panel1.ResumeLayout(false);
             this.splitContainer4.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).EndInit();
             this.splitContainer4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvPorch)).EndInit();
+            this.tabPage2.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
+            this.splitContainer3.Panel1.ResumeLayout(false);
+            this.splitContainer3.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer3)).EndInit();
+            this.splitContainer3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.dgvBypass)).EndInit();
+            this.splitContainer2.Panel1.ResumeLayout(false);
+            this.splitContainer2.Panel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).EndInit();
+            this.splitContainer2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.bsPeople)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsAddress)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsPorch)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.BindingSource sbBypassed;
+        private System.Windows.Forms.BindingSource bsBypass;
         private System.Windows.Forms.SplitContainer splitContainer1;
-        private System.Windows.Forms.DataGridView dgvByPassed;
-        private System.Windows.Forms.Button btRemove;
-        private System.Windows.Forms.Button btChange;
-        private System.Windows.Forms.Button btAdd;
+        private System.Windows.Forms.DataGridView dgvPeople;
+        private System.Windows.Forms.Button btRemovePerson;
+        private System.Windows.Forms.Button btChangePerson;
+        private System.Windows.Forms.Button btAddPerson;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tabPage1;
         private System.Windows.Forms.TabPage tabPage2;
@@ -488,19 +505,22 @@ namespace WinFormsView.Cards
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.SplitContainer splitContainer3;
-        private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.DataGridView dgvBypass;
+        private System.Windows.Forms.Button btRemoveBypass;
+        private System.Windows.Forms.Button btChangeBypass;
+        private System.Windows.Forms.Button btAddBypass;
         private System.Windows.Forms.Button btSave;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox tbDescription;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.ComboBox comboBox1;
         private System.Windows.Forms.SplitContainer splitContainer4;
-        private System.Windows.Forms.DataGridView dataGridView2;
-        private System.Windows.Forms.Button button4;
-        private System.Windows.Forms.Button button5;
-        private System.Windows.Forms.Button button6;
+        private System.Windows.Forms.DataGridView dgvPorch;
+        private System.Windows.Forms.Button btRemovePorch;
+        private System.Windows.Forms.Button btChangePorch;
+        private System.Windows.Forms.Button btAddPorch;
+        private System.Windows.Forms.TextBox tbName;
+        private System.Windows.Forms.BindingSource bsPeople;
+        private System.Windows.Forms.BindingSource bsAddress;
+        private System.Windows.Forms.BindingSource bsPorch;
     }
 }

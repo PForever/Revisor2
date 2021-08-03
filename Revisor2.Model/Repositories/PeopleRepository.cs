@@ -1,4 +1,4 @@
-﻿using Revisor2.Model.ViewModels;
+﻿using Revisor2.Model.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,14 +10,14 @@ namespace Revisor2.Model.Repositories
 {
     public class PeopleRepository
     {
-        private List<PersonVm> _people;
-        private List<SosialSatusVm> _sosialStatus;
-        private List<OrgPersonVm> _orgPeople;
+        private List<PersonM> _people;
+        private List<SosialSatusM> _sosialStatus;
+        private List<OrgPersonM> _orgPeople;
         private List<PlaceVm> _places;
-        private List<OrgStateVm> _orgStates;
-        private List<WorkTypeVm> _workTypes;
-        private List<CallResultVm> _callResults;
-        private List<AddressVm> _addresses;
+        private List<OrgStateM> _orgStates;
+        private List<WorkTypeM> _workTypes;
+        private List<CallResultM> _callResults;
+        private List<AddressM> _addresses;
 
         public Type DtoType => typeof(RoomPerson);
 
@@ -35,36 +35,36 @@ namespace Revisor2.Model.Repositories
             _callResults = null;
             _addresses = null;
         }
-        public IList<PersonVm> GetPeoples(LambdaExpression predicate)
+        public IList<PersonM> GetPeoples(LambdaExpression predicate)
         {
             return GetData(predicate as Expression<Func<RoomPerson, bool>>).ToList();
         }
-        public IList<PersonVm> GetPeoples()
+        public IList<PersonM> GetPeoples()
         {
             return _people ??= GetPeoplesInternal();
         }
 
-        private List<PersonVm> GetPeoplesInternal()
+        private List<PersonM> GetPeoplesInternal()
         {
             return GetData(null).ToList();
         }
 
-        private static IEnumerable<PersonVm> GetData(Expression<Func<RoomPerson, bool>> predicate)
+        private static IEnumerable<PersonM> GetData(Expression<Func<RoomPerson, bool>> predicate)
         {
             using var context = new RevisorContext();
             IQueryable<RoomPerson> res = context.RoomPeople;
             var addreses = res.Where(p => !string.IsNullOrEmpty(p.Address)).Select(p => p.Address).Distinct().AsEnumerable().Select((a, i) => (Address: a, Id: i))
-                .ToDictionary(a => a.Address, a => new AddressVm(a.Id) { Name = a.Address }, StringComparer.OrdinalIgnoreCase);
+                .ToDictionary(a => a.Address, a => new AddressM(a.Id) { Name = a.Address }, StringComparer.OrdinalIgnoreCase);
             if (predicate != null) res = res.Where(predicate);
             return res.ToList().Select(p =>
-                           new PersonVm(p.Id)
+                           new PersonM(p.Id)
                            {
                                Age = p.Age,
                                Address = string.IsNullOrEmpty(p.Address) ? null : addreses[p.Address],
                                CallDate = p.CallDate,
                                CallResult = p.CallResult,
-                               CallsCount = p.CallsCount,
-                               Contributions = p.Contributions?.Select(p => new ContributionVm
+                               CallsCount = p.CallsCount ?? 0,
+                               Contributions = p.Contributions?.Select(p => new ContributionM
                                {
                                    Id = p.Id,
                                    Description = p.Description,
@@ -73,13 +73,13 @@ namespace Revisor2.Model.Repositories
                                    RoomPersonId = p.RoomPersonId,
                                    Type = p.Type
                                }).ToList(),
-                               DisconnectsCount = p.DisconnectsCount,
+                               DisconnectsCount = p.DisconnectsCount ?? 0,
                                Discription = p.Discription,
                                Floor = p.Floor,
                                InviteDate = p.InviteDate,
                                PaperCount = p.PaperCount,
                                Inviter = p.Inviter,
-                               IsRoom = p.IsRoom,
+                               IsRoom = p.IsRoom ?? false,
                                IvitePlace = p.IvitePlace,
                                LastPaper = p.LastPaper,
                                LastСontribution = p.LastСontribution,
@@ -95,23 +95,23 @@ namespace Revisor2.Model.Repositories
                            });
         }
 
-        public IList<SosialSatusVm> GetSosialSatus() => _sosialStatus ??= GetPeoples().Select(p => p.SosialStatus).Where(p => !string.IsNullOrWhiteSpace(p)).Distinct().OrderBy(p => p).Select((p, i) => new SosialSatusVm(i) { Name = p }).ToList();
-        public IList<OrgPersonVm> GetOrgPeople() => _orgPeople ??= GetPeoples().Select(p => p.Inviter).Where(p => !string.IsNullOrWhiteSpace(p)).Distinct().OrderBy(p => p).Select((p, i) => new OrgPersonVm(i) { Name = p }).ToList();
+        public IList<SosialSatusM> GetSosialSatus() => _sosialStatus ??= GetPeoples().Select(p => p.SosialStatus).Where(p => !string.IsNullOrWhiteSpace(p)).Distinct().OrderBy(p => p).Select((p, i) => new SosialSatusM(i) { Name = p }).ToList();
+        public IList<OrgPersonM> GetOrgPeople() => _orgPeople ??= GetPeoples().Select(p => p.Inviter).Where(p => !string.IsNullOrWhiteSpace(p)).Distinct().OrderBy(p => p).Select((p, i) => new OrgPersonM(i) { Name = p }).ToList();
         public IList<PlaceVm> GetPlaces() => _places ??= GetPeoples().Select(p => p.IvitePlace).Where(p => !string.IsNullOrWhiteSpace(p)).Distinct().OrderBy(p => p).Select(p => new PlaceVm(-1) { Name = p }).ToList();
-        public IList<OrgStateVm> GetOrgStates() => _orgStates ??= GetPeoples().Select(p => p.OrgState).Where(p => !string.IsNullOrWhiteSpace(p)).Distinct().OrderBy(p => p).Select((p, i) => new OrgStateVm(i) { Name = p }).ToList();
-        public IList<WorkTypeVm> GetWorkTypes() => _workTypes ??= GetPeoples().Select(p => p.WorkType).Where(p => !string.IsNullOrWhiteSpace(p)).Distinct().OrderBy(p => p).Select((p, i) => new WorkTypeVm(i) { Name = p }).ToList();
-        public IList<CallResultVm> GetCallResults() => _callResults ??= GetPeoples().Select(p => p.CallResult).Where(p => !string.IsNullOrWhiteSpace(p)).Distinct().OrderBy(p => p).Select((p, i) => new CallResultVm(i) { Name = p }).ToList();
+        public IList<OrgStateM> GetOrgStates() => _orgStates ??= GetPeoples().Select(p => p.OrgState).Where(p => !string.IsNullOrWhiteSpace(p)).Distinct().OrderBy(p => p).Select((p, i) => new OrgStateM(i) { Name = p }).ToList();
+        public IList<WorkTypeM> GetWorkTypes() => _workTypes ??= GetPeoples().Select(p => p.WorkType).Where(p => !string.IsNullOrWhiteSpace(p)).Distinct().OrderBy(p => p).Select((p, i) => new WorkTypeM(i) { Name = p }).ToList();
+        public IList<CallResultM> GetCallResults() => _callResults ??= GetPeoples().Select(p => p.CallResult).Where(p => !string.IsNullOrWhiteSpace(p)).Distinct().OrderBy(p => p).Select((p, i) => new CallResultM(i) { Name = p }).ToList();
         //public IList<AddressVm> GetAddresses() => _addresses ??= GetPeoples().Select(p => p.Address).Where(p => p is not null).Distinct().OrderBy(p => p).Select((p, i) => new AddressVm(i) { Name = p.Name }).ToList();
-        public IList<AddressVm> GetAddresses()
+        public IList<AddressM> GetAddresses()
         {
             using var context = new RevisorContext();
             IQueryable<RoomPerson> res = context.RoomPeople;
             return res.Where(p => !string.IsNullOrEmpty(p.Address)).Select(p => p.Address).Distinct().AsEnumerable().Select((a, i) => (Address: a, Id: i))
-                .Select(a => new AddressVm(a.Id) { Name = a.Address }).ToList();
+                .Select(a => new AddressM(a.Id) { Name = a.Address }).ToList();
 
         }
 
-        public void SavePerson(PersonVm person)
+        public void SavePerson(PersonM person)
         {
             using var context = new RevisorContext();
             var model = context.RoomPeople.Find(person.Id) ?? new RoomPerson();

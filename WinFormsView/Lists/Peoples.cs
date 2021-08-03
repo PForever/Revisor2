@@ -4,7 +4,7 @@ using DynamicFilterControls;
 using FilterLibrary.FilterHelp;
 using FilterLibrary.SortableBindingList;
 using Revisor2.Model.Repositories;
-using Revisor2.Model.ViewModels;
+using Revisor2.Model.Models;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,6 +17,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using SystemHelpers;
 using WinFormsView.Help;
+using WinFormsView.Cards;
 
 namespace WinFormsView.Lists
 {
@@ -26,7 +27,7 @@ namespace WinFormsView.Lists
         private PropertiesFilter _docFilters;
 
         private IOperand Filter { get; set; }
-        private Expression<Func<PersonVm, bool>> Predicate { get; set; }
+        private Expression<Func<PersonM, bool>> Predicate { get; set; }
 
         public Peoples()
         {
@@ -35,12 +36,12 @@ namespace WinFormsView.Lists
             OnStart(poeople);
         }
 
-        private IList<PersonVm> GetPeople()
+        private IList<PersonM> GetPeople()
         {
             return _repository.GetPeoples();
         }
 
-        private void OnStart(IList<PersonVm> people)
+        private void OnStart(IList<PersonM> people)
         {
             InitializeComponent();
             InitializeComponentCustom();
@@ -60,7 +61,7 @@ namespace WinFormsView.Lists
             e.Cancel = true;
         }
 
-        private void Fill(IList<PersonVm> people)
+        private void Fill(IList<PersonM> people)
         {
             bsPeople.DataSource = people.ToSortableBindingList();
             bsAddresses.DataSource = _repository.GetAddresses()/*.StartWith(NoValue)*/.ToList();
@@ -71,7 +72,7 @@ namespace WinFormsView.Lists
         {
             dgvPeople.AutoGenerateColumns = false;
             bsAddresses.DataSource = _repository.GetAddresses();
-            var columns = WinFormsHelper.CreateColumns<PersonVm>(bsAddresses);
+            var columns = WinFormsHelper.CreateColumns<PersonM>(bsAddresses);
             dgvPeople.Columns.AddRange(columns);
             dgvPeople.DataSource = bsPeople;
         }
@@ -79,7 +80,7 @@ namespace WinFormsView.Lists
         private void OnEdit(object sender, EventArgs e)
         {
             if (dgvPeople.SelectedRows.Count == 0) return;
-            var person = dgvPeople.SelectedRows[0].DataBoundItem as PersonVm;
+            var person = dgvPeople.SelectedRows[0].DataBoundItem as PersonM;
             var card = new PersonCard(person, _repository);
             card.ShowDialog();
         }
@@ -101,13 +102,13 @@ namespace WinFormsView.Lists
 
         private async void OnFilter(object sender, EventArgs e)
         {
-            var filterForm = Filter == null ? new DynamicFilterForm(typeof(PersonVm), dgvPeople.Columns) : new DynamicFilterForm(typeof(PersonVm), dgvPeople.Columns, Filter);
+            var filterForm = Filter == null ? new DynamicFilterForm(typeof(PersonM), dgvPeople.Columns) : new DynamicFilterForm(typeof(PersonM), dgvPeople.Columns, Filter);
             if (filterForm.ShowDialog() == DialogResult.OK)
             {
                 Filter = filterForm.Result;
                 //Predicate = Filter?.Calculate() as Expression<Func<PersonVm, bool>>;
                 //var filter = Predicate.Compile();
-                Predicate = Filter?.Calculate().Reduce() as Expression<Func<PersonVm, bool>>;
+                Predicate = Filter?.Calculate().Reduce() as Expression<Func<PersonM, bool>>;
                 var filter = Predicate.Compile();
                 var people = _repository.GetPeoples().Where(filter).ToSortableBindingList();
                 Fill(people);
@@ -123,7 +124,7 @@ namespace WinFormsView.Lists
                 .Distinct()
                 .Select(i => dgvPeople.Rows[i])
                 .Cast<DataGridViewRow>()
-                .Select(r => r.DataBoundItem as PersonVm)
+                .Select(r => r.DataBoundItem as PersonM)
                 .Select(p => p.Id)
                 .ToList();
             Exporter.ExportToRoomTable(@"D:\Downloads\", DateTime.Now, person);
