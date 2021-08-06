@@ -3,11 +3,10 @@ using System;
 
 namespace Revisor2.Model.Models
 {
-    public class OrgStateM : DomainModelBase<OrgStateM, int>
+    public class BookM : DomainModelBase<BookM, Guid>
     {
-        public OrgStateM(int id) : base(id) { }
-        public string Name { get; init; }
-
+        public BookM(Guid id) : base(id) { }
+        public string Name { get; set; }
         public override string DisplayMember => Name;
     }
 }

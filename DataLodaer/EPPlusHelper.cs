@@ -13,7 +13,7 @@ namespace DataLodaer
         private readonly static ConcurrentDictionary<Type, Func<string, object>> Parsers = new();
         public static IEnumerable<T> GetTable<T>(this ExcelWorksheet worksheet) where T : class, new()
         {
-            var set = typeof(Helper).GetMethod(nameof(Helper.SetPropertyValue));
+            var set = typeof(SystemHelper).GetMethod(nameof(SystemHelper.SetPropertyValue));
             const int FirstDataRow = 2;
             int columnCount = worksheet.Dimension.Columns + 1;
             int rowsCount = worksheet.Dimension.Rows + 1;
@@ -29,7 +29,7 @@ namespace DataLodaer
             var t = titles.Where(t => !properties.Select(p => p.ColumnNumber).Contains(t.Value)).ToList();
             for (int row = FirstDataRow; row < rowsCount; row++)
             {
-                var instance = Helper.ActivateInstance<T>();
+                var instance = SystemHelper.ActivateInstance<T>();
                 foreach (var (name, type, column) in properties)
                 {
                     object value = worksheet.GetValue(row, column).FixType(type);
@@ -38,7 +38,7 @@ namespace DataLodaer
                         value = Parsers.GetOrAdd(type, Parse)(str);
                     else if (value == null)
                     {
-                        value = type == typeof(string) ? "" : Helper.ActivateInstance(type);
+                        value = type == typeof(string) ? "" : SystemHelper.ActivateInstance(type);
                     }
                     var setT = set.MakeGenericMethod(new[] { typeof(T), value?.GetType() ?? type });
                     _ = setT.Invoke(null, new object[] { instance, name, value });

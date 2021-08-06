@@ -89,7 +89,7 @@ namespace WinFormsView.Cards
 
         private void OnAddPerson(object sender, EventArgs e)
         {
-            var model = new PersonM(-1);
+            var model = new PersonM();
             var card = new PersonCard(model, _peopleRepository);
             if (card.ShowDialog() == DialogResult.OK) bsPeople.Add(model);
             dgvPeople.Refresh();
@@ -113,7 +113,7 @@ namespace WinFormsView.Cards
         private void OnAddBypass(object sender, EventArgs e)
         {
             var model = new BypassM(Guid.NewGuid());
-            var card = new BypassCard(model, _model, _repository);
+            var card = new BypassCard(model, _peopleRepository);
             if (card.ShowDialog() == DialogResult.OK) bsBypass.Add(model);
             dgvBypass.Refresh();
         }
@@ -121,7 +121,7 @@ namespace WinFormsView.Cards
         private void OnChangeBypass(object sender, EventArgs e)
         {
             var model = dgvBypass.GetCurrent<BypassM>();
-            var card = new BypassCard(model, _model, _repository);
+            var card = new BypassCard(model, _peopleRepository);
             if (card.ShowDialog() == DialogResult.OK) dgvBypass.Refresh();
         }
 

@@ -2,6 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using OfficeOpenXml;
 using Revisor2.Model;
+using Revisor2.Model.Data;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;

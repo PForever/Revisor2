@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Revisor2.Model
+namespace Revisor2.Model.Data
 {
     public class Contribution
     {

@@ -128,6 +128,27 @@ namespace WinFormsView.Help
             binding.Parse += provider.OnParse;
         }
 
+
+        public static void SetNullubleComboBinding(this ComboBox control, object dataObject, string dataMember, object defaultMember, BindingSource dataSource)
+        {
+            dataSource.Insert(0, defaultMember);
+            control.DataSource = dataSource;
+            var binding = new Binding(nameof(ComboBox.SelectedItem), dataObject, dataMember, true);
+            var provider = new BindingProvider(defaultMember);
+            binding.Format += provider.OnFormat;
+            binding.Parse += provider.OnParse;
+            control.DataBindings.Add(binding);
+        }
+
+        public static void SetNullubleComboBinding(this ComboBox control, object dataSource, object defaultMember)
+        {
+            var binding = new Binding(nameof(ComboBox.SelectedItem), dataSource, "", true);
+            control.DataBindings.Add(binding);
+            var provider = new BindingProvider(defaultMember);
+            binding.Format += provider.OnFormat;
+            binding.Parse += provider.OnParse;
+        }
+
         class BindingProvider
         {
             private object _defatultMember;

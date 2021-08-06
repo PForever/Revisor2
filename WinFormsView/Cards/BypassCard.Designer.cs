@@ -57,6 +57,8 @@ namespace WinFormsView.Cards
             this.btAddPersonTime = new System.Windows.Forms.Button();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.btSave = new System.Windows.Forms.Button();
+            this.bsContributions = new System.Windows.Forms.BindingSource(this.components);
+            this.bsPersonTimes = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.sbBypassed)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRepeated)).BeginInit();
             this.tabControl1.SuspendLayout();
@@ -80,6 +82,8 @@ namespace WinFormsView.Cards
             this.splitContainer4.Panel1.SuspendLayout();
             this.splitContainer4.Panel2.SuspendLayout();
             this.splitContainer4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bsContributions)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsPersonTimes)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvRepeated
@@ -94,7 +98,7 @@ namespace WinFormsView.Cards
             this.dgvRepeated.Name = "dgvRepeated";
             this.dgvRepeated.ReadOnly = true;
             this.dgvRepeated.RowHeadersWidth = 51;
-            this.dgvRepeated.Size = new System.Drawing.Size(686, 216);
+            this.dgvRepeated.Size = new System.Drawing.Size(686, 217);
             this.dgvRepeated.TabIndex = 0;
             // 
             // tabControl1
@@ -248,7 +252,7 @@ namespace WinFormsView.Cards
             this.splitContainer1.Panel2.Controls.Add(this.btAddContribution);
             this.splitContainer1.Panel2.Padding = new System.Windows.Forms.Padding(4);
             this.splitContainer1.Size = new System.Drawing.Size(686, 263);
-            this.splitContainer1.SplitterDistance = 216;
+            this.splitContainer1.SplitterDistance = 217;
             this.splitContainer1.SplitterWidth = 3;
             this.splitContainer1.TabIndex = 2;
             // 
@@ -258,7 +262,7 @@ namespace WinFormsView.Cards
             this.btRemoveContribution.Location = new System.Drawing.Point(4, 4);
             this.btRemoveContribution.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btRemoveContribution.Name = "btRemoveContribution";
-            this.btRemoveContribution.Size = new System.Drawing.Size(82, 36);
+            this.btRemoveContribution.Size = new System.Drawing.Size(82, 35);
             this.btRemoveContribution.TabIndex = 2;
             this.btRemoveContribution.Text = "Удалить";
             this.btRemoveContribution.UseVisualStyleBackColor = true;
@@ -269,7 +273,7 @@ namespace WinFormsView.Cards
             this.btChangeContribution.Location = new System.Drawing.Point(518, 4);
             this.btChangeContribution.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btChangeContribution.Name = "btChangeContribution";
-            this.btChangeContribution.Size = new System.Drawing.Size(82, 36);
+            this.btChangeContribution.Size = new System.Drawing.Size(82, 35);
             this.btChangeContribution.TabIndex = 1;
             this.btChangeContribution.Text = "Изменить";
             this.btChangeContribution.UseVisualStyleBackColor = true;
@@ -280,10 +284,11 @@ namespace WinFormsView.Cards
             this.btAddContribution.Location = new System.Drawing.Point(600, 4);
             this.btAddContribution.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btAddContribution.Name = "btAddContribution";
-            this.btAddContribution.Size = new System.Drawing.Size(82, 36);
+            this.btAddContribution.Size = new System.Drawing.Size(82, 35);
             this.btAddContribution.TabIndex = 0;
             this.btAddContribution.Text = "Добавить";
             this.btAddContribution.UseVisualStyleBackColor = true;
+            this.btAddContribution.Click += new System.EventHandler(this.OnAddContriburion);
             // 
             // tabPage4
             // 
@@ -317,7 +322,7 @@ namespace WinFormsView.Cards
             this.splitContainer3.Panel2.Controls.Add(this.btAddPersonTime);
             this.splitContainer3.Panel2.Padding = new System.Windows.Forms.Padding(4);
             this.splitContainer3.Size = new System.Drawing.Size(686, 263);
-            this.splitContainer3.SplitterDistance = 218;
+            this.splitContainer3.SplitterDistance = 219;
             this.splitContainer3.SplitterWidth = 3;
             this.splitContainer3.TabIndex = 4;
             // 
@@ -333,7 +338,7 @@ namespace WinFormsView.Cards
             this.dgvPersonTime.Name = "dgvPersonTime";
             this.dgvPersonTime.ReadOnly = true;
             this.dgvPersonTime.RowHeadersWidth = 51;
-            this.dgvPersonTime.Size = new System.Drawing.Size(686, 218);
+            this.dgvPersonTime.Size = new System.Drawing.Size(686, 219);
             this.dgvPersonTime.TabIndex = 0;
             // 
             // btRemovePersonTime
@@ -342,7 +347,7 @@ namespace WinFormsView.Cards
             this.btRemovePersonTime.Location = new System.Drawing.Point(4, 4);
             this.btRemovePersonTime.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btRemovePersonTime.Name = "btRemovePersonTime";
-            this.btRemovePersonTime.Size = new System.Drawing.Size(82, 34);
+            this.btRemovePersonTime.Size = new System.Drawing.Size(82, 33);
             this.btRemovePersonTime.TabIndex = 2;
             this.btRemovePersonTime.Text = "Удалить";
             this.btRemovePersonTime.UseVisualStyleBackColor = true;
@@ -353,7 +358,7 @@ namespace WinFormsView.Cards
             this.btChangePersonTime.Location = new System.Drawing.Point(518, 4);
             this.btChangePersonTime.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btChangePersonTime.Name = "btChangePersonTime";
-            this.btChangePersonTime.Size = new System.Drawing.Size(82, 34);
+            this.btChangePersonTime.Size = new System.Drawing.Size(82, 33);
             this.btChangePersonTime.TabIndex = 1;
             this.btChangePersonTime.Text = "Изменить";
             this.btChangePersonTime.UseVisualStyleBackColor = true;
@@ -364,7 +369,7 @@ namespace WinFormsView.Cards
             this.btAddPersonTime.Location = new System.Drawing.Point(600, 4);
             this.btAddPersonTime.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btAddPersonTime.Name = "btAddPersonTime";
-            this.btAddPersonTime.Size = new System.Drawing.Size(82, 34);
+            this.btAddPersonTime.Size = new System.Drawing.Size(82, 33);
             this.btAddPersonTime.TabIndex = 0;
             this.btAddPersonTime.Text = "Добавить";
             this.btAddPersonTime.UseVisualStyleBackColor = true;
@@ -435,6 +440,8 @@ namespace WinFormsView.Cards
             this.splitContainer4.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer4)).EndInit();
             this.splitContainer4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.bsContributions)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bsPersonTimes)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -468,5 +475,7 @@ namespace WinFormsView.Cards
         private System.Windows.Forms.GroupBox groupBox4;
         private System.Windows.Forms.TextBox tbDescription;
         private System.Windows.Forms.Button btAddAddres;
+        private System.Windows.Forms.BindingSource bsContributions;
+        private System.Windows.Forms.BindingSource bsPersonTimes;
     }
 }

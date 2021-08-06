@@ -1,19 +1,24 @@
-﻿using System;
+﻿using Revisor2.Model.Infrastructure;
+using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace Revisor2.Model.Models
 {
-    public class ContributionM
+    public class ContributionM : DomainModelBase<ContributionM, Guid>
     {
-        public int Id { get; set; }
-        public int RoomPersonId { get; set; }
-        public DateTime Month { get; set; }
-        public string Result { get; set; }
-        public string Type { get; set; }
+        public ContributionM() 
+        {
+        }
+        public ContributionM(Guid id) : base(id) { }
+        public PersonM Person { get; set; }
+        public PersonM MeetPerson { get; set; }
+        public MonthM Month { get; set; }
+        public ViewModelCollection<ValueResultM, ContributionM> ValueResults { get; set; }
+        public ViewModelCollection<BookResultM, ContributionM> BookResults { get; set; }
+        public ViewModelCollection<PaperResultM, ContributionM> PaperResults { get; set; }
+        public ViewModelCollection<SubscribeM, ContributionM> Subscribes { get; set; }
         public string Description { get; set; }
-    }
-    public class ResultTypeVm
-    {
-        public int Id { get; set; }
-        public string Name { get; set; }
+        public override string DisplayMember => $"{Person.Name} - {Month.Name}";
     }
 }

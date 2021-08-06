@@ -125,7 +125,7 @@ namespace WinFormsView.Lists
                 .Select(i => dgvPeople.Rows[i])
                 .Cast<DataGridViewRow>()
                 .Select(r => r.DataBoundItem as PersonM)
-                .Select(p => p.Id)
+                .Select(p => p.SourceId.Value)
                 .ToList();
             Exporter.ExportToRoomTable(@"D:\Downloads\", DateTime.Now, person);
         }

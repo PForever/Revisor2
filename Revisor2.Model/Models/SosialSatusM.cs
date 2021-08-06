@@ -1,4 +1,6 @@
-﻿namespace Revisor2.Model.Models
+﻿using Revisor2.Model.Infrastructure;
+
+namespace Revisor2.Model.Models
 {
     public class SosialSatusM : DomainModelBase<SosialSatusM, int>
     {

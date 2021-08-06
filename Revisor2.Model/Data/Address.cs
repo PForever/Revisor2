@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace Revisor2.Model
+namespace Revisor2.Model.Data
 {
     public class Address
     {

@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Revisor2.Model
+namespace Revisor2.Model.Data
 {
     public class RoomPerson
     {
@@ -14,11 +14,11 @@ namespace Revisor2.Model
         public string SosialStatus { get; set; }
         public string Inviter { get; set; }
         public string IvitePlace { get; set; }
-        public DateTime? InviteDate  { get; set; }
+        public DateTime? InviteDate { get; set; }
         public int? PaperCount { get; set; }
         public int? LastPaper { get; set; }
         public int? LastСontribution { get; set; }
-        public string OrgState  { get; set; }
+        public string OrgState { get; set; }
         public long? PhoneNumber { get; set; }
         public string Discription { get; set; }
         public bool? IsRoom { get; set; }

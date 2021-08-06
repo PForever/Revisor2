@@ -14,9 +14,24 @@ namespace WinFormsView.Cards
 {
     public partial class BypassCard : Form
     {
-        public BypassCard(BypassM model, AddressM address, AddressesRepository repository)
+        private readonly BypassM _model;
+        private readonly PeopleRepository _peopleRepository;
+
+        public BypassCard(BypassM model, PeopleRepository peopleRepository)
         {
+            _model = model;
             InitializeComponent();
+            _peopleRepository = peopleRepository;
+        }
+
+        private void OnAddContriburion(object sender, EventArgs e)
+        {
+            var model = new ContributionM();
+            var card = new ContributionCard(model, _model.Address.People, _peopleRepository);
+            if(card.ShowDialog() == DialogResult.OK)
+            {
+                
+            }
         }
     }
 }

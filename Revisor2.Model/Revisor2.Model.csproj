@@ -13,4 +13,8 @@
     <Folder Include="VModels\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\SystemHelpers\SystemHelpers.csproj" />
+  </ItemGroup>
+
 </Project>

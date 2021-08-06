@@ -1,10 +1,13 @@
-﻿using Revisor2.Model.Models;
+﻿using Revisor2.Model.Data;
+using Revisor2.Model.Infrastructure;
+using Revisor2.Model.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using SystemHelpers;
 
 namespace Revisor2.Model.Repositories
 {
@@ -13,7 +16,7 @@ namespace Revisor2.Model.Repositories
         private List<PersonM> _people;
         private List<SosialSatusM> _sosialStatus;
         private List<OrgPersonM> _orgPeople;
-        private List<PlaceVm> _places;
+        private List<PlaceM> _places;
         private List<OrgStateM> _orgStates;
         private List<WorkTypeM> _workTypes;
         private List<CallResultM> _callResults;
@@ -57,33 +60,26 @@ namespace Revisor2.Model.Repositories
                 .ToDictionary(a => a.Address, a => new AddressM(a.Id) { Name = a.Address }, StringComparer.OrdinalIgnoreCase);
             if (predicate != null) res = res.Where(predicate);
             return res.ToList().Select(p =>
-                           new PersonM(p.Id)
+                           new PersonM(Guid.NewGuid())
                            {
+                               SourceId = p.Id,
                                Age = p.Age,
                                Address = string.IsNullOrEmpty(p.Address) ? null : addreses[p.Address],
-                               CallDate = p.CallDate,
+                               CallDate = p.CallDate.ToDate(),
                                CallResult = p.CallResult,
                                CallsCount = p.CallsCount ?? 0,
-                               Contributions = p.Contributions?.Select(p => new ContributionM
-                               {
-                                   Id = p.Id,
-                                   Description = p.Description,
-                                   Month = p.Month,
-                                   Result = p.Result,
-                                   RoomPersonId = p.RoomPersonId,
-                                   Type = p.Type
-                               }).ToList(),
+                               
                                DisconnectsCount = p.DisconnectsCount ?? 0,
                                Discription = p.Discription,
                                Floor = p.Floor,
-                               InviteDate = p.InviteDate,
+                               InviteDate = p.InviteDate.ToDate(),
                                PaperCount = p.PaperCount,
                                Inviter = p.Inviter,
                                IsRoom = p.IsRoom ?? false,
-                               IvitePlace = p.IvitePlace,
+                               InvitePlace = p.IvitePlace,
                                LastPaper = p.LastPaper,
                                LastСontribution = p.LastСontribution,
-                               MeetDate = p.MeetDate,
+                               MeetDate = p.MeetDate.ToDate(),
                                MeetPerson = p.MeetPerson,
                                Name = p.Name,
                                OrgState = p.OrgState,
@@ -92,12 +88,20 @@ namespace Revisor2.Model.Repositories
                                Room = p.Room,
                                SosialStatus = p.SosialStatus,
                                WorkType = p.WorkType
-                           });
+                           }.Transform(m => m.Contributions = p.Contributions?
+                                                               .Select(p => new ContributionM(Guid.NewGuid())
+                                                                                       {
+                                                                                           Person = m,
+                                                                                           Description = p.Description,
+                                                                                           //Month = p.Month,
+                                                                                       }.Transform(cm => cm.BookResults = Array.Empty<BookResultM>().ToViewModelCollection(cm, (c, p) => c.Contribution = p))
+                                                               )
+                                                               .ToViewModelCollection(m, (c, p) => c.Person = p)));
         }
 
         public IList<SosialSatusM> GetSosialSatus() => _sosialStatus ??= GetPeoples().Select(p => p.SosialStatus).Where(p => !string.IsNullOrWhiteSpace(p)).Distinct().OrderBy(p => p).Select((p, i) => new SosialSatusM(i) { Name = p }).ToList();
         public IList<OrgPersonM> GetOrgPeople() => _orgPeople ??= GetPeoples().Select(p => p.Inviter).Where(p => !string.IsNullOrWhiteSpace(p)).Distinct().OrderBy(p => p).Select((p, i) => new OrgPersonM(i) { Name = p }).ToList();
-        public IList<PlaceVm> GetPlaces() => _places ??= GetPeoples().Select(p => p.IvitePlace).Where(p => !string.IsNullOrWhiteSpace(p)).Distinct().OrderBy(p => p).Select(p => new PlaceVm(-1) { Name = p }).ToList();
+        public IList<PlaceM> GetPlaces() => _places ??= GetPeoples().Select(p => p.InvitePlace).Where(p => !string.IsNullOrWhiteSpace(p)).Distinct().OrderBy(p => p).Select(p => new PlaceM(-1) { Name = p }).ToList();
         public IList<OrgStateM> GetOrgStates() => _orgStates ??= GetPeoples().Select(p => p.OrgState).Where(p => !string.IsNullOrWhiteSpace(p)).Distinct().OrderBy(p => p).Select((p, i) => new OrgStateM(i) { Name = p }).ToList();
         public IList<WorkTypeM> GetWorkTypes() => _workTypes ??= GetPeoples().Select(p => p.WorkType).Where(p => !string.IsNullOrWhiteSpace(p)).Distinct().OrderBy(p => p).Select((p, i) => new WorkTypeM(i) { Name = p }).ToList();
         public IList<CallResultM> GetCallResults() => _callResults ??= GetPeoples().Select(p => p.CallResult).Where(p => !string.IsNullOrWhiteSpace(p)).Distinct().OrderBy(p => p).Select((p, i) => new CallResultM(i) { Name = p }).ToList();
@@ -114,23 +118,23 @@ namespace Revisor2.Model.Repositories
         public void SavePerson(PersonM person)
         {
             using var context = new RevisorContext();
-            var model = context.RoomPeople.Find(person.Id) ?? new RoomPerson();
+            var model = context.RoomPeople.FirstOrDefault(m => m.Id == person.SourceId) ?? context.RoomPeople.Add(new RoomPerson()).Entity;
             model.Name = person.Name;
             model.Address = person.Address.Name;
             model.Age = person.Age;
-            model.CallDate = person.CallDate;
+            model.CallDate = person.CallDate.ToDateTime();
             model.CallResult = person.CallResult;
             model.CallsCount = person.CallsCount;
             model.DisconnectsCount = person.DisconnectsCount;
             model.Discription = person.Discription;
             model.Floor = person.Floor;
-            model.InviteDate = person.InviteDate;
+            model.InviteDate = person.InviteDate.ToDateTime();
             model.Inviter = person.Inviter;
             model.IsRoom = person.IsRoom;
-            model.IvitePlace = person.IvitePlace;
+            model.IvitePlace = person.InvitePlace;
             model.LastPaper = person.LastPaper;
             model.LastСontribution = person.LastСontribution;
-            model.MeetDate = person.MeetDate;
+            model.MeetDate = person.MeetDate.ToDateTime();
             model.MeetPerson = person.MeetPerson;
             model.OrgState = person.OrgState;
             model.PaperCount = person.PaperCount;
@@ -141,7 +145,7 @@ namespace Revisor2.Model.Repositories
             model.WorkType = person.WorkType;
 
             var result = context.SaveChanges();
-            person.Id = model.Id;
+            person.SourceId = model.Id;
         }
     }
 }

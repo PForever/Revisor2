@@ -1,17 +1,21 @@
-﻿using System;
+﻿using Revisor2.Model.Infrastructure;
+using System;
 using System.Collections.Generic;
+using SystemHelpers;
 
 namespace Revisor2.Model.Models
 {
-    public class PersonM : DomainModelBase<PersonM, int>
+    public class PersonM : DomainModelBase<PersonM, Guid>
     {
-        public PersonM(int id) : base(id) { }
+        public PersonM() { }
+        public PersonM(Guid id) : base(id) { }
         public string Name { get; set; }
+        public int? SourceId { get; set; }
         public int? Age { get; set; }
         public string SosialStatus { get; set; }
         public string Inviter { get; set; }
-        public string IvitePlace { get; set; }
-        public DateTime? InviteDate { get; set; }
+        public string InvitePlace { get; set; }
+        public DateOnly? InviteDate { get; set; }
         public int? PaperCount { get; set; }
         public int? LastPaper { get; set; }
         public int? LastСontribution { get; set; }
@@ -20,8 +24,8 @@ namespace Revisor2.Model.Models
         public string Discription { get; set; }
         public bool IsRoom { get; set; }
         public string WorkType { get; set; }
-        public DateTime? CallDate { get; set; }
-        public DateTime? MeetDate { get; set; }
+        public DateOnly? CallDate { get; set; }
+        public DateOnly? MeetDate { get; set; }
         public int DisconnectsCount { get; set; }
         public int CallsCount { get; set; }
         public string CallResult { get; set; }
@@ -30,7 +34,7 @@ namespace Revisor2.Model.Models
         public int? Room { get; set; }
         public int? Floor { get; set; }
         public string Porch { get; set; }
-        public ICollection<ContributionM> Contributions { get; set; }
+        public ViewModelCollection<ContributionM, PersonM> Contributions { get; set; }
 
         public override string DisplayMember => Name;
     }

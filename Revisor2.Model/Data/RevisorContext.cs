@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Revisor2.Model
+namespace Revisor2.Model.Data
 {
     public class RevisorContext : DbContext
     {
