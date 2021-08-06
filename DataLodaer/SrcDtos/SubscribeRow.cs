@@ -1,9 +1,9 @@
 ﻿using Revisor2.Model.Infrastructure;
 using System;
 
-namespace Revisor2.Model.Data
+namespace DataLodaer.SrcDtos
 {
-    public class Subscribe
+    public class SubscribeRow
     {
         public Guid Id { get; set; }
         public string Name { get; set; }

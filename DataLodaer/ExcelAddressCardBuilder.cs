@@ -61,7 +61,7 @@ namespace DataLodaer
                 new(person.Contribution8),
                 new(person.PhoneNumber?.ToString("+7(000)000-00-00")),
                 new(person.LastPaper?.ToString()),
-                new(person.Discription, isAutoFit: false, wrapText: true),
+                new(person.Description, isAutoFit: false, wrapText: true),
             });
         }
 

@@ -104,7 +104,7 @@ namespace DataLodaer
                            //Contribution8 = p.Contributions.Where(c => c.Month == month8).Select(c => c.Result).FirstOrDefault(),
                            PhoneNumber = p.PhoneNumber,
                            LastPaper = p.LastPaper,
-                           Discription = p.Discription,
+                           Description = p.Description,
                        }
                        group pir by p.Address;
             return list;
@@ -145,7 +145,7 @@ namespace DataLodaer
                            //Contribution8 = p.Contributions.Where(c => c.Month == month8).Select(c => c.Result).FirstOrDefault(),
                            PhoneNumber = p.PhoneNumber,
                            LastPaper = p.LastPaper,
-                           Discription = p.Discription,
+                           Description = p.Description,
                        } group pir by p.Address;
             return list;
         }

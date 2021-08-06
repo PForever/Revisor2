@@ -70,7 +70,7 @@ namespace Revisor2.Model.Repositories
                                CallsCount = p.CallsCount ?? 0,
                                
                                DisconnectsCount = p.DisconnectsCount ?? 0,
-                               Discription = p.Discription,
+                               Description = p.Description,
                                Floor = p.Floor,
                                InviteDate = p.InviteDate.ToDate(),
                                PaperCount = p.PaperCount,
@@ -87,7 +87,7 @@ namespace Revisor2.Model.Repositories
                                Porch = p.Porch,
                                Room = p.Room,
                                SosialStatus = p.SosialStatus,
-                               WorkType = p.WorkType
+                               //WorkType = p.WorkType
                            }
                            //.Transform(m => m.Contributions = p.Contributions?
                            //                                    .Select(p => new ContributionM(Guid.NewGuid())
@@ -105,7 +105,7 @@ namespace Revisor2.Model.Repositories
         public IList<OrgPersonM> GetOrgPeople() => _orgPeople ??= GetPeoples().Select(p => p.Inviter).Where(p => !string.IsNullOrWhiteSpace(p)).Distinct().OrderBy(p => p).Select((p, i) => new OrgPersonM(i) { Name = p }).ToList();
         public IList<PlaceM> GetPlaces() => _places ??= GetPeoples().Select(p => p.InvitePlace).Where(p => !string.IsNullOrWhiteSpace(p)).Distinct().OrderBy(p => p).Select(p => new PlaceM(-1) { Name = p }).ToList();
         public IList<OrgStateM> GetOrgStates() => _orgStates ??= GetPeoples().Select(p => p.OrgState).Where(p => !string.IsNullOrWhiteSpace(p)).Distinct().OrderBy(p => p).Select((p, i) => new OrgStateM(i) { Name = p }).ToList();
-        public IList<WorkTypeM> GetWorkTypes() => _workTypes ??= GetPeoples().Select(p => p.WorkType).Where(p => !string.IsNullOrWhiteSpace(p)).Distinct().OrderBy(p => p).Select((p, i) => new WorkTypeM(i) { Name = p }).ToList();
+        public IList<WorkTypeM> GetWorkTypes() => _workTypes ??= GetPeoples().Select(p => p.WorkType).Where(p => !string.IsNullOrWhiteSpace(p?.Name)).Distinct().OrderBy(p => p).Select((p, i) => new WorkTypeM(i) { Name = p.Name }).ToList();
         public IList<CallResultM> GetCallResults() => _callResults ??= GetPeoples().Select(p => p.CallResult).Where(p => !string.IsNullOrWhiteSpace(p)).Distinct().OrderBy(p => p).Select((p, i) => new CallResultM(i) { Name = p }).ToList();
         //public IList<AddressVm> GetAddresses() => _addresses ??= GetPeoples().Select(p => p.Address).Where(p => p is not null).Distinct().OrderBy(p => p).Select((p, i) => new AddressVm(i) { Name = p.Name }).ToList();
         public IList<AddressM> GetAddresses()
@@ -128,7 +128,7 @@ namespace Revisor2.Model.Repositories
             model.CallResult = person.CallResult;
             model.CallsCount = person.CallsCount;
             model.DisconnectsCount = person.DisconnectsCount;
-            model.Discription = person.Discription;
+            model.Description = person.Description;
             model.Floor = person.Floor;
             model.InviteDate = person.InviteDate.ToDateTime();
             model.Inviter = person.Inviter;
@@ -144,7 +144,7 @@ namespace Revisor2.Model.Repositories
             model.Porch = person.Porch;
             model.Room = person.Room;
             model.SosialStatus = person.SosialStatus;
-            model.WorkType = person.WorkType;
+            //model.WorkType = person.WorkType;
 
             var result = context.SaveChanges();
             person.SourceId = model.Id;

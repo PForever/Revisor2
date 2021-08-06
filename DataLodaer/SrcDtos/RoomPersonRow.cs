@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 
-namespace DataLodaer
+namespace DataLodaer.SrcDtos
 {
     public class RoomPersonRow
     {
@@ -29,7 +29,7 @@ namespace DataLodaer
         [DisplayName("Номер телефона")]
         public long? PhoneNumber { get; set; }
         [DisplayName("комментарии")]
-        public string Discription { get; set; }
+        public string Description { get; set; }
         [DisplayName("кв")]
         public string IsRoom { get; set; }
         [DisplayName("тип")]

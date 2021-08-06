@@ -1,14 +1,14 @@
 ﻿using Revisor2.Model.Infrastructure;
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
-namespace Revisor2.Model.Data
+namespace DataLodaer.SrcDtos
 {
-    public class Book
+    public class AddressRow
     {
         public Guid Id { get; set; }
         public string Name { get; set; }
-        public string ShortName { get; set; }
-        public int Price { get; set; }
         public string Description { get; set; }
     }
 }

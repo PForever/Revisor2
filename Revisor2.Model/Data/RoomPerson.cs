@@ -20,7 +20,7 @@ namespace Revisor2.Model.Data
         public int? LastСontribution { get; set; }
         public string OrgState { get; set; }
         public long? PhoneNumber { get; set; }
-        public string Discription { get; set; }
+        public string Description { get; set; }
         public bool? IsRoom { get; set; }
         public string WorkType { get; set; }
         public DateTime? CallDate { get; set; }

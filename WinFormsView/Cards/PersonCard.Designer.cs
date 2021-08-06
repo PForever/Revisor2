@@ -59,7 +59,7 @@ namespace WinFormsView.Cards
             this.groupBox18 = new System.Windows.Forms.GroupBox();
             this.chbIsRoom = new System.Windows.Forms.CheckBox();
             this.groupBox19 = new System.Windows.Forms.GroupBox();
-            this.tbDiscription = new System.Windows.Forms.TextBox();
+            this.tbDescription = new System.Windows.Forms.TextBox();
             this.groupBox20 = new System.Windows.Forms.GroupBox();
             this.mtbPhoneNumber = new System.Windows.Forms.MaskedTextBox();
             this.groupBox10 = new System.Windows.Forms.GroupBox();
@@ -437,7 +437,7 @@ namespace WinFormsView.Cards
             // 
             // groupBox19
             // 
-            this.groupBox19.Controls.Add(this.tbDiscription);
+            this.groupBox19.Controls.Add(this.tbDescription);
             this.groupBox19.Location = new System.Drawing.Point(197, 124);
             this.groupBox19.Name = "groupBox19";
             this.groupBox19.Size = new System.Drawing.Size(179, 50);
@@ -445,13 +445,13 @@ namespace WinFormsView.Cards
             this.groupBox19.TabStop = false;
             this.groupBox19.Text = "Дополнительная информация";
             // 
-            // tbDiscription
+            // tbDescription
             // 
-            this.tbDiscription.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbDiscription.Location = new System.Drawing.Point(3, 19);
-            this.tbDiscription.Name = "tbDiscription";
-            this.tbDiscription.Size = new System.Drawing.Size(173, 23);
-            this.tbDiscription.TabIndex = 0;
+            this.tbDescription.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbDescription.Location = new System.Drawing.Point(3, 19);
+            this.tbDescription.Name = "tbDescription";
+            this.tbDescription.Size = new System.Drawing.Size(173, 23);
+            this.tbDescription.TabIndex = 0;
             // 
             // groupBox20
             // 
@@ -806,7 +806,7 @@ namespace WinFormsView.Cards
         private System.Windows.Forms.GroupBox groupBox17;
         private System.Windows.Forms.GroupBox groupBox18;
         private System.Windows.Forms.GroupBox groupBox19;
-        private System.Windows.Forms.TextBox tbDiscription;
+        private System.Windows.Forms.TextBox tbDescription;
         private System.Windows.Forms.GroupBox groupBox20;
         private System.Windows.Forms.GroupBox groupBox10;
         private System.Windows.Forms.GroupBox groupBox9;

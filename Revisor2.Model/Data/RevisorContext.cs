@@ -11,6 +11,17 @@ namespace Revisor2.Model.Data
     public class RevisorContext : DbContext
     {
         public DbSet<Address> Addresses { get; set; }
+        public DbSet<Book> Books { get; set; }
+        public DbSet<Paper> Papers { get; set; }
+        public DbSet<Subscribe> Subscribes { get; set; }
+        public DbSet<Month> Months { get; set; }
+        public DbSet<OrgState> OrgStates { get; set; }
+        public DbSet<SosialStatus> SosialStatus { get; set; }
+        public DbSet<OrgPerson> OrgPeople { get; set; }
+        public DbSet<WorkType> WorkTypes { get; set; }
+        public DbSet<Place> Places { get; set; }
+        public DbSet<CallResultType> CallResultTypes { get; set; }
+
         public DbSet<Person> People { get; set; }
         public DbSet<RoomPerson> RoomPeople { get; set; }
         public DbSet<Contribution> Contributions { get; set; }

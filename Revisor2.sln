@@ -21,7 +21,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DynamicFilter", "DynamicFil
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LazyCollection", "LazyCollection\LazyCollection.csproj", "{F73A917F-F5B1-4917-A185-FAF73B92AB2E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Revisor2.ViewModel", "Revisor2.ViewModel\Revisor2.ViewModel.csproj", "{F937AA95-8A22-4453-A2F3-EFECA6B1F4EF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Revisor2.ViewModel", "Revisor2.ViewModel\Revisor2.ViewModel.csproj", "{F937AA95-8A22-4453-A2F3-EFECA6B1F4EF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Filter", "Filter", "{FD03A6CD-20F0-4FD5-B554-E5A0A3E15DE5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -72,6 +74,12 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{96B6B81B-FD30-44CD-A17A-69321F0E331F} = {FD03A6CD-20F0-4FD5-B554-E5A0A3E15DE5}
+		{FCBF3F55-C6F0-4FEC-8EFD-1A02022CECB1} = {FD03A6CD-20F0-4FD5-B554-E5A0A3E15DE5}
+		{4B0AC030-B616-4049-BCA3-8E91F6D4ED55} = {FD03A6CD-20F0-4FD5-B554-E5A0A3E15DE5}
+		{F73A917F-F5B1-4917-A185-FAF73B92AB2E} = {FD03A6CD-20F0-4FD5-B554-E5A0A3E15DE5}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {50E7CD49-5F41-42FD-BFC6-90EAA2E05B5F}

@@ -37,7 +37,7 @@ namespace DataLodaer
         [DisplayName("Газета")]
         public int? LastPaper { get; set; }
         [DisplayName("Комментарий")]
-        public string Discription { get; set; }
+        public string Description { get; set; }
         
     }
 }

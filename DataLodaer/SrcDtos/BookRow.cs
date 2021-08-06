@@ -1,9 +1,9 @@
 ﻿using Revisor2.Model.Infrastructure;
 using System;
 
-namespace Revisor2.Model.Data
+namespace DataLodaer.SrcDtos
 {
-    public class Book
+    public class BookRow
     {
         public Guid Id { get; set; }
         public string Name { get; set; }

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 
-namespace DataLodaer
+namespace DataLodaer.SrcDtos
 {
     public class ContributionRow
     {

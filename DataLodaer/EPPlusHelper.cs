@@ -14,7 +14,7 @@ namespace DataLodaer
         public static IEnumerable<T> GetTable<T>(this ExcelWorksheet worksheet) where T : class, new()
         {
             var set = typeof(SystemHelper).GetMethod(nameof(SystemHelper.SetPropertyValue));
-            const int FirstDataRow = 2;
+            const int firstDataRow = 2;
             int columnCount = worksheet.Dimension.Columns + 1;
             int rowsCount = worksheet.Dimension.Rows + 1;
             var titles = new Dictionary<string, int>();
@@ -27,7 +27,7 @@ namespace DataLodaer
                              orderby number
                              select (p.Name, Type: p.PropertyType, ColumnNumber: number)).ToArray();
             var t = titles.Where(t => !properties.Select(p => p.ColumnNumber).Contains(t.Value)).ToList();
-            for (int row = FirstDataRow; row < rowsCount; row++)
+            for (int row = firstDataRow; row < rowsCount; row++)
             {
                 var instance = SystemHelper.ActivateInstance<T>();
                 foreach (var (name, type, column) in properties)

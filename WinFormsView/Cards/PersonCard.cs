@@ -135,7 +135,7 @@ namespace WinFormsView.Cards
 
 
             SetBinding(tbName, nameof(TextBox.Text), nameof(person.Name));
-            SetBinding(tbDiscription, nameof(TextBox.Text), nameof(person.Discription));
+            SetBinding(tbDescription, nameof(TextBox.Text), nameof(person.Description));
             SetBinding(tbPorch, nameof(TextBox.Text), nameof(person.Porch));
 
             SetBinding(chbIsRoom, nameof(CheckBox.Checked), nameof(person.IsRoom));

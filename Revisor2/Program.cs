@@ -1,6 +1,7 @@
 ﻿using DataLodaer;
 using Revisor2.Model;
 using System;
+using System.IO;
 
 namespace Revisor2
 {
@@ -9,29 +10,28 @@ namespace Revisor2
         static void Main(string[] args)
         {
             Console.WriteLine("Hello World!");
-            Loader.UploadRoomPerson(@"C:\Users\igor_\OneDrive\Рабочий стол\Оргработа\Обзвон\Обзвон.xlsx");
-            Loader.UploadContributions(@"C:\Users\igor_\OneDrive\Рабочий стол\Оргработа\Обзвон\Обзвон.xlsx");
-            Exporter.ExportToRoomTable();
+            var dbExelPath = @"L:\Обзвон BD.xlsx";
+            var listExelPath = @"L:\Lists Db.xlsx";
 
-            //using var context = new RevisorContext();
-            //context.RoomPeople.Add(new RoomPerson
-            //{
-            //    Id = 1,
-            //    Address = "sdfdf",
-            //    Age = 12,
-            //    CallDate = DateTime.Now,
-            //    CallResult = "OK",
-            //    CallsCount = 2,
-            //    DisconnectsCount = 2,
-            //    Discription = "sdsd",
-            //    Floor = 34,
-            //    InviteDate = DateTime.Now.AddDays(-1),
-            //    Inviter = "ИГ",
-            //    IsRoom = true,
-            //    IvitePlace = "Мендеева",
-            //    LastPaper = 74
-            //});
-            //context.SaveChanges();
+            //Loader.UploadAddresses(listExelPath);
+            //Loader.UploadBooks(listExelPath);
+            //Loader.UploadPapers(listExelPath);
+            //Loader.UploadSubscribes(listExelPath);
+            //Loader.UploadMonths(listExelPath);
+            //Loader.UploadOrgPeople(listExelPath);
+            //Loader.UploadOrgStates(listExelPath);
+            //Loader.UploadSosialStatus(listExelPath);
+            //Loader.UploadPlaces(listExelPath);
+            //Loader.UploadCallResultTypes(listExelPath);
+            //Loader.UploadEventTypes(listExelPath);
+            //Loader.UploadEventRole(listExelPath);
+
+            //Loader.UploadRoomPerson(dbExelPath);
+
+            Loader.LoadPersonRoomToPerson();
+
+            //Loader.UploadContributions(@"C:\Users\igor_\OneDrive\Рабочий стол\Оргработа\Обзвон\Обзвон.xlsx");
+            //Exporter.ExportToRoomTable();
         }
     }
 }
