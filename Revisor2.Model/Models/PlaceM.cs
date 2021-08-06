@@ -1,6 +1,6 @@
 ﻿using Revisor2.Model.Infrastructure;
 
-namespace Revisor2.Model.Repositories
+namespace Revisor2.Model.Models
 {
     public class PlaceM : DomainModelBase<PlaceM, int>
     {

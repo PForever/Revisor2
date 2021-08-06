@@ -33,6 +33,5 @@ namespace Revisor2.Model.Data
         public int? Room { get; set; }
         public int? Floor { get; set; }
         public string Porch { get; set; }
-        public ICollection<Contribution> Contributions { get; set; }
     }
 }

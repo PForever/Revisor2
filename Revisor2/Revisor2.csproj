@@ -6,10 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="microsoft.entityframeworkcore" Version="5.0.5" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\DataLodaer\DataLodaer.csproj" />
     <ProjectReference Include="..\Revisor2.Model\Revisor2.Model.csproj" />
   </ItemGroup>

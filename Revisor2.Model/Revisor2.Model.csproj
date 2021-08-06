@@ -5,8 +5,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="microsoft.entityframeworkcore" Version="5.0.5" />
-    <PackageReference Include="microsoft.entityframeworkcore.sqlite" Version="5.0.5" />
+    <PackageReference Include="microsoft.entityframeworkcore" Version="6.0.0-preview.6.21352.1" />
+    <PackageReference Include="microsoft.entityframeworkcore.sqlite" Version="6.0.0-preview.6.21352.1" />
   </ItemGroup>
 
   <ItemGroup>

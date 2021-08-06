@@ -4,9 +4,9 @@ using System.Collections.ObjectModel;
 
 namespace Revisor2.Model.Models
 {
-    public class AddressM : DomainModelBase<AddressM, int>
+    public class AddressM : DomainModelBase<AddressM, Guid>
     {
-        public AddressM(int id) : base(id) { }
+        public AddressM(Guid id) : base(id) { }
 
         public ObservableCollection<BypassM> Bypasses { get; } = new();
         public ObservableCollection<PersonM> People { get; } = new();

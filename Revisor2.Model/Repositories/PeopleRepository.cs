@@ -14,7 +14,7 @@ namespace Revisor2.Model.Repositories
     public class PeopleRepository
     {
         private List<PersonM> _people;
-        private List<SosialSatusM> _sosialStatus;
+        private List<SosialStatusM> _sosialStatus;
         private List<OrgPersonM> _orgPeople;
         private List<PlaceM> _places;
         private List<OrgStateM> _orgStates;
@@ -57,7 +57,7 @@ namespace Revisor2.Model.Repositories
             using var context = new RevisorContext();
             IQueryable<RoomPerson> res = context.RoomPeople;
             var addreses = res.Where(p => !string.IsNullOrEmpty(p.Address)).Select(p => p.Address).Distinct().AsEnumerable().Select((a, i) => (Address: a, Id: i))
-                .ToDictionary(a => a.Address, a => new AddressM(a.Id) { Name = a.Address }, StringComparer.OrdinalIgnoreCase);
+                .ToDictionary(a => a.Address, a => new AddressM(Guid.NewGuid()) { Name = a.Address }, StringComparer.OrdinalIgnoreCase);
             if (predicate != null) res = res.Where(predicate);
             return res.ToList().Select(p =>
                            new PersonM(Guid.NewGuid())
@@ -88,18 +88,20 @@ namespace Revisor2.Model.Repositories
                                Room = p.Room,
                                SosialStatus = p.SosialStatus,
                                WorkType = p.WorkType
-                           }.Transform(m => m.Contributions = p.Contributions?
-                                                               .Select(p => new ContributionM(Guid.NewGuid())
-                                                                                       {
-                                                                                           Person = m,
-                                                                                           Description = p.Description,
-                                                                                           //Month = p.Month,
-                                                                                       }.Transform(cm => cm.BookResults = Array.Empty<BookResultM>().ToViewModelCollection(cm, (c, p) => c.Contribution = p))
-                                                               )
-                                                               .ToViewModelCollection(m, (c, p) => c.Person = p)));
+                           }
+                           //.Transform(m => m.Contributions = p.Contributions?
+                           //                                    .Select(p => new ContributionM(Guid.NewGuid())
+                           //                                                            {
+                           //                                                                Person = m,
+                           //                                                                Description = p.Description,
+                           //                                                                //Month = p.Month,
+                           //                                                            }.Transform(cm => cm.BookResults = Array.Empty<BookResultM>().ToViewModelCollection(cm, (c, p) => c.Contribution = p))
+                           //                                    )
+                           //                                    .ToViewModelCollection(m, (c, p) => c.Person = p))
+                           );
         }
 
-        public IList<SosialSatusM> GetSosialSatus() => _sosialStatus ??= GetPeoples().Select(p => p.SosialStatus).Where(p => !string.IsNullOrWhiteSpace(p)).Distinct().OrderBy(p => p).Select((p, i) => new SosialSatusM(i) { Name = p }).ToList();
+        public IList<SosialStatusM> GetSosialSatus() => _sosialStatus ??= GetPeoples().Select(p => p.SosialStatus).Where(p => !string.IsNullOrWhiteSpace(p)).Distinct().OrderBy(p => p).Select((p, i) => new SosialStatusM(i) { Name = p }).ToList();
         public IList<OrgPersonM> GetOrgPeople() => _orgPeople ??= GetPeoples().Select(p => p.Inviter).Where(p => !string.IsNullOrWhiteSpace(p)).Distinct().OrderBy(p => p).Select((p, i) => new OrgPersonM(i) { Name = p }).ToList();
         public IList<PlaceM> GetPlaces() => _places ??= GetPeoples().Select(p => p.InvitePlace).Where(p => !string.IsNullOrWhiteSpace(p)).Distinct().OrderBy(p => p).Select(p => new PlaceM(-1) { Name = p }).ToList();
         public IList<OrgStateM> GetOrgStates() => _orgStates ??= GetPeoples().Select(p => p.OrgState).Where(p => !string.IsNullOrWhiteSpace(p)).Distinct().OrderBy(p => p).Select((p, i) => new OrgStateM(i) { Name = p }).ToList();
@@ -111,7 +113,7 @@ namespace Revisor2.Model.Repositories
             using var context = new RevisorContext();
             IQueryable<RoomPerson> res = context.RoomPeople;
             return res.Where(p => !string.IsNullOrEmpty(p.Address)).Select(p => p.Address).Distinct().AsEnumerable().Select((a, i) => (Address: a, Id: i))
-                .Select(a => new AddressM(a.Id) { Name = a.Address }).ToList();
+                .Select(a => new AddressM(Guid.NewGuid()) { Name = a.Address }).ToList();
 
         }
 

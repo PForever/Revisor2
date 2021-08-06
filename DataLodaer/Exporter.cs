@@ -80,7 +80,7 @@ namespace DataLodaer
             var month7 = currentMonth.AddMonths(-1);
             var month8 = currentMonth;
             using var context = new RevisorContext();
-            var peoples = (from person in context.RoomPeople.Include(p => p.Contributions)
+            var peoples = (from person in context.RoomPeople/*.Include(p => p.Contributions)*/
                            where ids.Contains(person.Id)
                            select person).ToList();
             var list = from p in peoples
@@ -94,14 +94,14 @@ namespace DataLodaer
                            Age = p.Age,
                            SosialStatus = p.SosialStatus,
                            Inviter = p.Inviter,
-                           Contribution1 = p.Contributions.Where(c => c.Month == month1).Select(c => c.Result).FirstOrDefault(),
-                           Contribution2 = p.Contributions.Where(c => c.Month == month2).Select(c => c.Result).FirstOrDefault(),
-                           Contribution3 = p.Contributions.Where(c => c.Month == month3).Select(c => c.Result).FirstOrDefault(),
-                           Contribution4 = p.Contributions.Where(c => c.Month == month4).Select(c => c.Result).FirstOrDefault(),
-                           Contribution5 = p.Contributions.Where(c => c.Month == month5).Select(c => c.Result).FirstOrDefault(),
-                           Contribution6 = p.Contributions.Where(c => c.Month == month6).Select(c => c.Result).FirstOrDefault(),
-                           Contribution7 = p.Contributions.Where(c => c.Month == month7).Select(c => c.Result).FirstOrDefault(),
-                           Contribution8 = p.Contributions.Where(c => c.Month == month8).Select(c => c.Result).FirstOrDefault(),
+                           //Contribution1 = p.Contributions.Where(c => c.Month == month1).Select(c => c.Result).FirstOrDefault(),
+                           //Contribution2 = p.Contributions.Where(c => c.Month == month2).Select(c => c.Result).FirstOrDefault(),
+                           //Contribution3 = p.Contributions.Where(c => c.Month == month3).Select(c => c.Result).FirstOrDefault(),
+                           //Contribution4 = p.Contributions.Where(c => c.Month == month4).Select(c => c.Result).FirstOrDefault(),
+                           //Contribution5 = p.Contributions.Where(c => c.Month == month5).Select(c => c.Result).FirstOrDefault(),
+                           //Contribution6 = p.Contributions.Where(c => c.Month == month6).Select(c => c.Result).FirstOrDefault(),
+                           //Contribution7 = p.Contributions.Where(c => c.Month == month7).Select(c => c.Result).FirstOrDefault(),
+                           //Contribution8 = p.Contributions.Where(c => c.Month == month8).Select(c => c.Result).FirstOrDefault(),
                            PhoneNumber = p.PhoneNumber,
                            LastPaper = p.LastPaper,
                            Discription = p.Discription,
@@ -121,7 +121,7 @@ namespace DataLodaer
             var month7 = currentMonth.AddMonths(-1);
             var month8 = currentMonth;
             using var context = new RevisorContext();
-            var peoples = (from person in context.RoomPeople.Include(p => p.Contributions)
+            var peoples = (from person in context.RoomPeople/*.Include(p => p.Contributions)*/
                            where addresses.Contains(person.Address)
                            select person).ToList();
             var list = from p in peoples
@@ -135,14 +135,14 @@ namespace DataLodaer
                            Age = p.Age,
                            SosialStatus = p.SosialStatus,
                            Inviter = p.Inviter,
-                           Contribution1 = p.Contributions.Where(c => c.Month == month1).Select(c => c.Result).FirstOrDefault(),
-                           Contribution2 = p.Contributions.Where(c => c.Month == month2).Select(c => c.Result).FirstOrDefault(),
-                           Contribution3 = p.Contributions.Where(c => c.Month == month3).Select(c => c.Result).FirstOrDefault(),
-                           Contribution4 = p.Contributions.Where(c => c.Month == month4).Select(c => c.Result).FirstOrDefault(),
-                           Contribution5 = p.Contributions.Where(c => c.Month == month5).Select(c => c.Result).FirstOrDefault(),
-                           Contribution6 = p.Contributions.Where(c => c.Month == month6).Select(c => c.Result).FirstOrDefault(),
-                           Contribution7 = p.Contributions.Where(c => c.Month == month7).Select(c => c.Result).FirstOrDefault(),
-                           Contribution8 = p.Contributions.Where(c => c.Month == month8).Select(c => c.Result).FirstOrDefault(),
+                           //Contribution1 = p.Contributions.Where(c => c.Month == month1).Select(c => c.Result).FirstOrDefault(),
+                           //Contribution2 = p.Contributions.Where(c => c.Month == month2).Select(c => c.Result).FirstOrDefault(),
+                           //Contribution3 = p.Contributions.Where(c => c.Month == month3).Select(c => c.Result).FirstOrDefault(),
+                           //Contribution4 = p.Contributions.Where(c => c.Month == month4).Select(c => c.Result).FirstOrDefault(),
+                           //Contribution5 = p.Contributions.Where(c => c.Month == month5).Select(c => c.Result).FirstOrDefault(),
+                           //Contribution6 = p.Contributions.Where(c => c.Month == month6).Select(c => c.Result).FirstOrDefault(),
+                           //Contribution7 = p.Contributions.Where(c => c.Month == month7).Select(c => c.Result).FirstOrDefault(),
+                           //Contribution8 = p.Contributions.Where(c => c.Month == month8).Select(c => c.Result).FirstOrDefault(),
                            PhoneNumber = p.PhoneNumber,
                            LastPaper = p.LastPaper,
                            Discription = p.Discription,

@@ -55,8 +55,9 @@ namespace FilterLibrary.FilterHelp
 
         private ILookup<string, object> CreateSourceList(DataGridViewComboBoxColumn cb)
         {
-            if (cb.DataSource is IList list && list.Count > 0)
+            if (cb.DataSource is IList list)
             {
+                if (list.Count == 0) return Enumerable.Empty<(string, object)>().ToLookup(v => v.Item1, v => v.Item2);
                 var result = new List<(string Key, object Value)>(list.Count);
                 
                 var type = list[0].GetType();

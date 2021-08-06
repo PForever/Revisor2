@@ -27,7 +27,7 @@ namespace WinFormsView.Cards
 
         private void CustomInitialize()
         {
-            bsSosialStatus.DataSource = typeof(SosialSatusM);
+            bsSosialStatus.DataSource = typeof(SosialStatusM);
             bsInviter.DataSource = typeof(OrgPersonM);
             bsInvitePlace.DataSource = typeof(PlaceM);
             bsOrgState.DataSource = typeof(OrgStateM);
@@ -45,8 +45,8 @@ namespace WinFormsView.Cards
             //cbMeetPerson.DataSource = bsMeetPerson;
             //cbAddress.DataSource = bsAddress;
 
-            cbSosialStatus.DisplayMember = nameof(SosialSatusM.Name);
-            cbSosialStatus.ValueMember = nameof(SosialSatusM.Name);
+            cbSosialStatus.DisplayMember = nameof(SosialStatusM.Name);
+            cbSosialStatus.ValueMember = nameof(SosialStatusM.Name);
 
             cbInviter.DisplayMember = nameof(OrgPersonM.Name);
             cbInviter.ValueMember = nameof(OrgPersonM.Name);
@@ -110,7 +110,7 @@ namespace WinFormsView.Cards
             bsMeetPerson.DataSource = _peopleRepository.GetOrgPeople();
             bsAddress.DataSource = _peopleRepository.GetAddresses();
 
-            cbSosialStatus.SetNullubleComboBinding(bsPerson, nameof(PersonM.SosialStatus), new SosialSatusM(-1) { Name = "Нет" }, bsSosialStatus);
+            cbSosialStatus.SetNullubleComboBinding(bsPerson, nameof(PersonM.SosialStatus), new SosialStatusM(-1) { Name = "Нет" }, bsSosialStatus);
             //cbInviter.SetNullubleComboBinding(bsPerson, nameof(PersonM.Inviter), new OrgPersonM() { Name = "Нет" }, bsInviter);
             //cbInvitePlace.SetNullubleComboBinding(bsPerson, nameof(PersonM.InvitePlace), new PlaceM(-1) { Name = "Нет" }, bsInvitePlace);
             //cbOrgState.SetNullubleComboBinding(bsPerson, nameof(PersonM.OrgState), new OrgStateM(-1) { Name = "Нет" }, bsOrgState);

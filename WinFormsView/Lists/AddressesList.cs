@@ -46,7 +46,7 @@ namespace WinFormsView.Lists
 
         private void OnAdd(object sender, EventArgs e)
         {
-            var model = new AddressM(-1);
+            var model = new AddressM(Guid.NewGuid());
             var card = new AddressCard(model, _repository, _peopleRepository);
             if(card.ShowDialog() == DialogResult.OK)
             {
