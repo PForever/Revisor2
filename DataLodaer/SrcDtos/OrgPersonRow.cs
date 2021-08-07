@@ -6,6 +6,6 @@ namespace DataLodaer.SrcDtos
     public class OrgPersonRow
     {
         public Guid Id { get; set; }
-        public string Name { get; init; }
+        public string ShortName { get; init; }
     }
 }

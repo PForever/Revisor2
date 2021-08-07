@@ -32,12 +32,14 @@ namespace DataLodaer
             var addresses = context.Addresses.ToDictionary(a => a.Name, StringComparer.OrdinalIgnoreCase);
             var papers = context.Papers.ToDictionary(a => a.Number);
             var months = context.Months.ToDictionary(m => m.DateStart);
-            var orgPeople = context.OrgPeople.ToDictionary(p => p.Name, StringComparer.OrdinalIgnoreCase);
+            var orgPeople = context.OrgPeople.ToDictionary(p => p.ShortName, StringComparer.OrdinalIgnoreCase);
             var orgStates = context.OrgStates.ToDictionary(p => p.Name, StringComparer.OrdinalIgnoreCase);
             var sosialStatus = context.SosialStatus.ToDictionary(p => p.Name, StringComparer.OrdinalIgnoreCase);
             var places = context.Places.ToDictionary(p => p.Name, StringComparer.OrdinalIgnoreCase);
             var callResultTypes = context.CallResultTypes.ToDictionary(p => p.Name, StringComparer.OrdinalIgnoreCase);
             var workTypes = context.WorkTypes.ToDictionary(p => p.Name, StringComparer.OrdinalIgnoreCase);
+
+            var fakeCallEvent = new CallEvent { Id = Guid.NewGuid(), CallDate = new DateOnly(2021, 01, 01) };
 
             var people = (from p in dtoList.Values
                           select new Person
@@ -46,10 +48,18 @@ namespace DataLodaer
                               Address = addresses.GetValueOrDefault(p.Address),
                               Age = p.Age,
                               CallDate = p.CallDate.ToDate(),
-                              CallsCount = p.CallsCount ?? default,
-                              CallResults = callResultTypes.GetValueOrDefault(p.CallResult) is { } result ? new[] { new CallResult { Id = Guid.NewGuid(), CallResultType = result } } : default,
+                              Calls = callResultTypes.GetValueOrDefault(p.CallResult) is { } result ?
+                                                  new[] { new CallEventResult {
+                                                      Id = Guid.NewGuid(),
+                                                      CallEvent = fakeCallEvent,
+                                                      CallTargetResults = new[] {
+                                                          new CallTargetResult {
+                                                              Id = Guid.NewGuid(),
+                                                              CallResultType = result
+                                                          }
+                                                      }
+                                                  } } : default,
                               Description = p.Description,
-                              DisconnectsCount = p.DisconnectsCount ?? default,
                               Floor = p.Floor,
                               InviteDate = p.InviteDate.ToDate(),
                               InvitePlace = places.GetValueOrDefault(p.IvitePlace),
@@ -121,6 +131,7 @@ namespace DataLodaer
             UploadCallResultTypes(path);
             UploadEventTypes(path);
             UploadEventRole(path);
+            UploadEventResultType(path);
         }
 
         public static void UploadSosialStatus(string path) => Upload<SosialStatusRow, SosialStatus, Guid>(path, r => r.Id);
@@ -135,6 +146,7 @@ namespace DataLodaer
         public static void UploadCallResultTypes(string path) => Upload<CallResultTypeRow, CallResultType, Guid>(path, r => r.Id);
         public static void UploadEventTypes(string path) => Upload<EventTypeRow, EventType, Guid>(path, r => r.Id);
         public static void UploadEventRole(string path) => Upload<EventRoleRow, EventRole, Guid>(path, r => r.Id);
+        public static void UploadEventResultType(string path) => Upload<EventResultTypeRow, EventResultType, Guid>(path, r => r.Id);
 
         private static ICollection<RoomPersonRow> GetRoomPersonRowsFromExcel(string path)
         {

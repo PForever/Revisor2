@@ -32,7 +32,7 @@ namespace WinFormsView.Cards
             bsInvitePlace.DataSource = typeof(PlaceM);
             bsOrgState.DataSource = typeof(OrgStateM);
             bsWorkType.DataSource = typeof(WorkTypeM);
-            bsCallResult.DataSource = typeof(CallResultM);
+            bsCallResult.DataSource = typeof(CallResultTypeM);
             bsMeetPerson.DataSource = typeof(OrgPersonM);
             bsAddress.DataSource = typeof(AddressM);
 
@@ -45,29 +45,30 @@ namespace WinFormsView.Cards
             //cbMeetPerson.DataSource = bsMeetPerson;
             //cbAddress.DataSource = bsAddress;
 
-            cbSosialStatus.DisplayMember = nameof(SosialStatusM.Name);
-            cbSosialStatus.ValueMember = nameof(SosialStatusM.Name);
 
-            cbInviter.DisplayMember = nameof(OrgPersonM.Name);
-            cbInviter.ValueMember = nameof(OrgPersonM.Name);
+            //cbSosialStatus.DisplayMember = nameof(SosialStatusM.Name);
+            //cbSosialStatus.ValueMember = nameof(SosialStatusM.Name);
 
-            cbInvitePlace.DisplayMember = nameof(PlaceM.Name);
-            cbInvitePlace.ValueMember = nameof(PlaceM.Name);
+            //cbInviter.DisplayMember = nameof(OrgPersonM.Name);
+            //cbInviter.ValueMember = nameof(OrgPersonM.Name);
 
-            cbOrgState.DisplayMember = nameof(OrgStateM.Name);
-            cbOrgState.ValueMember = nameof(OrgStateM.Name);
+            //cbInvitePlace.DisplayMember = nameof(PlaceM.Name);
+            //cbInvitePlace.ValueMember = nameof(PlaceM.Name);
 
-            cbWorkType.DisplayMember = nameof(WorkTypeM.Name);
-            cbWorkType.ValueMember = nameof(WorkTypeM.Name);
+            //cbOrgState.DisplayMember = nameof(OrgStateM.Name);
+            //cbOrgState.ValueMember = nameof(OrgStateM.Name);
 
-            cbCallResult.DisplayMember = nameof(CallResultM.Name);
-            cbCallResult.ValueMember = nameof(CallResultM.Name);
+            //cbWorkType.DisplayMember = nameof(WorkTypeM.Name);
+            //cbWorkType.ValueMember = nameof(WorkTypeM.Name);
 
-            cbMeetPerson.DisplayMember = nameof(OrgPersonM.Name);
-            cbMeetPerson.ValueMember = nameof(OrgPersonM.Name);
+            //cbCallResult.DisplayMember = nameof(CallResultM.Name);
+            //cbCallResult.ValueMember = nameof(CallResultM.Name);
 
-            cbAddress.DisplayMember = nameof(AddressM.Name);
-            cbAddress.ValueMember = nameof(AddressM.Name);
+            //cbMeetPerson.DisplayMember = nameof(OrgPersonM.Name);
+            //cbMeetPerson.ValueMember = nameof(OrgPersonM.Name);
+
+            //cbAddress.DisplayMember = nameof(AddressM.Name);
+            //cbAddress.ValueMember = nameof(AddressM.Name);
         }
 
         public PersonCard(PeopleRepository peopleRepository) : this(new PersonM(), peopleRepository)
@@ -106,7 +107,7 @@ namespace WinFormsView.Cards
             bsInvitePlace.DataSource = _peopleRepository.GetPlaces();
             bsOrgState.DataSource = _peopleRepository.GetOrgStates();
             bsWorkType.DataSource = _peopleRepository.GetWorkTypes();
-            bsCallResult.DataSource = _peopleRepository.GetCallResults();
+            //bsCallResult.DataSource = _peopleRepository.GetCallResults();
             bsMeetPerson.DataSource = _peopleRepository.GetOrgPeople();
             bsAddress.DataSource = _peopleRepository.GetAddresses();
 
@@ -165,7 +166,7 @@ namespace WinFormsView.Cards
 
 
             SetBinding(nudDisconnectsCount, nameof(NumericUpDown.Value), nameof(person.DisconnectsCount));
-            SetBinding(nudCallsCount, nameof(NumericUpDown.Value), nameof(person.CallsCount));
+            //SetBinding(nudCallsCount, nameof(NumericUpDown.Value), nameof(person.CallsCount));
 
             SetBinding(mtbPhoneNumber, nameof(MaskedTextBox.Text), nameof(person.PhoneNumber));
         }

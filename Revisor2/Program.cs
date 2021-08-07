@@ -13,20 +13,21 @@ namespace Revisor2
             var dbExelPath = @"L:\Обзвон BD.xlsx";
             var listExelPath = @"L:\Lists Db.xlsx";
 
-            //Loader.UploadAddresses(listExelPath);
-            //Loader.UploadBooks(listExelPath);
-            //Loader.UploadPapers(listExelPath);
-            //Loader.UploadSubscribes(listExelPath);
-            //Loader.UploadMonths(listExelPath);
-            //Loader.UploadOrgPeople(listExelPath);
-            //Loader.UploadOrgStates(listExelPath);
-            //Loader.UploadSosialStatus(listExelPath);
-            //Loader.UploadPlaces(listExelPath);
-            //Loader.UploadCallResultTypes(listExelPath);
-            //Loader.UploadEventTypes(listExelPath);
-            //Loader.UploadEventRole(listExelPath);
+            Loader.UploadAddresses(listExelPath);
+            Loader.UploadBooks(listExelPath);
+            Loader.UploadPapers(listExelPath);
+            Loader.UploadSubscribes(listExelPath);
+            Loader.UploadMonths(listExelPath);
+            Loader.UploadOrgPeople(listExelPath);
+            Loader.UploadOrgStates(listExelPath);
+            Loader.UploadSosialStatus(listExelPath);
+            Loader.UploadPlaces(listExelPath);
+            Loader.UploadCallResultTypes(listExelPath);
+            Loader.UploadEventTypes(listExelPath);
+            Loader.UploadEventRole(listExelPath);
+            Loader.UploadEventResultType(listExelPath);
 
-            //Loader.UploadRoomPerson(dbExelPath);
+            Loader.UploadRoomPerson(dbExelPath);
 
             Loader.LoadPersonRoomToPerson();
 

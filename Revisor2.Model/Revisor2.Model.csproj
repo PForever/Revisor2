@@ -5,8 +5,14 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Mapster" Version="7.2.0" />
+    <PackageReference Include="Mapster.EFCore" Version="5.1.0" />
     <PackageReference Include="microsoft.entityframeworkcore" Version="6.0.0-preview.6.21352.1" />
     <PackageReference Include="microsoft.entityframeworkcore.sqlite" Version="6.0.0-preview.6.21352.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.0-preview.6.21352.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
