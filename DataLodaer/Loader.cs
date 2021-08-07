@@ -130,8 +130,9 @@ namespace DataLodaer
             UploadPlaces(path);
             UploadCallResultTypes(path);
             UploadEventTypes(path);
-            UploadEventRole(path);
-            UploadEventResultType(path);
+            UploadEventRoles(path);
+            UploadEventResultTypes(path);
+            UploadWorkTypes(path);
         }
 
         public static void UploadSosialStatus(string path) => Upload<SosialStatusRow, SosialStatus, Guid>(path, r => r.Id);
@@ -145,8 +146,9 @@ namespace DataLodaer
         public static void UploadPlaces(string path) => Upload<PlaceRow, Place, Guid>(path, r => r.Id);
         public static void UploadCallResultTypes(string path) => Upload<CallResultTypeRow, CallResultType, Guid>(path, r => r.Id);
         public static void UploadEventTypes(string path) => Upload<EventTypeRow, EventType, Guid>(path, r => r.Id);
-        public static void UploadEventRole(string path) => Upload<EventRoleRow, EventRole, Guid>(path, r => r.Id);
-        public static void UploadEventResultType(string path) => Upload<EventResultTypeRow, EventResultType, Guid>(path, r => r.Id);
+        public static void UploadEventRoles(string path) => Upload<EventRoleRow, EventRole, Guid>(path, r => r.Id);
+        public static void UploadEventResultTypes(string path) => Upload<EventResultTypeRow, EventResultType, Guid>(path, r => r.Id);
+        public static void UploadWorkTypes(string path) => Upload<WorkTypeRow, WorkType, Guid>(path, r => r.Id);
 
         private static ICollection<RoomPersonRow> GetRoomPersonRowsFromExcel(string path)
         {

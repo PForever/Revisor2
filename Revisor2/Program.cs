@@ -24,8 +24,9 @@ namespace Revisor2
             Loader.UploadPlaces(listExelPath);
             Loader.UploadCallResultTypes(listExelPath);
             Loader.UploadEventTypes(listExelPath);
-            Loader.UploadEventRole(listExelPath);
-            Loader.UploadEventResultType(listExelPath);
+            Loader.UploadEventRoles(listExelPath);
+            Loader.UploadEventResultTypes(listExelPath);
+            Loader.UploadWorkTypes(listExelPath);
 
             Loader.UploadRoomPerson(dbExelPath);
 
