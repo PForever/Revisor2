@@ -1,4 +1,5 @@
 ﻿using Mapster;
+using Microsoft.EntityFrameworkCore;
 using Revisor2.Model.Data;
 using Revisor2.Model.Infrastructure;
 using Revisor2.Model.Models;
@@ -14,38 +15,38 @@ namespace Revisor2.Model.Repositories
 {
     public static class MapProvider
     {
-        static MapProvider()
+        public static void SetMap()
         {
-            TypeAdapterConfig<Person, PersonM>.NewConfig().MapToConstructor(true).Map("Id", "Id")
+            var ctor = typeof(PersonM).GetConstructor(new[] { typeof(Guid) });
+            TypeAdapterConfig<Person, PersonM>.NewConfig()
+                .ConstructUsing(dto => new PersonM(dto.Id))
+                .MapToConstructor(ctor).Map("Id", "Id")
                 .Map(m => m.PaperCount, p => Math.Max(p.Source.PaperCount ?? 0, p.Papers.Count) )
                 .Map(m => m.LastPaper, p => p.Papers.LastOrDefault())
                 .Map(m => m.LastСontribution, p => p.Contributions.LastOrDefault())
                 .Compile();
+            TypeAdapterConfig<SosialStatus, SosialStatusM>.NewConfig().ConstructUsing(dto => new SosialStatusM(dto.Id)).MapToConstructor(typeof(SosialStatusM).GetConstructor(new[] { typeof(Guid) })).Map("Id", "Id").Compile();
+            TypeAdapterConfig<OrgPerson, OrgPersonM>.NewConfig().ConstructUsing(dto => new OrgPersonM(dto.Id)).MapToConstructor(typeof(OrgPersonM).GetConstructor(new[] { typeof(Guid) })).Map("Id", "Id").Compile();
+            TypeAdapterConfig<Place, PlaceM>.NewConfig().ConstructUsing(dto => new PlaceM(dto.Id)).MapToConstructor(typeof(PlaceM).GetConstructor(new[] { typeof(Guid) })).Map("Id", "Id").Compile();
+            TypeAdapterConfig<OrgState, OrgStateM>.NewConfig().ConstructUsing(dto => new OrgStateM(dto.Id)).MapToConstructor(typeof(OrgStateM).GetConstructor(new[] { typeof(Guid) })).Map("Id", "Id").Compile();
+            TypeAdapterConfig<WorkType, WorkTypeM>.NewConfig().ConstructUsing(dto => new WorkTypeM(dto.Id)).MapToConstructor(typeof(WorkTypeM).GetConstructor(new[] { typeof(Guid) })).Map("Id", "Id").Compile();
+            TypeAdapterConfig<CallResultType, CallResultTypeM>.NewConfig().ConstructUsing(dto => new CallResultTypeM(dto.Id)).MapToConstructor(typeof(CallResultTypeM).GetConstructor(new[] { typeof(Guid) })).Map("Id", "Id").Compile();
+            TypeAdapterConfig<Address, AddressM>.NewConfig().ConstructUsing(dto => new AddressM(dto.Id)).MapToConstructor(typeof(AddressM).GetConstructor(new[] { typeof(Guid) })).Map("Id", "Id").Compile();
+            TypeAdapterConfig<Paper, PaperM>.NewConfig().ConstructUsing(dto => new PaperM(dto.Id)).MapToConstructor(typeof(PaperM).GetConstructor(new[] { typeof(Guid) })).Map("Id", "Id").Compile();
+            TypeAdapterConfig<Contribution, ContributionM>.NewConfig().ConstructUsing(dto => new ContributionM(dto.Id)).MapToConstructor(typeof(ContributionM).GetConstructor(new[] { typeof(Guid) })).Map("Id", "Id").Compile();
 
-            TypeAdapterConfig<Person, PersonM>.NewConfig().MapToConstructor(true).Map("Id", "Id").Compile();
-            TypeAdapterConfig<SosialStatus, SosialStatusM>.NewConfig().MapToConstructor(true).Map("Id", "Id").Compile();
-            TypeAdapterConfig<OrgPerson, OrgPersonM>.NewConfig().MapToConstructor(true).Map("Id", "Id").Compile();
-            TypeAdapterConfig<Place, PlaceM>.NewConfig().MapToConstructor(true).Map("Id", "Id").Compile();
-            TypeAdapterConfig<OrgState, OrgStateM>.NewConfig().MapToConstructor(true).Map("Id", "Id").Compile();
-            TypeAdapterConfig<WorkType, WorkTypeM>.NewConfig().MapToConstructor(true).Map("Id", "Id").Compile();
-            TypeAdapterConfig<CallResultType, CallResultTypeM>.NewConfig().MapToConstructor(true).Map("Id", "Id").Compile();
-            TypeAdapterConfig<Address, AddressM>.NewConfig().MapToConstructor(true).Map("Id", "Id").Compile();
-            TypeAdapterConfig<Paper, PaperM>.NewConfig().MapToConstructor(true).Map("Id", "Id").Compile();
-            TypeAdapterConfig<Contribution, ContributionM>.NewConfig().MapToConstructor(true).Map("Id", "Id").Compile();
-
-            TypeAdapterConfig<CallEvent, CallEventM>.NewConfig().MapToConstructor(true).Map("Id", "Id").Compile();
-            TypeAdapterConfig<CallEventResult, CallEventResultM>.NewConfig().MapToConstructor(true).Map("Id", "Id").Compile();
-            TypeAdapterConfig<CallTargetResult, CallTargetResultM>.NewConfig().MapToConstructor(true).Map("Id", "Id").Compile();
-            TypeAdapterConfig<EventResultType, EventResultTypeM>.NewConfig().MapToConstructor(true).Map("Id", "Id").Compile();
-            TypeAdapterConfig<PersonEventResult, PersonEventResultM>.NewConfig().MapToConstructor(true).Map("Id", "Id").Compile();
-            TypeAdapterConfig<OrgPersonEventResult, OrgPersonEventResultM>.NewConfig().MapToConstructor(true).Map("Id", "Id").Compile();
-            TypeAdapterConfig<EventResultType, EventResultTypeM>.NewConfig().MapToConstructor(true).Map("Id", "Id").Compile();
-            TypeAdapterConfig<Event, EventM>.NewConfig().MapToConstructor(true).Map("Id", "Id").Compile();
-            TypeAdapterConfig<EventRole, EventRoleM>.NewConfig().MapToConstructor(true).Map("Id", "Id").Compile();
-            TypeAdapterConfig<EventType, EventTypeM>.NewConfig().MapToConstructor(true).Map("Id", "Id").Compile();
-
-            //TypeAdapterConfig<DateTime, DateOnly>.NewConfig().MapWith(src => src.ToDate()).Compile();
+            TypeAdapterConfig<CallEvent, CallEventM>.NewConfig().ConstructUsing(dto => new CallEventM(dto.Id)).MapToConstructor(typeof(CallEventM).GetConstructor(new[] { typeof(Guid) })).Map("Id", "Id").Compile();
+            TypeAdapterConfig<CallEventResult, CallEventResultM>.NewConfig().ConstructUsing(dto => new CallEventResultM(dto.Id)).MapToConstructor(typeof(CallEventResultM).GetConstructor(new[] { typeof(Guid) })).Map("Id", "Id").Compile();
+            TypeAdapterConfig<CallTargetResult, CallTargetResultM>.NewConfig().ConstructUsing(dto => new CallTargetResultM(dto.Id)).MapToConstructor(typeof(CallTargetResultM).GetConstructor(new[] { typeof(Guid) })).Map("Id", "Id").Compile();
+            TypeAdapterConfig<EventResultType, EventResultTypeM>.NewConfig().ConstructUsing(dto => new EventResultTypeM(dto.Id)).MapToConstructor(typeof(EventResultTypeM).GetConstructor(new[] { typeof(Guid) })).Map("Id", "Id").Compile();
+            TypeAdapterConfig<PersonEventResult, PersonEventResultM>.NewConfig().ConstructUsing(dto => new PersonEventResultM(dto.Id)).MapToConstructor(typeof(PersonEventResultM).GetConstructor(new[] { typeof(Guid) })).Map("Id", "Id").Compile();
+            TypeAdapterConfig<OrgPersonEventResult, OrgPersonEventResultM>.NewConfig().ConstructUsing(dto => new OrgPersonEventResultM(dto.Id)).MapToConstructor(typeof(OrgPersonEventResultM).GetConstructor(new[] { typeof(Guid) })).Map("Id", "Id").Compile();
+            TypeAdapterConfig<EventResultType, EventResultTypeM>.NewConfig().ConstructUsing(dto => new EventResultTypeM(dto.Id)).MapToConstructor(typeof(EventResultTypeM).GetConstructor(new[] { typeof(Guid) })).Map("Id", "Id").Compile();
+            TypeAdapterConfig<Event, EventM>.NewConfig().ConstructUsing(dto => new EventM(dto.Id)).MapToConstructor(typeof(EventM).GetConstructor(new[] { typeof(Guid) })).Map("Id", "Id").Compile();
+            TypeAdapterConfig<EventRole, EventRoleM>.NewConfig().ConstructUsing(dto => new EventRoleM(dto.Id)).MapToConstructor(typeof(EventRoleM).GetConstructor(new[] { typeof(Guid) })).Map("Id", "Id").Compile();
+            TypeAdapterConfig<EventType, EventTypeM>.NewConfig().ConstructUsing(dto => new EventTypeM(dto.Id)).MapToConstructor(typeof(EventTypeM).GetConstructor(new[] { typeof(Guid) })).Map("Id", "Id").Compile();
         }
+        //public static TypeAdapterSetter<TSource, TDest> GetDefaultAdapter<TSource, TDest>() => TypeAdapterConfig<TSource, TDest>.NewConfig().ConstructUsing(dto => SystemHelper.ActivateInstance new SosialStatusM(dto.Id)).MapToConstructor(typeof(SosialStatusM).GetConstructor(new[] { typeof(Guid) })).Map("Id", "Id")
     }
     public class PeopleRepository
     {
@@ -60,8 +61,9 @@ namespace Revisor2.Model.Repositories
 
         public Type DtoType => typeof(RoomPerson);
 
-        public PeopleRepository()
+        static PeopleRepository()
         {
+            MapProvider.SetMap();
         }
         public void Invalidate()
         {
@@ -76,7 +78,7 @@ namespace Revisor2.Model.Repositories
         }
         public IList<PersonM> GetPeoples(LambdaExpression predicate)
         {
-            return GetData(predicate as Expression<Func<RoomPerson, bool>>).ToList();
+            return GetData(predicate as Expression<Func<Person, bool>>).ToList();
         }
         public IList<PersonM> GetPeoples()
         {
@@ -88,29 +90,40 @@ namespace Revisor2.Model.Repositories
             return GetData(null).ToList();
         }
 
-        private static IEnumerable<PersonM> GetData(Expression<Func<RoomPerson, bool>> predicate)
+        private static IEnumerable<PersonM> GetData(Expression<Func<Person, bool>> predicate)
         {
             using var context = new RevisorContext();
-            IQueryable<RoomPerson> res = context.RoomPeople;
+            IQueryable<Person> res = context.People
+                .Include(p => p.OrgPersonNavigation)
+                .Include(p => p.Source)
+                .Include(p => p.SosialStatus)
+                .Include(p => p.Inviter)
+                .Include(p => p.InvitePlace)
+                .Include(p => p.Papers)
+                .Include(p => p.Books)
+                .Include(p => p.Subscribes)
+                .Include(p => p.Contributions)
+                .Include(p => p.Calls).ThenInclude(c => c.CallTargetResults).ThenInclude(t => t.CallResultType)
+                .Include(p => p.Events)
+                .Include(p => p.OrgState)
+                .Include(p => p.WorkType)
+                .Include(p => p.MeetPerson)
+                .Include(p => p.Address)
+                ;
             if (predicate != null) res = res.Where(predicate);
-            return res.ToList().Select(p => p.Adapt<PersonM>());
+            var list = res.ToList();
+            //return list.Select(p => p.Adapt<PersonM>());
+            return list.Select(s => Maps.Map(s));
         }
 
-        public IList<SosialStatusM> GetSosialSatus() => _sosialStatus ??= GetPeoples().Select(p => p.SosialStatus).ToList();
-        public IList<OrgPersonM> GetOrgPeople() => _orgPeople ??= GetPeoples().Select(p => p.Inviter).ToList();
-        public IList<PlaceM> GetPlaces() => _places ??= GetPeoples().Select(p => p.InvitePlace).ToList();
-        public IList<OrgStateM> GetOrgStates() => _orgStates ??= GetPeoples().Select(p => p.OrgState).ToList();
-        public IList<WorkTypeM> GetWorkTypes() => _workTypes ??= GetPeoples().Select(p => p.WorkType).ToList();
+        public IList<SosialStatusM> GetSosialSatus() => _sosialStatus ??= GetPeoples().Select(p => p.SosialStatus).NotNull().Distinct().OrderBy(a => a.Name).ToList();
+        public IList<OrgPersonM> GetOrgPeople() => _orgPeople ??= GetPeoples().Select(p => p.Inviter).NotNull().Distinct().OrderBy(a => a.ShortName).ToList();
+        public IList<PlaceM> GetPlaces() => _places ??= GetPeoples().Select(p => p.InvitePlace).NotNull().Distinct().OrderBy(a => a.Name).ToList();
+        public IList<OrgStateM> GetOrgStates() => _orgStates ??= GetPeoples().Select(p => p.OrgState).NotNull().Distinct().OrderBy(a => a.Name).ToList();
+        public IList<WorkTypeM> GetWorkTypes() => _workTypes ??= GetPeoples().Select(p => p.WorkType).NotNull().Distinct().OrderBy(a => a.Name).ToList();
         //public IList<CallResultTypeM> GetCallResults() => _callResults ??= GetPeoples().Select(p => p.LatCallResult).ToList();
         //public IList<AddressVm> GetAddresses() => _addresses ??= GetPeoples().Select(p => p.Address).Where(p => p is not null).Distinct().OrderBy(p => p).Select((p, i) => new AddressVm(i) { Name = p.Name }).ToList();
-        public IList<AddressM> GetAddresses()
-        {
-            using var context = new RevisorContext();
-            IQueryable<RoomPerson> res = context.RoomPeople;
-            return res.Where(p => !string.IsNullOrEmpty(p.Address)).Select(p => p.Address).Distinct().AsEnumerable().Select((a, i) => (Address: a, Id: i))
-                .Select(a => new AddressM(Guid.NewGuid()) { Name = a.Address }).ToList();
-
-        }
+        public IList<AddressM> GetAddresses() => _addresses ??= GetPeoples().Select(p => p.Address).NotNull().Distinct().OrderBy(a => a.Name).ToList();
 
         public void SavePerson(PersonM person)
         {

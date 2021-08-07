@@ -3,12 +3,12 @@ using System;
 
 namespace Revisor2.Model.Models
 {
-    public class OrgPersonM : DomainModelBase<OrgPersonM, int>
+    public class OrgPersonM : DomainModelBase<OrgPersonM, Guid>
     {
         public OrgPersonM() { }
-        public OrgPersonM(int id) : base(id) { }
-        public string Name { get; init; }
+        public OrgPersonM(Guid id) : base(id) { }
+        public string ShortName { get; init; }
 
-        public override string DisplayMember => Name;
+        public override string DisplayMember => ShortName;
     }
 }

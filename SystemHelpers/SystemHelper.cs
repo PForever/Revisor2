@@ -16,7 +16,7 @@ namespace SystemHelpers
             foreach (var i in src) yield return i;
         }
         
-        public static IEnumerable<T> ForEachTransform<T>(this IEnumerable<T> src, Action<T> transformer)
+        public static IEnumerable<T>ForEachTransform<T>(this IEnumerable<T> src, Action<T> transformer)
             where T : class
         {
             foreach (var i in src)
@@ -30,6 +30,20 @@ namespace SystemHelpers
         {
             transformer(src);
             return src;
+        }
+        public static Dest Convert<TSource, Dest>(this TSource src, Func<TSource, Dest> transformer)
+            where TSource : class
+        {
+            return src == default ? default : transformer(src);
+        }
+        public static IEnumerable<Dest> ForEachConvert<TSource, Dest>(this IEnumerable<TSource> src, Func<TSource, Dest> transformer)
+        {
+            if (src == null) return null;
+            static IEnumerable<Dest> ForEachConvert(IEnumerable<TSource> src, Func<TSource, Dest> transformer)
+            {
+                foreach (var item in src) yield return transformer(item);
+            }
+            return ForEachConvert(src, transformer);
         }
 
         private static readonly ConcurrentDictionary<(Type Type, string PropertyName), Func<object, object>> Getters = new();
@@ -173,6 +187,10 @@ namespace SystemHelpers
         public static DateOnly ToDate(this DateTime date) => new(date.Year, date.Month, date.Day);
         public static DateTime? ToDateTime(this DateOnly? ndate) => ndate is DateOnly date ? new(date.Year, date.Month, date.Day) : default;
         public static DateOnly? ToDate(this DateTime? ndate) => ndate is DateTime date ? new(date.Year, date.Month, date.Day) : default;
+
+        public static IEnumerable<T> NotNull<T>(this IEnumerable<T> src)
+            where T : class
+            => src.Where(s => s != null);
     }
     
 }

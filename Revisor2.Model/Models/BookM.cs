@@ -5,6 +5,7 @@ namespace Revisor2.Model.Models
 {
     public class BookM : DomainModelBase<BookM, Guid>
     {
+        public BookM() { }
         public BookM(Guid id) : base(id) { }
         public string Name { get; set; }
         public string ShortName { get; set; }

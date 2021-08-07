@@ -102,23 +102,24 @@ namespace WinFormsView.Cards
             //cbMeetPerson.SetNullubleBinding(nameof(ComboBox.SelectedValue), bsMeetPerson, nameof(OrgPersonM.Name), new OrgPersonM(-1) { Name = "Нет" });
             //cbAddress.SetNullubleBinding(nameof(ComboBox.SelectedValue), bsAddress, nameof(AddressM.Name), new AddressM(-1) { Name = "Нет" });
 
+            //bsCallResult.DataSource = _peopleRepository.GetCallResults();
+
             bsSosialStatus.DataSource = _peopleRepository.GetSosialSatus();
             bsInviter.DataSource = _peopleRepository.GetOrgPeople();
             bsInvitePlace.DataSource = _peopleRepository.GetPlaces();
             bsOrgState.DataSource = _peopleRepository.GetOrgStates();
             bsWorkType.DataSource = _peopleRepository.GetWorkTypes();
-            //bsCallResult.DataSource = _peopleRepository.GetCallResults();
             bsMeetPerson.DataSource = _peopleRepository.GetOrgPeople();
             bsAddress.DataSource = _peopleRepository.GetAddresses();
 
-            cbSosialStatus.SetNullubleComboBinding(bsPerson, nameof(PersonM.SosialStatus), new SosialStatusM(-1) { Name = "Нет" }, bsSosialStatus);
-            //cbInviter.SetNullubleComboBinding(bsPerson, nameof(PersonM.Inviter), new OrgPersonM() { Name = "Нет" }, bsInviter);
-            //cbInvitePlace.SetNullubleComboBinding(bsPerson, nameof(PersonM.InvitePlace), new PlaceM(-1) { Name = "Нет" }, bsInvitePlace);
-            //cbOrgState.SetNullubleComboBinding(bsPerson, nameof(PersonM.OrgState), new OrgStateM(-1) { Name = "Нет" }, bsOrgState);
-            //cbWorkType.SetNullubleComboBinding(bsPerson, nameof(PersonM.WorkType), new WorkTypeM(-1) { Name = "Нет" }, bsWorkType);
             //cbCallResult.SetNullubleComboBinding(bsPerson, nameof(PersonM.CallResult), new CallResultM(-1) { Name = "Нет" }, bsCallResult);
-            cbMeetPerson.SetNullubleComboBinding(bsPerson, nameof(PersonM.MeetPerson), new OrgPersonM() { Name = "Нет" }, bsMeetPerson);
-            //cbAddress.SetNullubleComboBinding(bsPerson, nameof(PersonM.Address), new AddressM(-1) { Name = "Нет" }, bsAddress);
+            cbSosialStatus.SetNullubleComboBinding(bsPerson, nameof(PersonM.SosialStatus), new SosialStatusM() { Name = "Нет" }, bsSosialStatus);
+            cbInviter.SetNullubleComboBinding(bsPerson, nameof(PersonM.Inviter), new OrgPersonM() { ShortName = "Нет" }, bsInviter);
+            cbInvitePlace.SetNullubleComboBinding(bsPerson, nameof(PersonM.InvitePlace), new PlaceM() { Name = "Нет" }, bsInvitePlace);
+            cbOrgState.SetNullubleComboBinding(bsPerson, nameof(PersonM.OrgState), new OrgStateM() { Name = "Нет" }, bsOrgState);
+            cbWorkType.SetNullubleComboBinding(bsPerson, nameof(PersonM.WorkType), new WorkTypeM() { Name = "Нет" }, bsWorkType);
+            cbMeetPerson.SetNullubleComboBinding(bsPerson, nameof(PersonM.MeetPerson), new OrgPersonM() { ShortName = "Нет" }, bsMeetPerson);
+            cbAddress.SetNullubleComboBinding(bsPerson, nameof(PersonM.Address), new AddressM() { Name = "Нет" }, bsAddress);
 
 
             //cbInviter.SetNullubleBinding(nameof(ComboBox.SelectedValue), bsInviter, nameof(OrgPersonM.Name), new OrgPersonM(-1) { Name = "Нет" });

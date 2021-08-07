@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Revisor2.Model.Models;
+using System;
 using System.Collections.Generic;
 
 namespace Revisor2.Model.Data
@@ -16,7 +17,7 @@ namespace Revisor2.Model.Data
         public ICollection<ValueResult> ValueResults { get; set; }
         public ICollection<BookResult> BookResults { get; set; }
         public ICollection<PaperResult> PaperResults { get; set; }
-        public ICollection<Subscribe> Subscribes { get; set; }
+        public ICollection<SubscribeResult> SubscribeResults { get; set; }
         public string Description { get; set; }
     }
 }

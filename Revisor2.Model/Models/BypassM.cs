@@ -11,6 +11,7 @@ namespace Revisor2.Model.Models
 {
     public class BypassM : DomainModelBase<BypassM, Guid>
     {
+        public BypassM() { }
         public BypassM(Guid id) : base(id) { }
 
         private DateOnly _bypassDate;

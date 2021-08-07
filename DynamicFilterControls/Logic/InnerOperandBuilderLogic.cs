@@ -17,7 +17,7 @@ namespace DynamicFilterControls.Logic
         private Action<string> OperationErrorHandler { get; }
         private Action<string> PrintUpdate { get; }
         //var innerCreator = new DynamicFilterForm(Data.AsRoot().PropertyType, InnerOperand, ValidValuesDictionary.Select(kvp => (kvp.Key.SrcType, kvp.Key.PropertyName, kvp.Value.DisplayMember, kvp.Value.ValueMember, kvp.Value.ValidValues)), DisplaySource.Select(d => (d.Key.SrcType, d.Key.PropertyName, d.Value)));
-        private Func<Type, IOperand, IEnumerable<(Type SrcType, string PropertyName, string DisplayMember, string ValueMember, Func<IEnumerable<ComboContainer>> ValidValues)>, IEnumerable<(Type SrcType, string propertyName, string displayName)>,IOperand> DynamicFilterFormOrDefault { get; }
+        private Func<Type, IOperand, IEnumerable<(Type SrcType, string PropertyName, string DisplayMember, string ValueMember, Func<IEnumerable<ComboContainer>> ValidValues)>, IEnumerable<(Type SrcType, string propertyName, string displayName)>, IOperand> DynamicFilterFormOrDefault { get; }
         public IDictionary<(Type SrcType, string PropertyName), (string DisplayMember, string ValueMember, Func<IEnumerable<ComboContainer>> ValidValues)> ValidValuesDictionary { get; set; }
         public IDictionary<(Type SrcType, string PropertyName), string> DisplaySource { get; set; }
         public IList<NamedOperation> OperationList = NamedOperationList.NamedOperations.Where(o => o.OperandType == OperandType.Collection).ToList();
@@ -64,16 +64,21 @@ namespace DynamicFilterControls.Logic
 
         public event EventHandler<EventArgs<IOperand>> Built;
         public IFilterData Data { get; set; }
-        public InnerOperandBuilderLogic() { }
-        public InnerOperandBuilderLogic(IFilterData data, IDictionary<(Type SrcType, string PropertyName), string> displaySource, IDictionary<(Type SrcType, string PropertyName), (string DisplayMember, string ValueMember, Func<IEnumerable<ComboContainer>> ValidValues)> validValuesDictionary)
+        public InnerOperandBuilderLogic(Func<Type, IOperand, IEnumerable<(Type SrcType, string PropertyName, string DisplayMember, string ValueMember, Func<IEnumerable<ComboContainer>> ValidValues)>, IEnumerable<(Type SrcType, string propertyName, string displayName)>, IOperand> dynamicFilterFormOrDefault)
+        {
+            DynamicFilterFormOrDefault = dynamicFilterFormOrDefault;
+        }
+        public InnerOperandBuilderLogic(IFilterData data, IDictionary<(Type SrcType, string PropertyName), string> displaySource, IDictionary<(Type SrcType, string PropertyName), (string DisplayMember, string ValueMember, Func<IEnumerable<ComboContainer>> ValidValues)> validValuesDictionary, Func<Type, IOperand, IEnumerable<(Type SrcType, string PropertyName, string DisplayMember, string ValueMember, Func<IEnumerable<ComboContainer>> ValidValues)>, IEnumerable<(Type SrcType, string propertyName, string displayName)>, IOperand> dynamicFilterFormOrDefault)
         {
             ValidValuesDictionary = validValuesDictionary;
             DisplaySource = displaySource;
             Data = data;
+            DynamicFilterFormOrDefault = dynamicFilterFormOrDefault;
         }
-        public InnerOperandBuilderLogic(IFilterData data, IDictionary<(Type SrcType, string PropertyName), string> displaySource, ICollectionOperand operand, IDictionary<(Type SrcType, string PropertyName), (string DisplayMember, string ValueMember, Func<IEnumerable<ComboContainer>> ValidValues)> validValuesDictionary) : this(data, displaySource, validValuesDictionary)
+        public InnerOperandBuilderLogic(IFilterData data, IDictionary<(Type SrcType, string PropertyName), string> displaySource, ICollectionOperand operand, IDictionary<(Type SrcType, string PropertyName), (string DisplayMember, string ValueMember, Func<IEnumerable<ComboContainer>> ValidValues)> validValuesDictionary, Func<Type, IOperand, IEnumerable<(Type SrcType, string PropertyName, string DisplayMember, string ValueMember, Func<IEnumerable<ComboContainer>> ValidValues)>, IEnumerable<(Type SrcType, string propertyName, string displayName)>, IOperand> dynamicFilterFormOrDefault) : this(data, displaySource, validValuesDictionary, dynamicFilterFormOrDefault)
         {
             Result = operand;
+            DynamicFilterFormOrDefault = dynamicFilterFormOrDefault;
         }
 
         private void Calculate()

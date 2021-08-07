@@ -15,6 +15,14 @@ namespace DynamicFilterControls
     internal partial class InnerOperandBuilder : UserControl
     {
         private readonly InnerOperandBuilderLogic _innerOperandBuilderLogic;
+        private IOperand DynamicFilterFormOrDefault
+        (Type type, IOperand op, IEnumerable<(Type SrcType, string PropertyName, string DisplayMember, string ValueMember, Func<IEnumerable<ComboContainer>> ValidValues)> validValues, IEnumerable<(Type SrcType, string propertyName, string displayName)> displaySources)
+        {
+            var form = new DynamicFilterForm(type, op, validValues, displaySources);
+            return form.ShowDialog() == DialogResult.OK ? form.Result : null;
+        }
+
+
         public IOperand InnerOperand => _innerOperandBuilderLogic.InnerOperand;
         public IDictionary<(Type SrcType, string PropertyName), (string DisplayMember, string ValueMember, Func<IEnumerable<ComboContainer>> ValidValues)> ValidValuesDictionary { get => _innerOperandBuilderLogic.ValidValuesDictionary; set => _innerOperandBuilderLogic.ValidValuesDictionary = value; }
         public IDictionary<(Type SrcType, string PropertyName), string> DisplaySource { get => _innerOperandBuilderLogic.DisplaySource; set => _innerOperandBuilderLogic.DisplaySource = value; }
@@ -23,18 +31,18 @@ namespace DynamicFilterControls
         public IFilterData Data { get => _innerOperandBuilderLogic.Data; set => _innerOperandBuilderLogic.Data = value; }
         public InnerOperandBuilder()
         {
-            _innerOperandBuilderLogic = new InnerOperandBuilderLogic();
+            _innerOperandBuilderLogic = new InnerOperandBuilderLogic(DynamicFilterFormOrDefault);
             InitializeComponent();
             bsCollectionOperands.DataSource = _innerOperandBuilderLogic.OperationList;
         }
         public InnerOperandBuilder(IFilterData data, IDictionary<(Type SrcType, string PropertyName), string> displaySource, IDictionary<(Type SrcType, string PropertyName), (string DisplayMember, string ValueMember, Func<IEnumerable<ComboContainer>> ValidValues)> validValuesDictionary)
         {
-            _innerOperandBuilderLogic = new InnerOperandBuilderLogic(data, displaySource, validValuesDictionary);
+            _innerOperandBuilderLogic = new InnerOperandBuilderLogic(data, displaySource, validValuesDictionary, DynamicFilterFormOrDefault);
             InitializeComponent();
             bsCollectionOperands.DataSource = _innerOperandBuilderLogic.OperationList;
         }
 
-        public InnerOperandBuilder(IFilterData data, IDictionary<(Type SrcType, string PropertyName), string> displaySource, ICollectionOperand operand, IDictionary<(Type SrcType, string PropertyName), (string DisplayMember, string ValueMember, Func<IEnumerable<ComboContainer>> ValidValues)> validValuesDictionary) : this(data, displaySource, validValuesDictionary) => _innerOperandBuilderLogic = new InnerOperandBuilderLogic(data, displaySource, operand, validValuesDictionary);
+        public InnerOperandBuilder(IFilterData data, IDictionary<(Type SrcType, string PropertyName), string> displaySource, ICollectionOperand operand, IDictionary<(Type SrcType, string PropertyName), (string DisplayMember, string ValueMember, Func<IEnumerable<ComboContainer>> ValidValues)> validValuesDictionary) : this(data, displaySource, validValuesDictionary) => _innerOperandBuilderLogic = new InnerOperandBuilderLogic(data, displaySource, operand, validValuesDictionary, DynamicFilterFormOrDefault);
         private void OnBuild(object sender, EventArgs e) => _innerOperandBuilderLogic.OnBuild(bsCollectionOperands.Current as NamedOperation);
         private void OnCreate(object sender, EventArgs e) => _innerOperandBuilderLogic.OnCreate();
     }

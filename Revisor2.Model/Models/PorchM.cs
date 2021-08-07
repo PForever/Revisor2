@@ -5,6 +5,7 @@ namespace Revisor2.Model.Models
 {
     public class PorchM : DomainModelBase<PorchM, Guid>
     {
+        public PorchM() {}
         public PorchM(Guid id) :base(id) {}
         public string Name { get; init; }
         public int? OrderNumber { get; init; }

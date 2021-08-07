@@ -6,6 +6,7 @@ namespace Revisor2.Model.Models
 {
     public class AddressM : DomainModelBase<AddressM, Guid>
     {
+        public AddressM() { }
         public AddressM(Guid id) : base(id) { }
 
         public ObservableCollection<BypassM> Bypasses { get; } = new();
