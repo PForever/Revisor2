@@ -30,7 +30,7 @@ namespace WinFormsView.Lists
         {
             _repository = new AddressesRepository();
             _peopleRepository = new PeopleRepository();
-            Fill(_repository.GetAddresses().OrderBy(a => a.Name).ToList());
+            Fill(_repository.GetAddresses());
         }
 
         private void Fill(ICollection<AddressM> address)
@@ -40,13 +40,15 @@ namespace WinFormsView.Lists
 
         private void InitializeComponentCustom()
         {
+
             dgvAddresses.AutoGenerateColumns = false;
             dgvAddresses.Columns.AddRange(WinFormsHelper.CreateColumns<AddressM>());
+            dgvAddresses.DataSource = bsAddresses;
         }
 
         private void OnAdd(object sender, EventArgs e)
         {
-            var model = new AddressM(Guid.NewGuid());
+            var model = new AddressM();
             var card = new AddressCard(model, _repository, _peopleRepository);
             if(card.ShowDialog() == DialogResult.OK)
             {

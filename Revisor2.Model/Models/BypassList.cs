@@ -9,11 +9,11 @@ namespace Revisor2.Model.Models
     public class BypassListVm
     {
         public ObservableCollection<BypassM> Bypasses { get; }
-        public BypassM Create() => new BypassM(Guid.NewGuid());
+        public BypassM Create() => new BypassM();
     }
     public class PeopleVm
     {
         public ObservableCollection<PersonM> Bypasses { get; }
-        public BypassM Create() => new BypassM(Guid.NewGuid());
+        public BypassM Create() => new BypassM();
     }
 }

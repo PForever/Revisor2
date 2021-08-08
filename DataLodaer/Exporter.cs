@@ -30,6 +30,7 @@ namespace DataLodaer
         {
             var list = GetRowsFromDb(currentMonth, ids).ToList();
             var path = Path.Combine(downloadPath, $"Export{DateTime.Now:yyyy.MM.dd HH-mm-ss}.xlsx");
+            Directory.CreateDirectory(downloadPath);
             var file = new FileInfo(path);
             using var exelPackage = new ExcelPackage();
             var workSheet = exelPackage.Workbook.Worksheets.Add("Address");

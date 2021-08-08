@@ -22,7 +22,7 @@ namespace Revisor2.Model.Infrastructure
         }
         public DomainModelBase(TKey id)
         {
-            Id = id;
+            _id = id;
         }
 
         public bool IsNew { get; private set; }
@@ -42,12 +42,25 @@ namespace Revisor2.Model.Infrastructure
         private ConcurrentDictionary<string, Func<bool>> _viewModelChangestStates = new ConcurrentDictionary<string, Func<bool>>();
         protected virtual ILookup<string, string> Dependencies { get; }
         public bool IsChanged => _changestStates.Values.Any(v => v) || _viewModelChangestStates.Values.Any(v => v());
+        protected virtual TProperty InitVm<TProperty>(TProperty newValue, string propertyName) where TProperty : class, IViewModelBase
+        {
+            if (newValue is null) return null;
+            Func<bool> check = () => newValue.IsChanged;
+            _viewModelChangestStates.AddOrUpdate(propertyName, k => check, (k, old) => check);
+            return newValue;
+        }
         protected virtual void SetVm<TProperty>(ref TProperty oldValue, TProperty newValue, [CallerMemberName] string propertyName = "") where TProperty : IViewModelBase
         {
             if (oldValue is IEquatable<TProperty> v && v.Equals(newValue) || (oldValue?.Equals(newValue) ?? newValue is null)) return;
+            if(newValue is null)
+            {
+                _viewModelChangestStates.Remove(propertyName, out _);
+                return;
+            }
             Func<bool> check = () => newValue.IsChanged;
             _viewModelChangestStates.AddOrUpdate(propertyName, k => check, (k, old) => check);
-            SetInternal(ref oldValue, newValue, propertyName);
+
+            Set(ref oldValue, newValue, propertyName);
         }
         protected virtual void Set<TProperty>(ref TProperty oldValue, TProperty newValue, [CallerMemberName] string propertyName = "")
             => Set(ref oldValue, newValue, (o, n) => o?.Equals(n) is true, propertyName);

@@ -1,4 +1,5 @@
-﻿using Revisor2.Model.Models;
+﻿using DataLodaer;
+using Revisor2.Model.Models;
 using Revisor2.Model.Repositories;
 using System;
 using System.Collections.Generic;
@@ -36,18 +37,18 @@ namespace WinFormsView.Cards
 
             dgvBypass.DataSource = bsBypass;
             dgvBypass.Columns.AddRange(WinFormsHelper.CreateColumns<BypassM>());
-            bsBypass.DataSource = _model;
+            bsBypass.DataSource = bsAddress;
             bsBypass.DataMember = nameof(AddressM.Bypasses);
 
 
             dgvPeople.DataSource = bsPeople;
             dgvPeople.Columns.AddRange(WinFormsHelper.CreateColumns<PersonM>());
-            bsPeople.DataSource = _model;
+            bsPeople.DataSource = bsAddress;
             bsPeople.DataMember = nameof(AddressM.People);
 
             dgvPorch.DataSource = bsPorch;
             dgvPorch.Columns.AddRange(WinFormsHelper.CreateColumns<PorchM>());
-            bsPorch.DataSource = _model;
+            bsPorch.DataSource = bsAddress;
             bsPorch.DataMember = nameof(AddressM.Porches);
         }
 
@@ -64,7 +65,7 @@ namespace WinFormsView.Cards
 
         private void OnAddPorch(object sender, EventArgs e)
         {
-            var model = new PorchM(Guid.NewGuid());
+            var model = new PorchM();
             var card = new PorchCard(model, _model, _repository);
             if (card.ShowDialog() == DialogResult.OK) bsPorch.Add(model);
             dgvPorch.Refresh();
@@ -112,7 +113,7 @@ namespace WinFormsView.Cards
 
         private void OnAddBypass(object sender, EventArgs e)
         {
-            var model = new BypassM(Guid.NewGuid());
+            var model = new BypassM();
             var card = new BypassCard(model, _peopleRepository);
             if (card.ShowDialog() == DialogResult.OK) bsBypass.Add(model);
             dgvBypass.Refresh();
@@ -131,6 +132,21 @@ namespace WinFormsView.Cards
             _repository.Remove(model);
             bsBypass.Remove(model);
             dgvBypass.Refresh();
+        }
+
+        private void OnPrint(object sender, EventArgs e)
+        {
+            if (dgvPeople.SelectedCells.Count == 0) return;
+            var person = dgvPeople.SelectedCells.Cast<DataGridViewCell>()
+                .Where(c => c.RowIndex != -1)
+                .Select(c => c.RowIndex)
+                .Distinct()
+                .Select(i => dgvPeople.Rows[i])
+                .Cast<DataGridViewRow>()
+                .Select(r => r.DataBoundItem as PersonM)
+                .Select(p => p.SourceId.Value)
+                .ToList();
+            Exporter.ExportToRoomTable(@"D:\Export\", DateTime.Now, person);
         }
     }
 }

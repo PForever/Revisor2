@@ -23,7 +23,7 @@ namespace Revisor2.Model.Data
         public ICollection<CallTargetResult> CallTargetResults { get; set; }
         public Guid? CallerId { get; set; }
         public OrgPerson Caller { get; set; }
-        string Description { get; set; }
+        public string Description { get; set; }
     }
 
     public class CallTargetResult
@@ -48,7 +48,7 @@ namespace Revisor2.Model.Data
         public EventRole EventRole { get; set; }
         public Guid EventResultTypeId { get; set; }
         public EventResultType EventResultType { get; set; }
-        string Description { get; set; }
+        public string Description { get; set; }
     }
     public class OrgPersonEventResult
     {
@@ -60,7 +60,7 @@ namespace Revisor2.Model.Data
         public Guid EventRoleId { get; set; }
         public EventRole EventRole { get; set; }
         public TimeOnly? Time { get; set; }
-        string Description { get; set; }
+        public string Description { get; set; }
     }
     public class CallEvent
     {

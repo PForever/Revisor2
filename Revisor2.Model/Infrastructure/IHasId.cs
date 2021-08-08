@@ -39,9 +39,12 @@
     //    public static bool operator ==(DomainModelBase<T, TKey> left, DomainModelBase<T, TKey> right) => left is T && right is T && EqualityComparer<DomainModelBase<T, TKey>>.Default.Equals(left, right);
     //    public static bool operator !=(DomainModelBase<T, TKey> left, DomainModelBase<T, TKey> right) => !(left == right);
     //}
-    public interface IHasId<TKey>
+    public interface IHasId<TKey> : IHasId
+    {
+        public TKey Id { get; }
+    }
+    public interface IHasId
     {
         bool IsNew { get; }
-        public TKey Id { get; }
     }
 }

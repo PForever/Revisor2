@@ -41,6 +41,7 @@ namespace WinFormsView.Cards
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tbDescription = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.tbName = new System.Windows.Forms.TextBox();
             this.tabPage4 = new System.Windows.Forms.TabPage();
             this.splitContainer4 = new System.Windows.Forms.SplitContainer();
             this.dgvPorch = new System.Windows.Forms.DataGridView();
@@ -56,10 +57,11 @@ namespace WinFormsView.Cards
             this.btAddBypass = new System.Windows.Forms.Button();
             this.splitContainer2 = new System.Windows.Forms.SplitContainer();
             this.btSave = new System.Windows.Forms.Button();
-            this.tbName = new System.Windows.Forms.TextBox();
             this.bsPeople = new System.Windows.Forms.BindingSource(this.components);
             this.bsAddress = new System.Windows.Forms.BindingSource(this.components);
             this.bsPorch = new System.Windows.Forms.BindingSource(this.components);
+            this.contextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.smiPrint = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.bsBypass)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
@@ -90,6 +92,7 @@ namespace WinFormsView.Cards
             ((System.ComponentModel.ISupportInitialize)(this.bsPeople)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsAddress)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsPorch)).BeginInit();
+            this.contextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // splitContainer1
@@ -113,7 +116,7 @@ namespace WinFormsView.Cards
             this.splitContainer1.Panel2.Controls.Add(this.btAddPerson);
             this.splitContainer1.Panel2.Padding = new System.Windows.Forms.Padding(4);
             this.splitContainer1.Size = new System.Drawing.Size(686, 265);
-            this.splitContainer1.SplitterDistance = 218;
+            this.splitContainer1.SplitterDistance = 219;
             this.splitContainer1.SplitterWidth = 3;
             this.splitContainer1.TabIndex = 2;
             // 
@@ -123,13 +126,14 @@ namespace WinFormsView.Cards
             this.dgvPeople.AllowUserToDeleteRows = false;
             this.dgvPeople.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.dgvPeople.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvPeople.ContextMenuStrip = this.contextMenu;
             this.dgvPeople.Dock = System.Windows.Forms.DockStyle.Fill;
             this.dgvPeople.Location = new System.Drawing.Point(0, 0);
             this.dgvPeople.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dgvPeople.Name = "dgvPeople";
             this.dgvPeople.ReadOnly = true;
             this.dgvPeople.RowHeadersWidth = 51;
-            this.dgvPeople.Size = new System.Drawing.Size(686, 218);
+            this.dgvPeople.Size = new System.Drawing.Size(686, 219);
             this.dgvPeople.TabIndex = 0;
             // 
             // btRemovePerson
@@ -138,7 +142,7 @@ namespace WinFormsView.Cards
             this.btRemovePerson.Location = new System.Drawing.Point(4, 4);
             this.btRemovePerson.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btRemovePerson.Name = "btRemovePerson";
-            this.btRemovePerson.Size = new System.Drawing.Size(82, 36);
+            this.btRemovePerson.Size = new System.Drawing.Size(82, 35);
             this.btRemovePerson.TabIndex = 2;
             this.btRemovePerson.Text = "Удалить";
             this.btRemovePerson.UseVisualStyleBackColor = true;
@@ -150,7 +154,7 @@ namespace WinFormsView.Cards
             this.btChangePerson.Location = new System.Drawing.Point(518, 4);
             this.btChangePerson.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btChangePerson.Name = "btChangePerson";
-            this.btChangePerson.Size = new System.Drawing.Size(82, 36);
+            this.btChangePerson.Size = new System.Drawing.Size(82, 35);
             this.btChangePerson.TabIndex = 1;
             this.btChangePerson.Text = "Изменить";
             this.btChangePerson.UseVisualStyleBackColor = true;
@@ -162,7 +166,7 @@ namespace WinFormsView.Cards
             this.btAddPerson.Location = new System.Drawing.Point(600, 4);
             this.btAddPerson.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btAddPerson.Name = "btAddPerson";
-            this.btAddPerson.Size = new System.Drawing.Size(82, 36);
+            this.btAddPerson.Size = new System.Drawing.Size(82, 35);
             this.btAddPerson.TabIndex = 0;
             this.btAddPerson.Text = "Добавить";
             this.btAddPerson.UseVisualStyleBackColor = true;
@@ -222,6 +226,14 @@ namespace WinFormsView.Cards
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Улица Дом";
             // 
+            // tbName
+            // 
+            this.tbName.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tbName.Location = new System.Drawing.Point(3, 19);
+            this.tbName.Name = "tbName";
+            this.tbName.Size = new System.Drawing.Size(670, 23);
+            this.tbName.TabIndex = 0;
+            // 
             // tabPage4
             // 
             this.tabPage4.Controls.Add(this.splitContainer4);
@@ -254,7 +266,7 @@ namespace WinFormsView.Cards
             this.splitContainer4.Panel2.Controls.Add(this.btAddPorch);
             this.splitContainer4.Panel2.Padding = new System.Windows.Forms.Padding(4);
             this.splitContainer4.Size = new System.Drawing.Size(686, 265);
-            this.splitContainer4.SplitterDistance = 219;
+            this.splitContainer4.SplitterDistance = 220;
             this.splitContainer4.SplitterWidth = 3;
             this.splitContainer4.TabIndex = 3;
             // 
@@ -270,7 +282,7 @@ namespace WinFormsView.Cards
             this.dgvPorch.Name = "dgvPorch";
             this.dgvPorch.ReadOnly = true;
             this.dgvPorch.RowHeadersWidth = 51;
-            this.dgvPorch.Size = new System.Drawing.Size(686, 219);
+            this.dgvPorch.Size = new System.Drawing.Size(686, 220);
             this.dgvPorch.TabIndex = 0;
             // 
             // btRemovePorch
@@ -279,7 +291,7 @@ namespace WinFormsView.Cards
             this.btRemovePorch.Location = new System.Drawing.Point(4, 4);
             this.btRemovePorch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btRemovePorch.Name = "btRemovePorch";
-            this.btRemovePorch.Size = new System.Drawing.Size(82, 35);
+            this.btRemovePorch.Size = new System.Drawing.Size(82, 34);
             this.btRemovePorch.TabIndex = 2;
             this.btRemovePorch.Text = "Удалить";
             this.btRemovePorch.UseVisualStyleBackColor = true;
@@ -291,7 +303,7 @@ namespace WinFormsView.Cards
             this.btChangePorch.Location = new System.Drawing.Point(518, 4);
             this.btChangePorch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btChangePorch.Name = "btChangePorch";
-            this.btChangePorch.Size = new System.Drawing.Size(82, 35);
+            this.btChangePorch.Size = new System.Drawing.Size(82, 34);
             this.btChangePorch.TabIndex = 1;
             this.btChangePorch.Text = "Изменить";
             this.btChangePorch.UseVisualStyleBackColor = true;
@@ -303,7 +315,7 @@ namespace WinFormsView.Cards
             this.btAddPorch.Location = new System.Drawing.Point(600, 4);
             this.btAddPorch.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btAddPorch.Name = "btAddPorch";
-            this.btAddPorch.Size = new System.Drawing.Size(82, 35);
+            this.btAddPorch.Size = new System.Drawing.Size(82, 34);
             this.btAddPorch.TabIndex = 0;
             this.btAddPorch.Text = "Добавить";
             this.btAddPorch.UseVisualStyleBackColor = true;
@@ -352,7 +364,7 @@ namespace WinFormsView.Cards
             this.splitContainer3.Panel2.Controls.Add(this.btAddBypass);
             this.splitContainer3.Panel2.Padding = new System.Windows.Forms.Padding(4);
             this.splitContainer3.Size = new System.Drawing.Size(686, 265);
-            this.splitContainer3.SplitterDistance = 219;
+            this.splitContainer3.SplitterDistance = 220;
             this.splitContainer3.SplitterWidth = 3;
             this.splitContainer3.TabIndex = 3;
             // 
@@ -368,7 +380,7 @@ namespace WinFormsView.Cards
             this.dgvBypass.Name = "dgvBypass";
             this.dgvBypass.ReadOnly = true;
             this.dgvBypass.RowHeadersWidth = 51;
-            this.dgvBypass.Size = new System.Drawing.Size(686, 219);
+            this.dgvBypass.Size = new System.Drawing.Size(686, 220);
             this.dgvBypass.TabIndex = 0;
             // 
             // btRemoveBypass
@@ -377,7 +389,7 @@ namespace WinFormsView.Cards
             this.btRemoveBypass.Location = new System.Drawing.Point(4, 4);
             this.btRemoveBypass.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btRemoveBypass.Name = "btRemoveBypass";
-            this.btRemoveBypass.Size = new System.Drawing.Size(82, 35);
+            this.btRemoveBypass.Size = new System.Drawing.Size(82, 34);
             this.btRemoveBypass.TabIndex = 2;
             this.btRemoveBypass.Text = "Удалить";
             this.btRemoveBypass.UseVisualStyleBackColor = true;
@@ -389,7 +401,7 @@ namespace WinFormsView.Cards
             this.btChangeBypass.Location = new System.Drawing.Point(518, 4);
             this.btChangeBypass.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btChangeBypass.Name = "btChangeBypass";
-            this.btChangeBypass.Size = new System.Drawing.Size(82, 35);
+            this.btChangeBypass.Size = new System.Drawing.Size(82, 34);
             this.btChangeBypass.TabIndex = 1;
             this.btChangeBypass.Text = "Изменить";
             this.btChangeBypass.UseVisualStyleBackColor = true;
@@ -401,7 +413,7 @@ namespace WinFormsView.Cards
             this.btAddBypass.Location = new System.Drawing.Point(600, 4);
             this.btAddBypass.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btAddBypass.Name = "btAddBypass";
-            this.btAddBypass.Size = new System.Drawing.Size(82, 35);
+            this.btAddBypass.Size = new System.Drawing.Size(82, 34);
             this.btAddBypass.TabIndex = 0;
             this.btAddBypass.Text = "Добавить";
             this.btAddBypass.UseVisualStyleBackColor = true;
@@ -437,13 +449,20 @@ namespace WinFormsView.Cards
             this.btSave.Text = "Сохранить";
             this.btSave.UseVisualStyleBackColor = true;
             // 
-            // tbName
+            // contextMenu
             // 
-            this.tbName.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tbName.Location = new System.Drawing.Point(3, 19);
-            this.tbName.Name = "tbName";
-            this.tbName.Size = new System.Drawing.Size(670, 23);
-            this.tbName.TabIndex = 0;
+            this.contextMenu.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.contextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.smiPrint});
+            this.contextMenu.Name = "contextMenu";
+            this.contextMenu.Size = new System.Drawing.Size(181, 48);
+            // 
+            // smiPrint
+            // 
+            this.smiPrint.Name = "smiPrint";
+            this.smiPrint.Size = new System.Drawing.Size(180, 22);
+            this.smiPrint.Text = "Печать";
+            this.smiPrint.Click += new System.EventHandler(this.OnPrint);
             // 
             // AddressCard
             // 
@@ -486,6 +505,7 @@ namespace WinFormsView.Cards
             ((System.ComponentModel.ISupportInitialize)(this.bsPeople)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsAddress)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bsPorch)).EndInit();
+            this.contextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
@@ -522,5 +542,7 @@ namespace WinFormsView.Cards
         private System.Windows.Forms.BindingSource bsPeople;
         private System.Windows.Forms.BindingSource bsAddress;
         private System.Windows.Forms.BindingSource bsPorch;
+        private System.Windows.Forms.ContextMenuStrip contextMenu;
+        private System.Windows.Forms.ToolStripMenuItem smiPrint;
     }
 }

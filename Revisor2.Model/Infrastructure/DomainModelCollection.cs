@@ -13,6 +13,17 @@ namespace Revisor2.Model.Infrastructure
     {
         TParent Parent { get; set; }
     }
+
+    public static class DomainModelHelpers
+    {
+        public static IEnumerable<T> Changed<T, TParent>(this DomainModelCollection<T, TParent> src)
+            where T : class, IViewModelBase
+            => src.Added?.Union(src.Where(s => s.IsChanged)) ?? src.Where(s => s.IsChanged);
+        public static IEnumerable<T> Changed<T>(this DomainModelCollection<T> src)
+            where T : class, IViewModelBase
+            => src.Added?.Union(src.Where(s => s.IsChanged)) ?? src.Where(s => s.IsChanged);
+    }
+
     public class DomainModelCollection<T, TParent> : IHasParent<TParent>, IViewModelBase, INotifyCollectionChanged, IList<T>, IList
         where T : class, IViewModelBase
     {

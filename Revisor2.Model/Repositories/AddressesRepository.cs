@@ -1,11 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Revisor2.Model.Data;
+using Revisor2.Model.Infrastructure;
 using Revisor2.Model.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SystemHelpers;
 
 namespace Revisor2.Model.Repositories
 {
@@ -17,8 +19,44 @@ namespace Revisor2.Model.Repositories
         public ICollection<AddressM> GetAddresses()
         {
             using var context = new RevisorContext();
-            return new List<AddressM>(); //TODO заглушка
-            return context.Addresses.AsEnumerable().Select(a => new AddressM (a.Id) { Name = a.Name }).ToList();
+            return context.Addresses
+                .Include(a => a.People)
+                .Include(a => a.Bypasses)
+                .Include(a => a.Porches)
+                .AsEnumerable()
+                .Select(a => 
+                        new AddressM (a.Id, a.Name, a.Description)
+                        .Transform(m => m.People = a.People.Select(s => new PersonM
+                                                                            (
+                                                                                s.Id,
+                                                                                s.Name,
+                                                                                s.SourceId,
+                                                                                s.Age,
+                                                                                null,
+                                                                                null,
+                                                                                null,
+                                                                                s.InviteDate.ToDateTime(),
+                                                                                null,
+                                                                                s.PhoneNumber,
+                                                                                s.Description,
+                                                                                s.IsRoom,
+                                                                                null,
+                                                                                s.CallDate.ToDateTime(),
+                                                                                s.MeetDate.ToDateTime(),
+                                                                                null,
+                                                                                null,
+                                                                                s.Room,
+                                                                                s.Floor,
+                                                                                s.Porch,
+                                                                                0,
+                                                                                0,
+                                                                                null,
+                                                                                null,
+                                                                                null
+                                                                            )).ToDomainModelCollection()
+                        )
+                )
+                .OrderBy(a => a.Name).ToList();
         }
         public void Remove(PorchM porch)
         {
